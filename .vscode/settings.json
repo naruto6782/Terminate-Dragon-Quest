@@ -58,6 +58,23 @@
         "iomanip": "cpp",
         "semaphore": "cpp",
         "sstream": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "ios": "cpp",
+        "xstring": "cpp",
+        "xlocale": "cpp",
+        "cstring": "cpp",
+        "forward_list": "cpp",
+        "locale": "cpp",
+        "xfacet": "cpp",
+        "xiosbase": "cpp",
+        "xlocbuf": "cpp",
+        "xlocinfo": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp"
     }
 }
