@@ -10,7 +10,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 include_directories(include)
 
 # 添加静态库（默认是 STATIC）
-add_library(Game_lib src/game.cpp src/Hero_and_Monster.cpp)
+add_library(Game_lib src/game.cpp src/Hero_and_Monster.cpp src/equip.cpp)
 
 # 主程序
 add_executable(main main.cpp)

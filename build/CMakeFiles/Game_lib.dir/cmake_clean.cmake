@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
+  "CMakeFiles/Game_lib.dir/src/equip.cpp.obj"
+  "CMakeFiles/Game_lib.dir/src/equip.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/game.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
   "libGame_lib.a"

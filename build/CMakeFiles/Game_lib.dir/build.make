@@ -101,19 +101,36 @@ CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.s"
 	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Code\Terminal Dragon Quest\src\Hero_and_Monster.cpp" -o CMakeFiles\Game_lib.dir\src\Hero_and_Monster.cpp.s
 
+CMakeFiles/Game_lib.dir/src/equip.cpp.obj: CMakeFiles/Game_lib.dir/flags.make
+CMakeFiles/Game_lib.dir/src/equip.cpp.obj: CMakeFiles/Game_lib.dir/includes_CXX.rsp
+CMakeFiles/Game_lib.dir/src/equip.cpp.obj: D:/Code/Terminal\ Dragon\ Quest/src/equip.cpp
+CMakeFiles/Game_lib.dir/src/equip.cpp.obj: CMakeFiles/Game_lib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Code\Terminal Dragon Quest\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Game_lib.dir/src/equip.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Game_lib.dir/src/equip.cpp.obj -MF CMakeFiles\Game_lib.dir\src\equip.cpp.obj.d -o CMakeFiles\Game_lib.dir\src\equip.cpp.obj -c "D:\Code\Terminal Dragon Quest\src\equip.cpp"
+
+CMakeFiles/Game_lib.dir/src/equip.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Game_lib.dir/src/equip.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Code\Terminal Dragon Quest\src\equip.cpp" > CMakeFiles\Game_lib.dir\src\equip.cpp.i
+
+CMakeFiles/Game_lib.dir/src/equip.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Game_lib.dir/src/equip.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Code\Terminal Dragon Quest\src\equip.cpp" -o CMakeFiles\Game_lib.dir\src\equip.cpp.s
+
 # Object files for target Game_lib
 Game_lib_OBJECTS = \
 "CMakeFiles/Game_lib.dir/src/game.cpp.obj" \
-"CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj"
+"CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj" \
+"CMakeFiles/Game_lib.dir/src/equip.cpp.obj"
 
 # External object files for target Game_lib
 Game_lib_EXTERNAL_OBJECTS =
 
 libGame_lib.a: CMakeFiles/Game_lib.dir/src/game.cpp.obj
 libGame_lib.a: CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj
+libGame_lib.a: CMakeFiles/Game_lib.dir/src/equip.cpp.obj
 libGame_lib.a: CMakeFiles/Game_lib.dir/build.make
 libGame_lib.a: CMakeFiles/Game_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\Code\Terminal Dragon Quest\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libGame_lib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\Code\Terminal Dragon Quest\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libGame_lib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles\Game_lib.dir\cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Game_lib.dir\link.txt --verbose=$(VERBOSE)
 
