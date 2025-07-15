@@ -24,7 +24,7 @@ void printBar(int value, int max_value = 100, int barWidth = 30) {
 }
 //----------------Hero-Section----------------
 void Hero::show_info(Hero* hero) {
-    cout << "\tHero " << hero->get_name()<< endl;
+    cout << "\tHero " << hero->get_name()<<'\t'<<"Level:"<<hero->get_Level()<<endl;
     
     cout << "HP:\t\t\t";
     printBar(hero->get_HP());
@@ -91,7 +91,7 @@ void Hero::Attack_Monster(Hero* hero, Monster* monster,StatusEffect* hero_status
 
 //----------------Monster-Section----------------
 void Monster::show_info(Monster* monster){
-    cout<<"\tMonster "<<monster->get_name()<<endl;
+    cout<<"\tMonster "<<monster->get_name()<<'\t'<<"Level:"<<monster->get_Level()<<endl;
     
     cout << "HP:\t\t\t";
     printBar(monster->get_HP());
