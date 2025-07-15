@@ -142,4 +142,5 @@ CMakeFiles/main.dir/main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_vector.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/vector.tcc \
- D:/Code/TERMIN~1/include/Hero_and_Monster.h
+ D:/Code/TERMIN~1/include/Hero_and_Monster.h \
+ D:/Code/TERMIN~1/include/status.h

@@ -181,4 +181,5 @@ CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/numeric \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_numeric.h \
  C:/msys64/ucrt64/include/c++/14.2.0/pstl/glue_numeric_defs.h \
- D:/Code/TERMIN~1/include/Hero_and_Monster.h
+ D:/Code/TERMIN~1/include/Hero_and_Monster.h \
+ D:/Code/TERMIN~1/include/status.h D:/Code/TERMIN~1/include/status.h
