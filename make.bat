@@ -1,22 +1,37 @@
 @echo off
-echo [1/4] 切换到 build 目录...
+echo ================================
+echo == Build Process Started
+echo ================================
+
+:: Delete old build folder (optional - comment out if not needed)
+if exist build (
+    echo Found old build folder. Deleting...
+    rd /s /q build
+)
+
+:: Create a new build directory
+echo Creating build directory...
+mkdir build
 cd build
 
-echo [2/4] 运行 CMake 生成 Makefiles...
+:: Run CMake to generate Makefiles
+echo Running CMake...
 cmake .. -G "MinGW Makefiles"
 if errorlevel 1 (
-    echo CMake 生成失败，退出。
+    echo ❌ CMake configuration failed. Exiting.
+    pause
     exit /b 1
 )
 
-echo [3/4] 开始构建项目...
+:: Build the project
+echo Building the project...
 cmake --build .
 if errorlevel 1 (
-    echo 构建失败，退出。
+    echo ❌ Build failed. Exiting.
+    pause
     exit /b 1
 )
 
-echo [4/4] 返回上级目录...
+:: Go back to the root directory
 cd ..
-
-echo 全部完成！
+echo ✅ Build completed successfully!
