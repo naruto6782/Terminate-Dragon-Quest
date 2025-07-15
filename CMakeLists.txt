@@ -3,7 +3,8 @@ project(TDQ)
 
 set(CMAKE_CXX_STANDARD 17)
 
-
+# 强制静态链接 libstdc++ 和 libgcc
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
 # 包含头文件目录
 include_directories(include)
