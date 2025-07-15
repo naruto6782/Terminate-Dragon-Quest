@@ -2,10 +2,12 @@
 #define HERO_AND_MONSTER_H
 #include <string>
 #include "status.h"
+#include "equip.h"
 class Base
 {
 protected:
     StatusEffect* status;
+    Accessory* accessory;
     std::string name;
     unsigned int HP=100;
     unsigned int Attack=10;
@@ -30,6 +32,7 @@ public:
         int get_Level() const { return Level; }
         bool is_Alive() const { return HP > 0; }
         StatusEffect* getStatusEffect() const {return status;}
+        Accessory* getAccessory() const {return accessory;}
         //改变属性值
         void change_HP(int num) { HP += num; }
         void change_Attack(int num) { Attack += num; }
@@ -37,6 +40,7 @@ public:
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
         void setStatusEffect(StatusEffect* status) {this->status = status;}
+        void setAccessory(Accessory* accessory) {this->accessory = accessory;}
 };
 class Monster;
 class Hero: public Base

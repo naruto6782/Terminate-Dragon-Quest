@@ -189,6 +189,30 @@ src/Hero_and_Monster.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.s
 .PHONY : src/Hero_and_Monster.cpp.s
 
+src/equip.obj: src/equip.cpp.obj
+.PHONY : src/equip.obj
+
+# target to build an object file
+src/equip.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/equip.cpp.obj
+.PHONY : src/equip.cpp.obj
+
+src/equip.i: src/equip.cpp.i
+.PHONY : src/equip.i
+
+# target to preprocess a source file
+src/equip.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/equip.cpp.i
+.PHONY : src/equip.cpp.i
+
+src/equip.s: src/equip.cpp.s
+.PHONY : src/equip.s
+
+# target to generate assembly for a file
+src/equip.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/equip.cpp.s
+.PHONY : src/equip.cpp.s
+
 src/game.obj: src/game.cpp.obj
 .PHONY : src/game.obj
 
@@ -229,6 +253,9 @@ help:
 	@echo ... src/Hero_and_Monster.obj
 	@echo ... src/Hero_and_Monster.i
 	@echo ... src/Hero_and_Monster.s
+	@echo ... src/equip.obj
+	@echo ... src/equip.i
+	@echo ... src/equip.s
 	@echo ... src/game.obj
 	@echo ... src/game.i
 	@echo ... src/game.s
