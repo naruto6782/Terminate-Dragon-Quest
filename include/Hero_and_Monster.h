@@ -5,6 +5,7 @@
 class Base
 {
 protected:
+    StatusEffect* status;
     std::string name;
     unsigned int HP=100;
     unsigned int Attack=10;
@@ -28,12 +29,14 @@ public:
         int get_Speed() const { return Speed; }
         int get_Level() const { return Level; }
         bool is_Alive() const { return HP > 0; }
+        StatusEffect* getStatusEffect() const {return status;}
         //改变属性值
         void change_HP(int num) { HP += num; }
         void change_Attack(int num) { Attack += num; }
         void change_Defense(int num) { Defense += num; }
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
+        void setStatusEffect(StatusEffect* status) {this->status = status;}
 };
 class Monster;
 class Hero: public Base

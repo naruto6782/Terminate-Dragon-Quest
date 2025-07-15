@@ -8,7 +8,11 @@ public:
     int poisoned = 0;   // 中毒
     bool defending = false;  // 防御中
     int stunned = 0;    // 困倦 / 眩晕
-
+    StatusEffect(int poisoned = 0, bool defending = false, int stunned = 0) {    // 默认状态
+        this->poisoned = poisoned;
+        this->defending = defending;
+        this->stunned = stunned;
+    }
     void process() {
         if(poisoned>0){
             poisoned--;
@@ -25,17 +29,27 @@ public:
         defending = true;
     }
     void setStunned() {
-        stunned = 3;
+        stunned += 3;
     }
     void setPoisoned() {
-        poisoned = 3;
+        poisoned += 3;
+    }
+    void resetPoisoned(){
+        poisoned = 0;
+    }
+    void resetStunned(){
+        stunned = 0;
+    }
+    void resetAll(){
+        poisoned = 0;
+        stunned = 0;
     }
     
     void print() const {
         std::cout << "[Status] ";
-        if (poisoned) std::cout << "Poisoned ";
+        if (poisoned) std::cout << "Poisoned "<<"remaining :"<<poisoned<<"\t";
         if (defending) std::cout << "Defending ";
-        if (stunned) std::cout << "Stunned ";
+        if (stunned) std::cout << "Stunned "<<"remaining :"<<stunned<<"\t";
         if (!poisoned && !defending && !stunned) std::cout << "Normal";
         std::cout << "\n";
     }
