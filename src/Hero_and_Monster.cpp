@@ -42,10 +42,46 @@ void Hero::show_info(Hero* hero) {
     
     cout << endl;
 }
-//TODO 英雄选择攻击
+int H2M_ultimate_attack(int H_Attack, int M_Defense, int H_Speed, int M_Speed,int H_Luck, bool M_isdefense){
+    //参数分别为英雄攻击力，怪物防御力，英雄速度，怪物速度，英雄幸运值，怪物是否防御
+    static bool seeded = false;
+    if (!seeded) {
+        srand(static_cast<unsigned>(time(0)));
+        seeded = true;
+    }
 
-//TODO 英雄选择防御
+    int delta_speed = M_Speed - H_Speed;
 
+    // 闪避概率：基础5% + 每点速度差加1%，最多50%
+    double dodge_chance = 0.05 + delta_speed * 0.01-0.005*H_Luck;
+    if (dodge_chance < 0.05) dodge_chance = 0.05;
+    if (dodge_chance > 0.5) dodge_chance = 0.5;
+
+    // 0.0 到 1.0 的随机数
+    static auto& engine = get_random_engine();
+    uniform_real_distribution<double> dist(0.0, 1.0);
+    double roll = dist(engine);
+
+    if (roll < dodge_chance) {//闪避成功
+        cout << "Monster dodged the ultimate attack!" << endl << endl;
+        return 0;
+    }
+    //计算伤害
+    double damage = 10*H_Attack - 2* M_Defense;
+    if (damage < 0) damage = 0;//伤害不能为负
+    if (M_isdefense) damage = damage * 0.5;//防御伤害减半
+    cout << "Ultimate attack damage: " << static_cast<int>(damage) << endl << endl;
+    return static_cast<int>(damage);
+}
+void Hero::Attack_Monster(Hero* hero, Monster* monster){
+    //先计算伤害，如果未躲避成功，再减少怪物HP
+    int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster->get_is_defense());
+    monster->change_HP(-damage);
+    if(damage>0){
+        cout<<"Hero Attacked Monster!"<<endl;
+        cout<<endl;
+    }
+}
 //TODO 英雄选择技能
 
 //TODO 英雄选择道具
@@ -72,7 +108,8 @@ void Monster::show_info(Monster* monster){
 }
 
 
-int ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,int H_Luck) {
+int M2H_ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,int H_Luck,bool H_isdefense) {
+    //参数分别为怪物攻击力，英雄防御力，英雄速度，怪物速度，英雄幸运值，英雄是否防御
     static bool seeded = false;
     if (!seeded) {
         srand(static_cast<unsigned>(time(0)));
@@ -98,18 +135,17 @@ int ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,int H_
 
     double damage = 10*M_Attack - 2* H_Defense;
     if (damage < 0) damage = 0;
-
+    if (H_isdefense) damage = damage * 0.5;
     cout << "Ultimate attack damage: " << static_cast<int>(damage) << endl << endl;
     return static_cast<int>(damage);
 }
 
 void Monster::Attack_Hero(Hero* hero, Monster* monster){
-    //TODO 还和防没防御有关
-    int damage=ultimate_attack(hero->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck());
+    //先计算伤害，如果未躲避成功，再减少英雄HP
+    int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero->get_is_defense());
     hero->change_HP(-damage);
     if(damage>0){
         cout<<"Monster Attacked Hero!"<<endl;
         cout<<endl;
     }
 }
-//TODO 怪物选择防守
