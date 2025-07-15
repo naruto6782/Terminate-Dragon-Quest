@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <random>
 #include "Hero_and_Monster.h"
+#include "status.h"
 using namespace std;
 
 static mt19937_64& get_random_engine() {//用于随机数生成
@@ -23,22 +24,22 @@ void printBar(int value, int max_value = 100, int barWidth = 30) {
 }
 //----------------Hero-Section----------------
 void Hero::show_info(Hero* hero) {
-    cout << "\tHero " << hero->name << endl;
+    cout << "\tHero " << hero->get_name()<< endl;
     
     cout << "HP:\t\t\t";
-    printBar(hero->HP);
+    printBar(hero->get_HP());
     
     cout << "Attack:\t\t\t";
-    printBar(hero->Attack);
+    printBar(hero->get_Attack());
     
     cout << "Defense:\t\t";
-    printBar(hero->Defense);
+    printBar(hero->get_Defense());
     
     cout << "Speed:\t\t\t";
-    printBar(hero->Speed);
+    printBar(hero->get_Speed());
     
     cout << "Luck:\t\t\t";
-    printBar(hero->Luck);
+    printBar(hero->get_Luck());
     
     cout << endl;
 }
@@ -73,9 +74,9 @@ int H2M_ultimate_attack(int H_Attack, int M_Defense, int H_Speed, int M_Speed,in
     cout << "Ultimate attack damage: " << static_cast<int>(damage) << endl << endl;
     return static_cast<int>(damage);
 }
-void Hero::Attack_Monster(Hero* hero, Monster* monster){
+void Hero::Attack_Monster(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect){
     //先计算伤害，如果未躲避成功，再减少怪物HP
-    int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster->get_is_defense());
+    int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster_status_effect->defending);
     monster->change_HP(-damage);
     if(damage>0){
         cout<<"Hero Attacked Monster!"<<endl;
@@ -90,19 +91,19 @@ void Hero::Attack_Monster(Hero* hero, Monster* monster){
 
 //----------------Monster-Section----------------
 void Monster::show_info(Monster* monster){
-    cout<<"\tMonster "<<monster->name<<endl;
+    cout<<"\tMonster "<<monster->get_name()<<endl;
     
     cout << "HP:\t\t\t";
-    printBar(monster->HP);
+    printBar(monster->get_HP());
     
     cout << "Attack:\t\t\t";
-    printBar(monster->Attack);
+    printBar(monster->get_Attack());
     
     cout << "Defense:\t\t";
-    printBar(monster->Defense);
+    printBar(monster->get_Defense());
     
     cout << "Speed:\t\t\t";
-    printBar(monster->Speed);
+    printBar(monster->get_Speed());
 
     cout << endl;
 }
@@ -140,9 +141,9 @@ int M2H_ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,in
     return static_cast<int>(damage);
 }
 
-void Monster::Attack_Hero(Hero* hero, Monster* monster){
+void Monster::Attack_Hero(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect){
     //先计算伤害，如果未躲避成功，再减少英雄HP
-    int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero->get_is_defense());
+    int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero_status_effect->defending);
     hero->change_HP(-damage);
     if(damage>0){
         cout<<"Monster Attacked Hero!"<<endl;
