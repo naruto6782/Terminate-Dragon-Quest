@@ -1,2 +1,0 @@
-C:\msys64\mingw64\bin\ar.exe qc libGame_lib.a CMakeFiles/Game_lib.dir/src/game.cpp.obj CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj
-C:\msys64\mingw64\bin\ranlib.exe libGame_lib.a
