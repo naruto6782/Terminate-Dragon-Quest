@@ -1,6 +1,7 @@
 #ifndef HERO_AND_MONSTER_H
 #define HERO_AND_MONSTER_H
 #include <string>
+#include "status.h"
 class Base
 {
 protected:
@@ -9,7 +10,6 @@ protected:
     unsigned int Attack=10;
     unsigned int Defense=10;
     unsigned int Speed=10;
-    bool is_defense=false;
 public:
         Base(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed) {
         this->name = name;
@@ -19,15 +19,12 @@ public:
         this->Speed = Speed;
         }
         //get方法
+        std::string get_name() const { return name; }
         int get_HP() const { return HP; }
         int get_Attack() const { return Attack; }
         int get_Defense() const { return Defense; }
         int get_Speed() const { return Speed; }
-        bool get_is_defense() const { return is_defense; }
         //改变属性值
-        void set_is_defense(bool is_defense) { this->is_defense = is_defense; }
-        void Choose_to_Defense(){ is_defense=true; };
-        void Reset_is_defense(){ is_defense=false; };
         void change_HP(int num) { HP += num; }
         void change_Attack(int num) { Attack += num; }
         void change_Defense(int num) { Defense += num; }
@@ -46,13 +43,13 @@ public:
         this->Luck = Luck;
     }
     int get_Luck() const { return Luck; }
-    void Attack_Monster(Hero* hero, Monster* monster);
+    void Attack_Monster(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect);
 };
 class Monster: public Base
 {
 public:
     using Base::Base;
-    void show_info(Monster *monster);
-    void Attack_Hero(Hero* hero, Monster* monster);
+    void show_info(Monster* monster);//展示怪物信息
+    void Attack_Hero(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect);
 };
 #endif
