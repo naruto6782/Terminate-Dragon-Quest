@@ -27,6 +27,7 @@ public:
         int get_Defense() const { return Defense; }
         int get_Speed() const { return Speed; }
         int get_Level() const { return Level; }
+        bool is_Alive() const { return HP > 0; }
         //改变属性值
         void change_HP(int num) { HP += num; }
         void change_Attack(int num) { Attack += num; }
