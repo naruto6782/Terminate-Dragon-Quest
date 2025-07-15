@@ -1,0 +1,4 @@
+D:/LEARN/Terminal_Dragon_Quest/build/CMakeFiles/Game_lib.dir
+D:/LEARN/Terminal_Dragon_Quest/build/CMakeFiles/main.dir
+D:/LEARN/Terminal_Dragon_Quest/build/CMakeFiles/edit_cache.dir
+D:/LEARN/Terminal_Dragon_Quest/build/CMakeFiles/rebuild_cache.dir
