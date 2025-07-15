@@ -18,7 +18,7 @@ cd build
 echo Running CMake...
 cmake .. -G "MinGW Makefiles"
 if errorlevel 1 (
-    echo ❌ CMake configuration failed. Exiting.
+    echo  CMake configuration failed. Exiting.
     pause
     exit /b 1
 )
@@ -27,11 +27,11 @@ if errorlevel 1 (
 echo Building the project...
 cmake --build .
 if errorlevel 1 (
-    echo ❌ Build failed. Exiting.
+    echo  Build failed. Exiting.
     pause
     exit /b 1
 )
 
 :: Go back to the root directory
 cd ..
-echo ✅ Build completed successfully!
+echo  Build completed successfully!
