@@ -18,12 +18,20 @@ public:
         this->Defense = Defense;
         this->Speed = Speed;
         }
+        //get方法
         int get_HP() const { return HP; }
         int get_Attack() const { return Attack; }
         int get_Defense() const { return Defense; }
         int get_Speed() const { return Speed; }
         bool get_is_defense() const { return is_defense; }
+        //改变属性值
         void set_is_defense(bool is_defense) { this->is_defense = is_defense; }
+        void Choose_to_Defense(){ is_defense=true; };
+        void Reset_is_defense(){ is_defense=false; };
+        void change_HP(int num) { HP += num; }
+        void change_Attack(int num) { Attack += num; }
+        void change_Defense(int num) { Defense += num; }
+        void change_Speed(int num) { Speed += num; }
 };
 
 class Hero: public Base
@@ -32,16 +40,13 @@ private:
     unsigned int Luck=0;
 public:
     void show_info(Hero* hero);//展示英雄信息
-    void change_HP(int num) { HP += num; }
-    void change_Attack(int num) { Attack += num; }
-    void change_Defense(int num) { Defense += num; }
-    void change_Speed(int num) { Speed += num; }
     void change_Luck(int num) { Luck += num; }
     //构造函数
     Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed) {
         this->Luck = Luck;
     }
     int get_Luck() const { return Luck; }
+    void Attack_Monster(Hero* hero, Monster* monster);
 };
 class Monster: public Base
 {
