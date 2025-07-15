@@ -1,6 +1,6 @@
 # 🐉 Terminate-Dragon-Quest
 
-> 💻 两个菜鸟的 C++ 大作业
+> 💻 两个菜鸟的 C++ 大作业(仅支持windows系统)
 
 ---
 
