@@ -42,6 +42,10 @@ void Hero::show_info(Hero* hero) {
     printBar(hero->get_Luck());
     
     cout << endl;
+
+    hero->getStatusEffect()->print();
+
+    cout << endl;
 }
 int H2M_ultimate_attack(int H_Attack, int M_Defense, int H_Speed, int M_Speed,int H_Luck, bool M_isdefense){
     //参数分别为英雄攻击力，怪物防御力，英雄速度，怪物速度，英雄幸运值，怪物是否防御
