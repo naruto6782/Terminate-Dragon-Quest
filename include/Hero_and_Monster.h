@@ -35,7 +35,7 @@ public:
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
 };
-
+class Monster;
 class Hero: public Base
 {
 private:
