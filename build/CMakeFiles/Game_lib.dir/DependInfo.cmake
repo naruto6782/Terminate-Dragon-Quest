@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/Code/Terminal Dragon Quest/src/Hero_and_Monster.cpp" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
-  "D:/Code/Terminal Dragon Quest/src/game.cpp" "CMakeFiles/Game_lib.dir/src/game.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
+  "D:/LEARN/Terminal_Dragon_Quest/src/Hero_and_Monster.cpp" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
+  "D:/LEARN/Terminal_Dragon_Quest/src/game.cpp" "CMakeFiles/Game_lib.dir/src/game.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
