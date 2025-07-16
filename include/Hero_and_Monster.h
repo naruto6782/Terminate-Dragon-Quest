@@ -3,6 +3,12 @@
 #include <string>
 #include "status.h"
 #include "equip.h"
+#include "backpack.h"
+
+class StatusEffect;
+class Accessory;
+class backpack;
+
 class Base
 {
 protected:
@@ -22,6 +28,13 @@ public:
         this->Defense = Defense;
         this->Speed = Speed;
         this->Level = Level;
+        this->status=new StatusEffect();
+        this->accessory=new Accessory();
+        this->status->resetAll();
+        }
+        virtual ~Base(){
+            delete accessory;
+            delete status;
         }
         //get方法
         std::string get_name() const { return name; }
@@ -39,20 +52,33 @@ public:
         void change_Defense(int num=0, double rate=1.0) { Defense += num; Defense = (int)(Defense * rate); }
         void change_Speed(int num=0, double rate=1.0) { Speed += num; Speed = (int)(Speed * rate); }
         void change_Level(int num=0) { Level += num;}
-        void setStatusEffect(StatusEffect* status) {this->status = status;}
-        void setAccessory(Accessory* accessory) {this->accessory = accessory;}
+        void setStatusEffect(StatusEffect* newStatus) {
+            delete this->status;
+            this->status = newStatus;
+        }
+        void setAccessory(Accessory* newAccessory) {
+            delete this->accessory;
+            this->accessory = newAccessory;
+        }
 };
 class Monster;
 class Hero: public Base
 {
 private:
     unsigned int Luck=0;
+    backpack *hero_backpack;
 public:
+    backpack *get_backpack(){return this->hero_backpack;}
     void show_info(Hero* hero);//展示英雄信息
     void change_Luck(int num) { Luck += num; }
     //构造函数
     Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed,unsigned int Level, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed, Level) {
         this->Luck = Luck;
+        this->hero_backpack = new backpack(); // ✅ 动态分配背包
+        this->hero_backpack->init_backpack(); // ✅ 初始化
+    }
+    ~Hero() override {
+        delete hero_backpack;
     }
     int get_Luck() const { return Luck; }
     void Attack_Monster(Hero* hero, Monster* monster);
@@ -64,4 +90,5 @@ public:
     void show_info(Monster* monster);//展示怪物信息
     void Attack_Hero(Hero* hero, Monster* monster);
 };
+
 #endif

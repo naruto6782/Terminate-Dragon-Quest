@@ -261,6 +261,30 @@ src/game.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/game.cpp.s
 .PHONY : src/game.cpp.s
 
+src/items.obj: src/items.cpp.obj
+.PHONY : src/items.obj
+
+# target to build an object file
+src/items.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/items.cpp.obj
+.PHONY : src/items.cpp.obj
+
+src/items.i: src/items.cpp.i
+.PHONY : src/items.i
+
+# target to preprocess a source file
+src/items.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/items.cpp.i
+.PHONY : src/items.cpp.i
+
+src/items.s: src/items.cpp.s
+.PHONY : src/items.s
+
+# target to generate assembly for a file
+src/items.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/items.cpp.s
+.PHONY : src/items.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -286,6 +310,9 @@ help:
 	@echo ... src/game.obj
 	@echo ... src/game.i
 	@echo ... src/game.s
+	@echo ... src/items.obj
+	@echo ... src/items.i
+	@echo ... src/items.s
 .PHONY : help
 
 

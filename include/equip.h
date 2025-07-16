@@ -27,28 +27,16 @@ class Amulet: public Accessory {
     public:
     Amulet(const std::string& name, unsigned int num, unsigned int price) : Accessory(name, num, price) {}
     void equip(Hero* hero) const override;
-    // {
-    //     std::cout << " 勇者护符已装备！" << std::endl;
-    //     hero->change_Defense(10);//需要修改成所有格挡减伤提高30%
-    // }
 };//勇者护符
 class Cape: public Accessory {
     public:
     Cape(const std::string& name, unsigned int num, unsigned int price) : Accessory(name, num, price) {}
     void equip(Hero* hero) const override;
-    // {
-    //     std::cout << " 灵光披风已装备！" << std::endl;
-    //     hero->change_Speed(10);
-    // }
 };//灵光披风
 class Ring: public Accessory {
     public:
     Ring(const std::string& name, unsigned int num, unsigned int price) : Accessory(name, num, price) {}
     void equip(Hero* hero) const override;
-    // {    
-    //     std::cout << " 幸运戒指已装备！" << std::endl;
-    //     hero->change_Luck(10);
-    // }
 };//幸运戒指
 
 
