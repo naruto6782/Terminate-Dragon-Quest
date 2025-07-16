@@ -35,9 +35,9 @@ static void equipWeapon(Hero* hero,Equipment* eq) {
         case 1: hero->change_Attack(10,1.0); break;//对称长枪（普通武器）
         case 2: hero->change_Attack(30,1.0); hero->change_Speed(-20);break;//暴风大剑（高额伤害，但是会降低速度）
         case 3: hero->change_Attack(20,1.0); hero->change_Luck(-30);break;//诅咒之刃（提升伤害的同时降低运气）
-        case 4: hero->change_Attack(10,1.0); break;//（淬毒刃，目前无法使用）
+        case 4: hero->change_Attack(10,1.0); break;//（淬毒刃）
         case 5: hero->change_Attack(-5,1.0); break;//月影双刃（一回合可以攻击两次）
-        case 6: hero->change_Attack(10,1.0); break;//花无十日红（增加暴击率，每进行一次攻击增加5点攻击力）
+        case 6: hero->change_Attack(10,1.0); break;//花无十日红（伤害叠加，每攻击一次可将伤害倍率增加0.1
         default: break;
     }
 }

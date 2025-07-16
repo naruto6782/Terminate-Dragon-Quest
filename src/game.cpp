@@ -4,6 +4,7 @@
 #include "Hero_and_Monster.h"
 #include "battle.h"
 #include "equip.h"
+#include "backpack.h"
 #include <cstdlib>
 #include <chrono>
 #include <thread>
@@ -55,7 +56,8 @@ void Game::menu1(Game* game){
 
 void Game::menu2(Hero* hero){//after name
     int choice;
-    Medicine medicine("haha", 10, 100);
+    Medicine medicine("血瓶", 1, 100);
+    Poison poison("毒瓶", 1, 100);
     Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
     Equipment wwwww(EquipmentType::Armor, "流云铠甲", 10, 100, 2);
     Equipment eeeee(EquipmentType::Accessory, "1111", 10, 100, 2);
@@ -76,6 +78,10 @@ void Game::menu2(Hero* hero){//after name
             system("cls");
             hero->show_info(hero);
             break;
+        case 2:
+            system("cls");
+            bag->show();
+            break;
         case 3:
             {
             system("cls");
@@ -83,6 +89,11 @@ void Game::menu2(Hero* hero){//after name
             battle.Battle_round();
             break;
             }
+        case 4:
+            system("cls");
+            bag->add_item(&poison);
+            bag->show();
+            break;
         case 6:
             exit(0);
             break;
@@ -141,7 +152,7 @@ void Game::start(){
     printLineByLine(asciiSword, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}));
     std::string intro3 = 
     "“如此甚好，" + name + "。汝之命运，当由此展开。”\n"
-    "提汝圣剑，踏上征途。汝乃天命之子。\n";
+    "提汝之剑，踏上征途。汝乃天命之子。\n";
 
     printWithDelay(intro3, 30, CYAN);//3
     printWithDelay(intro4, 30, CYAN);
