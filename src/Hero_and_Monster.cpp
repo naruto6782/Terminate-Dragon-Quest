@@ -48,7 +48,7 @@ void Hero::show_info(Hero* hero) {
     cout << endl;
 
 }
-    // hero->getAccessory()->equip(hero);
+    // hero->getEquipment()->equip(hero);
 
     // cout<< endl;
 
