@@ -10,11 +10,11 @@ class Battle {
             this->hero = hero;
             this->monster = monster;
         }
-        void Hero_turn();
-        void Monster_turn();
-        void init_battle();
-        void end_battle();
-        void show_battle();
+        void Battle_round();
+        void process_turn();//done
+        void Hero_turn();//done
+        void Monster_turn();//done
+        void show_battle();//done
         void choose_item();
 };
 
