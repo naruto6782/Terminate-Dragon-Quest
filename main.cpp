@@ -5,6 +5,8 @@
 #include "items.h"
 #include "status.h"
 #include "equip.h"
+#include "battle.h"
+#include "backpack.h"
 using namespace std;
 
 int main() {
