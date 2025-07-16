@@ -2,6 +2,8 @@
 #include "game.h"
 #include "story.h"
 #include "Hero_and_Monster.h"
+#include "battle.h"
+#include "equip.h"
 #include <cstdlib>
 #include <chrono>
 #include <thread>
@@ -52,16 +54,44 @@ void Game::menu1(Game* game){
 }
 
 void Game::menu2(Hero* hero){//after name
-    std::cout << "请做出你的选择" << std::endl
-     << "1.属性" << std::endl << "2.物品" << std::endl << "3.冒险" << std::endl
-     << "4.挑战" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl;
     int choice;
-    std::cin >> choice;
-    switch(choice){ 
+    Medicine medicine("haha", 10, 100);
+    Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
+    Equipment wwwww(EquipmentType::Armor, "流云铠甲", 10, 100, 2);
+    Equipment eeeee(EquipmentType::Accessory, "1111", 10, 100, 2);
+    hero->equip_Accessory(&eeeee);
+    hero->equip_Weapon(&equipment);
+    hero->equip_Armor(&wwwww);
+    Monster monster("zengtou", 100,10,1,10,10);
+    backpack *bag=hero->get_backpack();
+    bag->add_item(&medicine);
+    while(1){
+        std::cout << "请做出你的选择" << std::endl
+        << "1.属性" << std::endl << "2.物品" << std::endl << "3.冒险" << std::endl
+        << "4.挑战" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl;
+        std::cin >> choice;
+        getchar();
+        switch(choice){ 
         case 1:
             system("cls");
             hero->show_info(hero);
+            break;
+        case 3:
+            {
+            system("cls");
+            Battle battle(hero,&monster);
+            battle.Battle_round();
+            break;
+            }
+        case 6:
+            exit(0);
+            break;
+        default:
+            std::cout << "迷途的羔羊啊，请重新选择。" << std::endl;
+            getchar();
+            getchar();
         }
+    }
 }
 
 void printWithDelay(const std::string& text, int delayMs = 50, const std::string& color = RESET) {    //字体打印

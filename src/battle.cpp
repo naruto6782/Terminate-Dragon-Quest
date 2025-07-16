@@ -16,34 +16,34 @@ static mt19937_64& get_random_engine() {//用于随机数生成
 
 void Battle::show_battle() {
     cout << "\n================= ⚔️ Battle Begins ⚔️ =================\n";
-    cout << "🏹 Hero: " << std::setw(15) << std::left << this->hero->get_name()
-         << "🧟 Monster: " << this->monster->get_name() << "\n";
+    cout << "🏹 勇者: " << std::setw(15) << std::left << this->hero->get_name()
+         << "🧟 怪物: " << this->monster->get_name() << "\n";
     cout << "-------------------------------------------------------\n";
-    cout << std::setw(12) << "Attribute"
-         << std::setw(12) << "Hero"
-         << std::setw(12) << "Monster" << "\n";
+    cout << std::setw(12) << "属性"
+         << std::setw(12) << "勇者"
+         << std::setw(12) << "怪物" << "\n";
     cout << "-------------------------------------------------------\n";
-    cout << std::setw(12) << "HP"
+    cout << std::setw(12) << "血量"
          << std::setw(12) << this->hero->get_HP()
          << std::setw(12) << this->monster->get_HP() << "\n";
-    cout << std::setw(12) << "Attack"
+    cout << std::setw(12) << "攻击"
          << std::setw(12) << this->hero->get_Attack()
          << std::setw(12) << this->monster->get_Attack() << "\n";
-    cout << std::setw(12) << "Defense"
+    cout << std::setw(12) << "防御"
          << std::setw(12) << this->hero->get_Defense()
          << std::setw(12) << this->monster->get_Defense() << "\n";
-    cout << std::setw(12) << "Speed"
+    cout << std::setw(12) << "敏捷"
          << std::setw(12) << this->hero->get_Speed()
          << std::setw(12) << this->monster->get_Speed() << "\n";
-    cout << std::setw(12) << "Luck"
+    cout << std::setw(12) << "幸运"
          << std::setw(12) << this->hero->get_Luck()
          << std::setw(12) << "-" << "\n"; // 假设怪物没有 Luck
     cout << "-------------------------------------------------------\n";
 
-    cout << "🧙 Hero Status Effects:     ";
+    cout << "🧙 勇者状态效果：            ";
     this->hero->getStatusEffect()->print();
     cout<<endl;
-    cout << "👹 Monster Status Effects:  ";
+    cout << "👹 怪物状态效果：            ";
     this->monster->getStatusEffect()->print();
     cout<<endl;
     cout << "=======================================================\n\n";
@@ -103,6 +103,7 @@ void Battle::process_turn(){
 
 void Battle::choose_item() {
     backpack* bag = this->hero->get_backpack();
+    //TO COPY
     cout << "\n🎒 你背包中的道具如下：\n";
     cout << "=======================================================\n";
     cout << std::setw(5) << "编号" 
@@ -113,17 +114,17 @@ void Battle::choose_item() {
     for (int i = 0; i < MAX_ITEMS; ++i) {
         BaseItem* item = bag->choose_item(i);
         if (item->get_index() != 0) {
-            cout << std::setw(5) << i
+            cout << std::setw(5) << i+1
                  << std::setw(20) << item->get_name()
                  << std::setw(10) << item->get_num() << "\n";
         }
     }
     cout << "=======================================================\n";
 
-    cout << "\n🔢 请输入你要使用的道具编号（-1取消）：";
+    cout << "\n🔢 请输入你要使用的道具编号（0取消）：";
     int choose;
     cin >> choose;
-
+    choose--;
     if (choose == -1) {
         cout << "❌ 你取消了使用道具。\n";
         return;
@@ -165,6 +166,7 @@ void Battle::Battle_round() {
         cout << "\n🔄 回合结束，按回车继续...\n";
         cin.ignore();
         cin.get(); // 等待用户按回车
+        system("cls"); // 清屏
     }
 
     // 战斗结束判定

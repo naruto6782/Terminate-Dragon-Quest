@@ -36,6 +36,7 @@ public:
 
     void add_item(BaseItem* item) {
         if (!Check_valid()) {
+            //TODO 弹出提示框
             std::cout << "Too many items!" << std::endl;
             return;
         }

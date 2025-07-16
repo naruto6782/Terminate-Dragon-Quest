@@ -43,9 +43,9 @@ public:
         bool is_Alive() const { return HP > 0; }
         StatusEffect* getStatusEffect() const {return status;}
         //改变属性值
-        void change_HP(int num) { HP += num; }
-        void change_Attack(int num) { Attack += num; }
-        void change_Defense(int num) { Defense += num; }
+        void change_HP(int num1,double num2) { HP += num1; HP =(int ) HP *num2; }
+        void change_Attack(int num1,double num2) { Attack += num1; Attack =(int) Attack *num2; }
+        void change_Defense(int num1,double num2) { Defense += num1; Defense =(int) Defense *num2; }
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
         void setStatusEffect(StatusEffect* status) {this->status = status;}
@@ -70,8 +70,8 @@ public:
         int index=new_weapon->get_index();
         if (index) {
             switch (index) {
-                case 1: change_Attack(10); break;
-                case 2: change_Attack(20); break;
+                case 1: change_Attack(10,1.0); break;
+                case 2: change_Attack(20,1.0); break;
                 default: break;
             }
             weapon = new_weapon;
@@ -82,8 +82,8 @@ public:
         int index=new_armor->get_index();
         if (index) {
             switch (index) {
-                case 1: change_Defense(10); break;
-                case 2: change_Defense(20); break;
+                case 1: change_Defense(10,1.0); break;
+                case 2: change_Defense(20,1.0); break;
                 default: break;
             }
             armor = new_armor;
@@ -94,7 +94,7 @@ public:
         int index=new_accessory->get_index();
         if (index) {
             switch (index) {
-                case 1: change_Defense(10); break;
+                case 1: change_Defense(10,1.0); break;
                 case 2: change_Speed(10); break;
                 case 3: change_Luck(10); break;
                 default: break;
@@ -105,8 +105,8 @@ public:
     void unequip_Weapon() {
         if (weapon->get_index()) {
             switch (weapon->get_index()) {
-                case 1: change_Attack(-10); break;
-                case 2: change_Attack(-20); break;
+                case 1: change_Attack(-10,1.0); break;
+                case 2: change_Attack(-20,1.0); break;
                 default: break;
             }
             weapon = nullptr;
@@ -116,8 +116,8 @@ public:
     void unequip_Armor() {
         if (armor->get_index()) {
             switch (armor->get_index()) {
-                case 1: change_Defense(-10); break;
-                case 2: change_Defense(-20); break;
+                case 1: change_Defense(-10,1.0); break;
+                case 2: change_Defense(-20,1.0); break;
                 default: break;
             }
             armor = nullptr;
@@ -127,7 +127,7 @@ public:
     void unequip_Accessory() {
         if (accessory->get_index()) {
             switch (accessory->get_index()) {
-                case 1: change_Defense(-10); break;
+                case 1: change_Defense(-10,1.0); break;
                 case 2: change_Speed(-10); break;
                 case 3: change_Luck(-10); break;
                 default: break;
@@ -136,12 +136,7 @@ public:
         }
     }
 
-    void print_Equipped() {
-        std::cout << "当前装备：" << std::endl;
-        std::cout << "武器: " << (weapon ? weapon->get_name() : "无") << std::endl;
-        std::cout << "防具: " << (armor ? armor->get_name() : "无") << std::endl;
-        std::cout << "饰品: " << (accessory ? accessory->get_name() : "无") << std::endl;
-    }
+   
     //构造函数
     Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed,unsigned int Level, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed, Level) {
         this->Luck = Luck;
