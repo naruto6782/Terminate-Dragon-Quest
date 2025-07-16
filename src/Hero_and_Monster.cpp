@@ -17,7 +17,7 @@ void printBar(int value, int max_value = 100, int barWidth = 30) {
     int pos = value * barWidth / max_value;
     cout << "[";
     for (int i = 0; i < barWidth; ++i) {
-        if (i < pos) cout << "#";
+        if (i < pos) cout << "■";
         else cout << " ";
     }
     cout << "] " << value << endl;
@@ -83,9 +83,9 @@ int H2M_ultimate_attack(int H_Attack, int M_Defense, int H_Speed, int M_Speed,in
     cout << "Ultimate attack damage: " << static_cast<int>(damage) << endl << endl;
     return static_cast<int>(damage);
 }
-void Hero::Attack_Monster(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect){
+void Hero::Attack_Monster(Hero* hero, Monster* monster){
     //先计算伤害，如果未躲避成功，再减少怪物HP
-    int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster_status_effect->defending);
+    int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster->getStatusEffect()->defending);
     monster->change_HP(-damage);
     if(damage>0){
         cout<<"Hero Attacked Monster!"<<endl;
@@ -150,9 +150,9 @@ int M2H_ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,in
     return static_cast<int>(damage);
 }
 
-void Monster::Attack_Hero(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect){
+void Monster::Attack_Hero(Hero* hero, Monster* monster){
     //先计算伤害，如果未躲避成功，再减少英雄HP
-    int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero_status_effect->defending);
+    int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero->getStatusEffect()->defending);
     hero->change_HP(-damage);
     if(damage>0){
         cout<<"Monster Attacked Hero!"<<endl;
