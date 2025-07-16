@@ -6,7 +6,7 @@ using namespace std;
 class StatusEffect {
 public:
     int poisoned = 0;   // 中毒
-    bool defending = false;  // 防御中
+    int defending = 0;  // 防御中
     int stunned = 0;    // 困倦 / 眩晕
     StatusEffect(int poisoned = 0, bool defending = false, int stunned = 0) {    // 默认状态
         this->poisoned = poisoned;
@@ -20,13 +20,16 @@ public:
         if(stunned>0){
             stunned--;
         }
+        if(defending>0){
+            defending--;
+        }
     }
 
     void resetDefending() {
-        defending = false;
+        defending =0;
     }
     void setDefending() {
-        defending = true;
+        defending = 2;
     }
     void setStunned() {
         stunned += 3;
@@ -43,6 +46,7 @@ public:
     void resetAll(){
         poisoned = 0;
         stunned = 0;
+        defending = 0;
     }
     
     void print() const {
@@ -51,10 +55,8 @@ public:
         if (defending) std::cout << "Defending ";
         if (stunned) std::cout << "Stunned "<<"remaining :"<<stunned<<"\t";
         if (!poisoned && !defending && !stunned) std::cout << "Normal";
-        std::cout << "\n";
+        //std::cout << "\n";
     }
 
 };
-
-
 #endif

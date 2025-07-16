@@ -3,6 +3,12 @@
 #include <string>
 #include "status.h"
 #include "equip.h"
+#include "backpack.h"
+
+class StatusEffect;
+class Accessory;
+class backpack;
+
 class Base
 {
 protected:
@@ -52,7 +58,9 @@ private:
     const Equipment* armor;
     const Equipment* accessory;
     unsigned int Luck=0;
+    backpack *hero_backpack;
 public:
+    backpack *get_backpack(){return this->hero_backpack;}
     void show_info(Hero* hero);//展示英雄信息
     void change_Luck(int num) { Luck += num; };
     void set_weapon(Equipment* new_weapon) { weapon = new_weapon; }
@@ -140,15 +148,21 @@ public:
         this->weapon = nullptr;
         this->armor = nullptr;
         this->accessory = nullptr;
+        this->hero_backpack = new backpack(); // ✅ 动态分配背包
+        this->hero_backpack->init_backpack(); // ✅ 初始化
+    }
+    ~Hero() override {
+        delete hero_backpack;
     }
     int get_Luck() const { return Luck; }
-    void Attack_Monster(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect);
+    void Attack_Monster(Hero* hero, Monster* monster);
 };
 class Monster: public Base
 {
 public:
     using Base::Base;
     void show_info(Monster* monster);//展示怪物信息
-    void Attack_Hero(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect);
+    void Attack_Hero(Hero* hero, Monster* monster);
 };
+
 #endif
