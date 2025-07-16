@@ -6,17 +6,17 @@ NullItem null_item("Null",0,0);
 
 void Medicine::use(Hero* hero, Monster* monster) const{
     std::cout << "你使用了生命药水，恢复了10点生命值！" << std::endl;
-    hero->change_HP(10);
+    hero->change_HP(10,1.0);
 }
 
 void IronMedicine::use(Hero* hero, Monster* monster) const{
     std::cout << "你使用了钢铁合剂，本回合增加了10点防御力！" << std::endl;
-    hero->change_Defense(10);
+    hero->change_Defense(10,1.0);
 }
 
 void AngryDrink::use(Hero* hero, Monster* monster) const{
     std::cout << "你使用了愤怒合剂，本回合增加了10攻击力！" << std::endl;
-    hero->change_Attack(10);
+    hero->change_Attack(10,1.0);
 }
 
 void Antidote::use(Hero* hero, Monster* monster) const{
