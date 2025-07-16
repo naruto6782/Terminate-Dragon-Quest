@@ -137,7 +137,7 @@ void Battle::choose_item() {
     }
 
     item_choosed->use(this->hero, this->monster);
-    bag->delete_item(item_choosed);  // 使用后删除一个数量
+    bag->delete_item(choose);  // 使用后删除一个数量
 }
 
 void Battle::Battle_round() {

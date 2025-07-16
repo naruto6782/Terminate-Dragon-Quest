@@ -3,11 +3,52 @@
 
 #define MAX_ITEMS 15
 #include "items.h"
+#include <string>
 extern NullItem null_item;
 
 class backpack {
 private:
     BaseItem* items[MAX_ITEMS];
+
+    int prompt_remove_item() {
+
+
+        int option;
+        while(1){
+        system("cls");
+        std::cout << "背包已满，你想：\n";
+        std::cout << "1. 删除已有物品\n";
+        std::cout << "2. 丢弃将要添加的物品\n";
+        std::cout << "请输入数字选择：";
+        std::cin >> option;
+        if (option == 1) 
+        {   
+            std::cout << "当前背包物品如下：\n";
+            for (int i = 0; i < MAX_ITEMS; i++) {
+                if (items[i]->get_index() != 0) {
+                    std::cout << i + 1<< ": " << items[i]->get_name() << " x" << items[i]->get_num() << std::endl;
+                }
+            }
+            std::cout << "请输入要删除的物品编号：";
+            int idx;
+            std::cin >> idx;
+            idx--;
+            std::string name=items[idx]->get_name();
+            if (delete_item(idx)) {
+                std::cout << "已删除：" << name << std::endl;
+            } else {
+                std::cout << "输入错误，取消添加物品。\n";
+            }
+            return 1;
+        } 
+        else if(option==2)
+        {
+            std::cout << "你选择了丢弃要添加的物品。\n";
+            return 0;
+        }
+         std::cout << "错误输入，请重新选择";
+        }
+    }
 
 public:
     void init_backpack() {
@@ -18,10 +59,17 @@ public:
 
     // 检查是否还有空位
     int Check_valid() {
+        int sum;
         for (int i = 0; i < MAX_ITEMS; i++) {
             if (items[i]->get_index() == 0) {
-                return 1; // 有空位
+                continue;
             }
+            else{
+                sum+=items[i]->get_num();
+            }
+        }
+        if(sum<=MAX_ITEMS-1){
+            return 1;
         }
         return 0; // 满了
     }
@@ -35,13 +83,15 @@ public:
     }
 
     void add_item(BaseItem* item) {
+        int choice;
         if (!Check_valid()) {
             //TODO 弹出提示框
-            std::cout << "Too many items!" << std::endl;
+            choice=prompt_remove_item();//1 代表删除原物品，0代表放弃
+        }
+        // 查找相同类型的物品
+        if(choice==0){
             return;
         }
-
-        // 查找相同类型的物品
         for (int i = 0; i < MAX_ITEMS; i++) {
             if (items[i]->get_index() == item->get_index()) {
                 items[i]->add_num();
@@ -58,27 +108,19 @@ public:
         }
     }
 
-    void delete_item(BaseItem* item) {
-        int found = 0;
-
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_index() == item->get_index()) {
-                found = 1;
-                items[i]->sub_num();
-                if (items[i]->get_num() < 1) {
-                    // 移除并将后面的物品前移
-                    for (int j = i; j < MAX_ITEMS - 1; j++) {
-                        items[j] = items[j + 1];
-                    }
-                    items[MAX_ITEMS - 1] = &null_item;
-                }
-                break;
+    int delete_item(int index) {
+        if(items[index]->get_index()==0){
+            return 0;
+        }
+        items[index]->sub_num();
+        if(items[index]->get_num()==0){
+            for(int j=index+1;j<MAX_ITEMS;j++){
+                items[j-1]=items[j];
             }
+            items[MAX_ITEMS-1]=&null_item;
+            return 1;
         }
-
-        if (!found) {
-            std::cout << "No such item in your backpack" << std::endl;
-        }
+        return 1;
     }
 
     void show() {
@@ -89,15 +131,6 @@ public:
                 std::cout << "---------------------------------------------" << std::endl;
             }
         }
-    }
-
-    int if_can_be_used(BaseItem* item) {
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_index() == item->get_index()) {
-                return 1;
-            }
-        }
-        return 0;
     }
 
     BaseItem* choose_item(int choose) {
