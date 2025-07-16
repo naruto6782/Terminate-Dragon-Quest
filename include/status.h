@@ -43,6 +43,7 @@ public:
     void resetAll(){
         poisoned = 0;
         stunned = 0;
+        defending = false;
     }
     
     void print() const {
@@ -51,7 +52,7 @@ public:
         if (defending) std::cout << "Defending ";
         if (stunned) std::cout << "Stunned "<<"remaining :"<<stunned<<"\t";
         if (!poisoned && !defending && !stunned) std::cout << "Normal";
-        std::cout << "\n";
+        //std::cout << "\n";
     }
 
 };

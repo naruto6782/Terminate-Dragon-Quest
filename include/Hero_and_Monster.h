@@ -34,11 +34,11 @@ public:
         StatusEffect* getStatusEffect() const {return status;}
         Accessory* getAccessory() const {return accessory;}
         //改变属性值
-        void change_HP(int num) { HP += num; }
-        void change_Attack(int num) { Attack += num; }
-        void change_Defense(int num) { Defense += num; }
-        void change_Speed(int num) { Speed += num; }
-        void change_Level(int num) { Level += num; }
+        void change_HP(int num=0, double rate=1.0) { HP += num; HP = (int)(HP * rate); }//便于修改属性值
+        void change_Attack(int num=0, double rate=1.0) { Attack += num; Attack = (int)(Attack * rate); }
+        void change_Defense(int num=0, double rate=1.0) { Defense += num; Defense = (int)(Defense * rate); }
+        void change_Speed(int num=0, double rate=1.0) { Speed += num; Speed = (int)(Speed * rate); }
+        void change_Level(int num=0) { Level += num;}
         void setStatusEffect(StatusEffect* status) {this->status = status;}
         void setAccessory(Accessory* accessory) {this->accessory = accessory;}
 };
@@ -55,13 +55,13 @@ public:
         this->Luck = Luck;
     }
     int get_Luck() const { return Luck; }
-    void Attack_Monster(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect);
+    void Attack_Monster(Hero* hero, Monster* monster);
 };
 class Monster: public Base
 {
 public:
     using Base::Base;
     void show_info(Monster* monster);//展示怪物信息
-    void Attack_Hero(Hero* hero, Monster* monster,StatusEffect* hero_status_effect,StatusEffect* monster_status_effect);
+    void Attack_Hero(Hero* hero, Monster* monster);
 };
 #endif
