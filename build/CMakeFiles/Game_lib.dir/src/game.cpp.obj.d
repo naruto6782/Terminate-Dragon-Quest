@@ -150,6 +150,8 @@ CMakeFiles/Game_lib.dir/src/game.cpp.obj: \
  D:/LEARN/Terminal_Dragon_Quest/include/Hero_and_Monster.h \
  D:/LEARN/Terminal_Dragon_Quest/include/status.h \
  D:/LEARN/Terminal_Dragon_Quest/include/equip.h \
+ D:/LEARN/Terminal_Dragon_Quest/include/backpack.h \
+ D:/LEARN/Terminal_Dragon_Quest/include/items.h \
  D:/LEARN/Terminal_Dragon_Quest/include/story.h \
  C:/msys64/mingw64/include/c++/15.1.0/chrono \
  C:/msys64/mingw64/include/c++/15.1.0/bits/chrono.h \

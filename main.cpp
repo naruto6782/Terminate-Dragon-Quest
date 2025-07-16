@@ -6,20 +6,19 @@
 #include "status.h"
 #include "equip.h"
 #include "battle.h"
+#include "backpack.h"
 using namespace std;
 
 int main() {
     Hero hero("wakaka", 100,10,101,10,10,1);
     Amulet HUFU("hupu",1,100);
     hero.getStatusEffect()->resetAll();
-    hero.setAccessory(&HUFU);
-    Monster monster("monster",100,10,0,10,10);
-    monster.getStatusEffect()->resetAll();
-    monster.setAccessory(&HUFU);
-    Battle battle(&hero,&monster);
-    battle.show_battle();
-    battle.Hero_turn();
-    battle.show_battle();
+    std::cout<<"haha";
+    // hero.setAccessory(&HUFU);
+    // Medicine hp("药水",1,10);
+    // hero.get_backpack()->add_item(&hp);
+    // std::cout<<"haha";
+    // hero.get_backpack()->show();
 
     //饰品的装载
     return 0;
