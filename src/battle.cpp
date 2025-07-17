@@ -191,11 +191,14 @@ void Battle::Battle_round() {
         system("cls"); // 清屏
         return;
     } else if (monster->get_HP() <= 0) {
+        int money = monster->get_Money();
+        hero -> change_Money(money);
         cout << "🎉 英雄胜利！" << endl<<endl;
         cout <<"🎊 按任意键继续...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
         return;
+        
     }
     
 }
