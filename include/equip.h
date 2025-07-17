@@ -1,16 +1,11 @@
-#ifndef EQUIP_H
-#define EQUIP_H
-
+#ifndef EQUIPMENT_H
+#define EQUIPMENT_H
 #include <string>
-#include <iostream>
+#include <functional>
 
 class Hero;
 
-enum class EquipmentType {
-    Weapon,
-    Armor,
-    Accessory
-};
+enum class EquipmentType { Weapon, Armor, Accessory };
 
 class Equipment {
 private:
@@ -18,20 +13,30 @@ private:
     std::string name;
     unsigned int num;
     unsigned int price;
-    unsigned int index; // 用来区分同类不同装备
+    unsigned int index;
+    std::function<void(Hero*)> apply_func;
+    std::function<void(Hero*)> remove_func;
 
 public:
     Equipment(EquipmentType type, const std::string& name, unsigned int num, unsigned int price, unsigned int index)
         : type(type), name(name), num(num), price(price), index(index) {}
 
-    EquipmentType getType() const { return type; }
-    std::string get_name() const { return name; }
-    unsigned int get_num() const { return num; }
-    unsigned int get_price() const { return price; }
-    unsigned int get_index() const { return index; }
+    void set_effect(std::function<void(Hero*)> apply, std::function<void(Hero*)> remove) {
+        apply_func = apply;
+        remove_func = remove;
+    }
 
-    // 装备行为，不再是虚函数，由 cpp 中 switch 实现
-    void equip(Hero* hero) const;
+    void apply_effect(Hero* hero) const {
+        if (apply_func) apply_func(hero);
+    }
+
+    void remove_effect(Hero* hero) const {
+        if (remove_func) remove_func(hero);
+    }
+
+    EquipmentType get_type() const { return type; }
+    std::string get_name() const { return name; }
+    unsigned int get_index() const { return index; }
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "equip.h"
 #include "battle.h"
 #include "backpack.h"
+#include "maze.h"
 using namespace std;
 
 int main() {
