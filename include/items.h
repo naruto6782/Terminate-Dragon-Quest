@@ -33,6 +33,7 @@ class BaseItem {
     unsigned int get_index() const { return index; }
     void add_num() { this->num += 1; }
     void sub_num() { this->num -= 1; }
+    void set_num(unsigned int num) { this->num = num; }
     virtual void use(Hero* hero, Monster* monster) const = 0;
 };
 class Medicine: public BaseItem {

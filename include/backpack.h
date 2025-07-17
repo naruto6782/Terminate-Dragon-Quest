@@ -1,10 +1,18 @@
 #ifndef BACKPACK_H
 #define BACKPACK_H
-
 #define MAX_ITEMS 15
 #include "items.h"
+#include <iomanip> 
 #include <string>
 extern NullItem null_item;
+extern Medicine medicine;
+extern Poison poison;
+extern IronMedicine ironMedicine;
+extern AngryDrink angryDrink;
+extern Antidote antidote;
+extern Antibiotic antibiotic;
+extern Stunned stunned;
+extern Panacea panacea;
 
 class backpack {
 private:
@@ -104,6 +112,7 @@ public:
         for (int i = 0; i < MAX_ITEMS; i++) {
             if (items[i]->get_index() == 0) {
                 items[i] = item;
+                items[i] ->set_num(1); // 设置数量为1
                 return;
             }
         }
@@ -125,20 +134,49 @@ public:
     }
 
     void show() {
+        std::cout << "\n🎒======= 背包内容 =======🎒\n\n";
+
+        bool empty = true;
         for (int i = 0; i < MAX_ITEMS; i++) {
             if (items[i]->get_index() != 0) {
-                std::cout << items[i]->get_name() << std::endl;
-                std::cout << "数量: " << items[i]->get_num() << std::endl;
-                std::cout << "---------------------------------------------" << std::endl;
+                empty = false;
+                std::cout << "【" << items[i]->get_name() << "】\n";
+                std::cout << "  数量  : " << items[i]->get_num() << "\n";
+                std::cout << "-------------------------------\n";
             }
         }
+
+        if (empty) {
+            std::cout << "（空空如也，还没有任何物品）\n";
+        }
+
+        std::cout << "\n按任意键返回主菜单...";
+        getchar();
+        system("cls");
+        return;
     }
+
 
     BaseItem* choose_item(int choose) {
         if (choose < 0 || choose >= MAX_ITEMS) {
             return &null_item;
         }
         return items[choose];
+    }
+    
+    BaseItem* get_item(int index) {
+        switch(index){
+            case 0: return &null_item;
+            case 1: return &medicine;
+            case 2: return &ironMedicine;
+            case 3: return &angryDrink;
+            case 4: return &antidote;
+            case 5: return &antibiotic;
+            case 6: return &poison;
+            case 7: return &stunned;
+            case 8: return &panacea;
+            default: return &null_item; // 如果没有对应的物品，返回空物品
+        }
     }
 };
 
