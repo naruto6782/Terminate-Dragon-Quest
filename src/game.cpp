@@ -4,6 +4,7 @@
 #include "Hero_and_Monster.h"
 #include "battle.h"
 #include "equip.h"
+#include "shop.h"
 #include "backpack.h"
 #include <cstdlib>
 #include <chrono>
@@ -56,6 +57,7 @@ void Game::menu1(Game* game){
 
 void Game::menu2(Hero* hero){//after name
     int choice;
+    Shop shop;
     Medicine medicine("血瓶", 1, 100);
     Poison poison("毒瓶", 1, 100);
     Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
@@ -93,6 +95,10 @@ void Game::menu2(Hero* hero){//after name
             system("cls");
             bag->add_item(&poison);
             bag->show();
+            break;
+        case 5:
+            system("cls");
+            shop.show_shop(hero);
             break;
         case 6:
             exit(0);

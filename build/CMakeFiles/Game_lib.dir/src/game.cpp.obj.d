@@ -152,6 +152,18 @@ CMakeFiles/Game_lib.dir/src/game.cpp.obj: \
  D:/LEARN/Terminal_Dragon_Quest/include/equip.h \
  D:/LEARN/Terminal_Dragon_Quest/include/backpack.h \
  D:/LEARN/Terminal_Dragon_Quest/include/items.h \
+ C:/msys64/mingw64/include/c++/15.1.0/iomanip \
+ C:/msys64/mingw64/include/c++/15.1.0/locale \
+ C:/msys64/mingw64/include/c++/15.1.0/bits/locale_facets_nonio.h \
+ C:/msys64/mingw64/include/c++/15.1.0/ctime \
+ C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32/bits/time_members.h \
+ C:/msys64/mingw64/include/c++/15.1.0/x86_64-w64-mingw32/bits/messages_members.h \
+ C:/msys64/mingw64/include/c++/15.1.0/bits/codecvt.h \
+ C:/msys64/mingw64/include/c++/15.1.0/bits/locale_facets_nonio.tcc \
+ C:/msys64/mingw64/include/c++/15.1.0/bits/locale_conv.h \
+ C:/msys64/mingw64/include/c++/15.1.0/bits/quoted_string.h \
+ C:/msys64/mingw64/include/c++/15.1.0/sstream \
+ C:/msys64/mingw64/include/c++/15.1.0/bits/sstream.tcc \
  D:/LEARN/Terminal_Dragon_Quest/include/story.h \
  C:/msys64/mingw64/include/c++/15.1.0/chrono \
  C:/msys64/mingw64/include/c++/15.1.0/bits/chrono.h \
@@ -160,7 +172,6 @@ CMakeFiles/Game_lib.dir/src/game.cpp.obj: \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stdint.h \
  C:/msys64/mingw64/include/stdint.h \
  C:/msys64/mingw64/include/c++/15.1.0/limits \
- C:/msys64/mingw64/include/c++/15.1.0/ctime \
  C:/msys64/mingw64/include/c++/15.1.0/bits/parse_numbers.h \
  C:/msys64/mingw64/include/c++/15.1.0/thread \
  C:/msys64/mingw64/include/c++/15.1.0/bits/std_thread.h \
@@ -177,4 +188,5 @@ CMakeFiles/Game_lib.dir/src/game.cpp.obj: \
  D:/LEARN/Terminal_Dragon_Quest/include/Hero_and_Monster.h \
  D:/LEARN/Terminal_Dragon_Quest/include/battle.h \
  D:/LEARN/Terminal_Dragon_Quest/include/equip.h \
+ D:/LEARN/Terminal_Dragon_Quest/include/shop.h \
  D:/LEARN/Terminal_Dragon_Quest/include/backpack.h

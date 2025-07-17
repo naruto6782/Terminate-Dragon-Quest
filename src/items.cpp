@@ -3,6 +3,14 @@
 #include "Hero_and_Monster.h"
 
 NullItem null_item("Null",0,0);
+Medicine medicine("血瓶", 1, 100);
+Poison poison("毒瓶", 1, 100);
+IronMedicine ironMedicine("钢铁合剂", 1, 100);
+AngryDrink angryDrink("愤怒合剂", 1, 100);
+Antidote antidote("解毒草", 1, 100);
+Antibiotic antibiotic("惊惶木", 1, 100);
+Stunned stunned("夜阑谣", 1, 100);
+Panacea panacea("万灵药", 1, 100);
 
 void Medicine::use(Hero* hero, Monster* monster) const{
     std::cout << "你使用了生命药水，恢复了10点生命值！" << std::endl<<std::endl;

@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/LEARN/Terminal_Dragon_Quest/src/equip.cpp" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj.d"
   "D:/LEARN/Terminal_Dragon_Quest/src/game.cpp" "CMakeFiles/Game_lib.dir/src/game.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
   "D:/LEARN/Terminal_Dragon_Quest/src/items.cpp" "CMakeFiles/Game_lib.dir/src/items.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/items.cpp.obj.d"
+  "D:/LEARN/Terminal_Dragon_Quest/src/shop.cpp" "CMakeFiles/Game_lib.dir/src/shop.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/shop.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
