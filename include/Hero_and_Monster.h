@@ -15,6 +15,7 @@ protected:
     StatusEffect* status;
     std::string name;
     unsigned int HP=100;
+    unsigned int max_HP=1000000; // 新增最大生命值
     unsigned int Attack=10;
     unsigned int Defense=10;
     unsigned int Speed=10;
@@ -29,6 +30,7 @@ public:
         this->Level = Level;
         this->status = new StatusEffect();
         this->status->resetAll();
+        this->max_HP = 1000000;
         }
         virtual ~Base() {
             delete status;
@@ -40,14 +42,30 @@ public:
         int get_Defense() const { return Defense; }
         int get_Speed() const { return Speed; }
         int get_Level() const { return Level; }
+        unsigned int get_max_HP() const { return max_HP; }
         bool is_Alive() const { return HP > 0; }
         StatusEffect* getStatusEffect() const {return status;}
         //改变属性值
-        void change_HP(int num1,double num2) { HP += num1; HP =(int ) HP *num2; }
+        void change_HP(int num1,double num2,unsigned int max_HP=1000000) {
+            if(num1 >= 0){
+                HP += num1; 
+                HP =(int ) HP *num2; 
+                if(HP > max_HP) HP = max_HP; 
+            }
+            if(num1 < 0){
+                if(-num1>=HP){
+                    HP = 0;
+                } else {
+                    HP += num1; 
+                    HP =(int ) HP *num2; 
+                }
+            }
+        }
         void change_Attack(int num1,double num2) { Attack += num1; Attack =(int) Attack *num2; }
         void change_Defense(int num1,double num2) { Defense += num1; Defense =(int) Defense *num2; }
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
+        void set_max_HP(unsigned int max_HP) { this->max_HP = max_HP; }
         void setStatusEffect(StatusEffect* status) {this->status = status;}
 };
 class Monster;

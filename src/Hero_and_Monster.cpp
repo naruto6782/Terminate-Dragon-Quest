@@ -90,17 +90,13 @@ int H2M_ultimate_attack(int H_Attack, int M_Defense, int H_Speed, int M_Speed,in
     double damage = 10*H_Attack - 2* M_Defense;
     if (damage < 0) damage = 0;//伤害不能为负
     if (M_isdefense) damage = damage * 0.5;//防御伤害减半
-    cout << "最终伤害: " << static_cast<int>(damage) << endl << endl;
+    cout << "你进行了攻击！ 对怪兽最终伤害: " << static_cast<int>(damage) << endl << endl;
     return static_cast<int>(damage);
 }
 void Hero::Attack_Monster(Hero* hero, Monster* monster){
     //先计算伤害，如果未躲避成功，再减少怪物HP
     int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster->getStatusEffect()->defending);
     monster->change_HP(-damage,1.0);
-    if(damage>0){
-        cout<<"你进行了攻击！"<<endl;
-        cout<<endl;
-    }
 }
 //TODO 英雄选择技能
 
@@ -156,7 +152,7 @@ int M2H_ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,in
     double damage = 10*M_Attack - 2* H_Defense;
     if (damage < 0) damage = 0;
     if (H_isdefense) damage = damage * 0.5;
-    cout << "最终伤害: " << static_cast<int>(damage) << endl << endl;
+    cout << "怪兽进行了攻击！ 对你最终伤害: " << static_cast<int>(damage) << endl << endl;
     return static_cast<int>(damage);
 }
 
@@ -164,8 +160,5 @@ void Monster::Attack_Hero(Hero* hero, Monster* monster){
     //先计算伤害，如果未躲避成功，再减少英雄HP
     int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero->getStatusEffect()->defending);
     hero->change_HP(-damage,1.0);
-    if(damage>0){
-        cout<<"怪物进行了攻击！"<<endl;
-        cout<<endl;
-    }
+
 }
