@@ -46,7 +46,8 @@ private:
             std::cout << "你选择了丢弃要添加的物品。\n";
             return 0;
         }
-         std::cout << "错误输入，请重新选择";
+        std::cout << "错误输入，请重新选择";
+        getchar();
         }
     }
 
