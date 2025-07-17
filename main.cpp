@@ -7,11 +7,12 @@
 #include "equip.h"
 #include "battle.h"
 #include "backpack.h"
+#include "maze.h"
 using namespace std;
 
 int main() {
     Game game;
-    Hero hero("haha",100,10,10,10,1,30);
+    Hero hero("haha",100,10,10,10,10,1,30);
     game.menu2(&hero);
     return 0;
 }

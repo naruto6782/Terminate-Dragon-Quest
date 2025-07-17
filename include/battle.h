@@ -10,7 +10,7 @@ class Battle {
             this->hero = hero;
             this->monster = monster;
         }
-        void Battle_round();
+        void Battle_round(int HP);
         void process_turn();//done
         void Hero_turn();//done
         void Monster_turn();//done
