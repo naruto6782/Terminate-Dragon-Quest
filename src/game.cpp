@@ -5,6 +5,7 @@
 #include "battle.h"
 #include "equip.h"
 #include "backpack.h"
+#include "maze.h"
 #include <cstdlib>
 #include <chrono>
 #include <thread>
@@ -26,7 +27,7 @@ const std::string CLEAR    = "\033[2J\033[H";
 
 void Game::init(Game* game){
     std::cout << "游戏已启动!" << std::endl;
-    std::cout << "按任意键继续..." << std::endl;
+    std::cout << "按Enter继续..." << std::endl;
     getchar();
     system("cls");
     game->menu1(game);
@@ -58,38 +59,37 @@ void Game::menu2(Hero* hero){//after name
     int choice;
     Medicine medicine("血瓶", 1, 100);
     Poison poison("毒瓶", 1, 100);
-    Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
-    Equipment wwwww(EquipmentType::Armor, "流云铠甲", 10, 100, 2);
-    Equipment eeeee(EquipmentType::Accessory, "1111", 10, 100, 2);
-    hero->equip_Accessory(&eeeee);
-    hero->equip_Weapon(&equipment);
-    hero->equip_Armor(&wwwww);
-    Monster monster("zengtou", 100,10,1,10,10,10);
+    // Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
+    // Equipment wwwww(EquipmentType::Armor, "流云铠甲", 10, 100, 2);
+    // Equipment eeeee(EquipmentType::Accessory, "1111", 10, 100, 2);
+    // hero->equip_Accessory(&eeeee);
+    // hero->equip_Weapon(&equipment);
+    // hero->equip_Armor(&wwwww);
+    // Monster monster("zengtou", 100,10,1,10,10,10);
     backpack *bag=hero->get_backpack();
     bag->add_item(&medicine);
     while(1){
         std::cout << "请做出你的选择" << std::endl
-        << "1.属性" << std::endl << "2.物品" << std::endl << "3.冒险" << std::endl
-        << "4.挑战" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl;
+        << "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
+        << "4.物品" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl;
         std::cin >> choice;
         getchar();
         switch(choice){ 
-        case 1:
+        case 3:
             system("cls");
             hero->show_info(hero);
             break;
-        case 2:
+        case 4:
             system("cls");
             bag->show();
             break;
-        case 3:
+        case 1:
             {
             system("cls");
-            Battle battle(hero,&monster);
-            battle.Battle_round();
+            easy(hero);
             break;
             }
-        case 4:
+        case 2:
             system("cls");
             bag->add_item(&poison);
             bag->show();
@@ -138,7 +138,7 @@ void Game::start(){
     printLineByLine(asciiScene, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}, std::vector<int>{}));
  
         printWithDelay(intro1, 30, CYAN); //1
-    cout << "按任意键继续..." << endl;
+    cout << "按Enter继续..." << endl;
     getchar();
     getchar();
     system("cls");
@@ -157,7 +157,7 @@ void Game::start(){
     printWithDelay(intro3, 30, CYAN);//3
     printWithDelay(intro4, 30, CYAN);
     cout << "\n" << endl;
-    cout << "按下任意键继续..." << endl;
+    cout << "按下Enter继续..." << endl;
     getchar();
     system("cls");
     printLineByLine(asciiLogo, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29}, std::vector<int>{}));//logo

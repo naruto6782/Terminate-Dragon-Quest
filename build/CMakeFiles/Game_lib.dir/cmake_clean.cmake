@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/items.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/items.cpp.obj.d"
+  "CMakeFiles/Game_lib.dir/src/maze.cpp.obj"
+  "CMakeFiles/Game_lib.dir/src/maze.cpp.obj.d"
   "libGame_lib.a"
   "libGame_lib.pdb"
 )

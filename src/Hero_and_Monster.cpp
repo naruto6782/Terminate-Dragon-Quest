@@ -40,6 +40,8 @@ void Hero::show_info(Hero* hero) {
     
     cout << "Luck:\t\t\t";
     printBar(hero->get_Luck());
+
+    cout << "Money:\t\t\t" << hero->get_Money();
     
     cout << endl;
 
@@ -48,9 +50,9 @@ void Hero::show_info(Hero* hero) {
     cout << endl;
 
     std::cout << "当前装备：" << std::endl;
-    std::cout << "武器: " << (weapon ? weapon->get_name() : "无") << std::endl;
-    std::cout << "防具: " << (armor ? armor->get_name() : "无") << std::endl;
-    std::cout << "饰品: " << (accessory ? accessory->get_name() : "无") << std::endl;
+    std::cout << "武器: " << (weapon->get_index() ? weapon->get_name() : "无") << std::endl;
+    std::cout << "防具: " << (armor->get_index() ? armor->get_name() : "无") << std::endl;
+    std::cout << "饰品: " << (accessory->get_index() ? accessory->get_name() : "无") << std::endl;
     std::cout << "按任意键返回主菜单..." << std::endl;
     getchar();
     
@@ -160,5 +162,4 @@ void Monster::Attack_Hero(Hero* hero, Monster* monster){
     //先计算伤害，如果未躲避成功，再减少英雄HP
     int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero->getStatusEffect()->defending);
     hero->change_HP(-damage,1.0);
-
 }

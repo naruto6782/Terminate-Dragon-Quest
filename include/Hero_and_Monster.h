@@ -9,6 +9,7 @@ class StatusEffect;
 class Accessory;
 class backpack;
 
+extern Equipment null_weapon,null_armor,null_accessory;
 class Base
 {
 protected:
@@ -70,6 +71,9 @@ public:
         void change_Level(int num) { Level += num; }
         void set_max_HP(unsigned int max_HP) { this->max_HP = max_HP; }
         void change_Money(int num) { Money += num; }
+        void reborn(double rate){
+            this->HP=(int) rate*max_HP;
+        };
         void setStatusEffect(StatusEffect* status) {this->status = status;}
 };
 class Monster;
@@ -85,86 +89,32 @@ public:
     backpack *get_backpack(){return this->hero_backpack;}
     void show_info(Hero* hero);//展示英雄信息
     void change_Luck(int num) { Luck += num; };
-    void set_weapon(Equipment* new_weapon) { weapon = new_weapon; }
-    void set_armor(Equipment* new_armor) { armor = new_armor; }
-    void set_accessory(Equipment* new_accessory) { accessory = new_accessory; }
-    void equip_Weapon(const Equipment* new_weapon) {
-        int index=new_weapon->get_index();
-        if (index) {
-            switch (index) {
-                case 1: change_Attack(10,1.0); break;
-                case 2: change_Attack(20,1.0); break;
-                default: break;
-            }
-            weapon = new_weapon;
+    void equip(const Equipment* item) {
+        switch (item->get_type()) {
+            case EquipmentType::Weapon:
+                if (weapon) weapon->remove_effect(this);
+                weapon = item;
+                break;
+            case EquipmentType::Armor:
+                if (armor) armor->remove_effect(this);
+                armor = item;
+                break;
+            case EquipmentType::Accessory:
+                if (accessory) accessory->remove_effect(this);
+                accessory = item;
+                break;
         }
+        item->apply_effect(this);
     }
 
-    void equip_Armor(const Equipment* new_armor) {
-        int index=new_armor->get_index();
-        if (index) {
-            switch (index) {
-                case 1: change_Defense(10,1.0); break;
-                case 2: change_Defense(20,1.0); break;
-                default: break;
-            }
-            armor = new_armor;
-        }
-    }
-
-    void equip_Accessory(const Equipment* new_accessory) {
-        int index=new_accessory->get_index();
-        if (index) {
-            switch (index) {
-                case 1: change_Defense(10,1.0); break;
-                case 2: change_Speed(10); break;
-                case 3: change_Luck(10); break;
-                default: break;
-            }
-            accessory = new_accessory;
-        }
-    }
-    void unequip_Weapon() {
-        if (weapon->get_index()) {
-            switch (weapon->get_index()) {
-                case 1: change_Attack(-10,1.0); break;
-                case 2: change_Attack(-20,1.0); break;
-                default: break;
-            }
-            weapon = nullptr;
-        }
-    }
-
-    void unequip_Armor() {
-        if (armor->get_index()) {
-            switch (armor->get_index()) {
-                case 1: change_Defense(-10,1.0); break;
-                case 2: change_Defense(-20,1.0); break;
-                default: break;
-            }
-            armor = nullptr;
-        }
-    }
-
-    void unequip_Accessory() {
-        if (accessory->get_index()) {
-            switch (accessory->get_index()) {
-                case 1: change_Defense(-10,1.0); break;
-                case 2: change_Speed(-10); break;
-                case 3: change_Luck(-10); break;
-                default: break;
-            }
-            accessory = nullptr;
-        }
-    }
 
    
     //构造函数
     Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed, unsigned int Money, unsigned int Level, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed, Money, Level) {
         this->Luck = Luck;
-        this->weapon = nullptr;
-        this->armor = nullptr;
-        this->accessory = nullptr;
+        this->weapon = &null_weapon;
+        this->armor = &null_armor;
+        this->accessory = &null_accessory;
         this->hero_backpack = new backpack(); // ✅ 动态分配背包
         this->hero_backpack->init_backpack(); // ✅ 初始化
     }

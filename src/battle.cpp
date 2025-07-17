@@ -79,7 +79,7 @@ void Battle::Hero_turn() {
             break;
     }
     if(item_choice==0){
-        cout << "-----按任意键继续-----";
+        cout << "-----按Enter继续-----";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
     }
@@ -152,9 +152,10 @@ int Battle::choose_item() {
     return 1;
 }
 
-void Battle::Battle_round() {
+void Battle::Battle_round(int HP) {
     cout << "\n🏁 战斗开始！" << endl;
-    this->hero->set_max_HP(this->hero->get_HP());
+    this->hero->set_max_HP(HP);
+    this->monster->set_max_HP(this->monster->get_HP());
     while (hero->get_HP() > 0 && monster->get_HP() > 0) {
 
         bool hero_goes_first = hero->get_Speed() >= monster->get_Speed();
@@ -176,7 +177,7 @@ void Battle::Battle_round() {
        
 
         // 清屏（可选，终端清理效果）
-        cout << "\n-----🔄 回合结束，按回车继续...------";
+        cout << "\n-----🔄 回合结束，按Enter继续...------";
         getchar(); // 等待用户按回车
         system("cls"); // 清屏
     }
@@ -186,17 +187,15 @@ void Battle::Battle_round() {
     this->hero->set_max_HP(1000000);
     if (hero->get_HP() <= 0) {
         cout << "💀 英雄战败了！" << endl<<endl;
-        cout << "💔 按任意键返回主菜单...";
+        cout << "💔 按Enter返回主菜单...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
         return;
     } else if (monster->get_HP() <= 0) {
         int money = monster->get_Money();
         hero -> change_Money(money);
-        cout << "🎉 英雄胜利！" << endl<<endl;
-        cout <<"🎊 按任意键继续...";
-        getchar(); // 等待用户按任意键
-        system("cls"); // 清屏
+        this->monster->reborn(1.0);
+        cout << "🎉 英雄胜利！获得了" << monster->get_Money() << "金钱" << endl<<endl;
         return;
         
     }
