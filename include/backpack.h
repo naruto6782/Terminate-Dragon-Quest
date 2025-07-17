@@ -59,7 +59,7 @@ public:
 
     // 检查是否还有空位
     int Check_valid() {
-        int sum;
+        int sum=0;
         for (int i = 0; i < MAX_ITEMS; i++) {
             if (items[i]->get_index() == 0) {
                 continue;

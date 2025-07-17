@@ -50,16 +50,18 @@ void Battle::show_battle() {
 }
 
 void Battle::Hero_turn() {
+    int item_choice =-1;
+    int choice=-1;
+    do{
+    show_battle();
     cout << "\n🎮 请做出你的选择：\n";
     cout << "1. ⚔️ 普通攻击\n";
     cout << "2. 🛡️ 防御\n";
     cout << "3. 💊 使用道具\n";
     cout << "👉 你的选择：";
-
-    int choice;
     cin >> choice;
+    getchar(); // 清除输入缓冲区的换行符
     cout << endl;
-
     switch (choice) {
         case 1:
             this->hero->Attack_Monster(this->hero, this->monster);
@@ -69,12 +71,19 @@ void Battle::Hero_turn() {
             cout << "🛡️ 你进入了防御状态！" << endl;
             break;
         case 3:
-            this->choose_item();
+            item_choice=this->choose_item();
             break;
         default:
-            cout << "❌ 无效选择，本回合浪费！" << endl;
+            cout << "❌ 无效选择！" << endl;
+            item_choice=0;
             break;
     }
+    if(item_choice==0){
+        cout << "-----按任意键继续-----";
+        getchar(); // 等待用户按任意键
+        system("cls"); // 清屏
+    }
+    }while(item_choice==0);
 }
 
 
@@ -101,7 +110,7 @@ void Battle::process_turn(){
      this->monster->getStatusEffect()->process();
 }
 
-void Battle::choose_item() {
+int Battle::choose_item() {
     backpack* bag = this->hero->get_backpack();
     //TO COPY
     cout << "\n🎒 你背包中的道具如下：\n";
@@ -124,35 +133,39 @@ void Battle::choose_item() {
     cout << "\n🔢 请输入你要使用的道具编号（0取消）：";
     int choose;
     cin >> choose;
+    getchar(); // 清除输入缓冲区的换行符
     choose--;
+    cout << endl;
     if (choose == -1) {
-        cout << "❌ 你取消了使用道具。\n";
-        return;
+        cout << "❌ 你取消了使用道具"<<endl<<endl;
+        return 0;
     }
 
     BaseItem* item_choosed = bag->choose_item(choose);
     if (item_choosed->get_index() == 0) {
-        cout << "⚠️ 输入无效，没有这个编号的道具。\n";
-        return;
+        cout << "⚠️ 输入无效，没有这个编号的道具。" << endl<<endl;
+        return 0;
     }
 
     item_choosed->use(this->hero, this->monster);
     bag->delete_item(choose);  // 使用后删除一个数量
+    return 1;
 }
 
 void Battle::Battle_round() {
     cout << "\n🏁 战斗开始！" << endl;
-
+    this->hero->set_max_HP(this->hero->get_HP());
     while (hero->get_HP() > 0 && monster->get_HP() > 0) {
-        show_battle();
 
         bool hero_goes_first = hero->get_Speed() >= monster->get_Speed();
 
         // 行动阶段
         if (hero_goes_first) {
             Hero_turn();
+            process_turn();
             if (monster->get_HP() <= 0) break;
             Monster_turn();
+            process_turn();
         } else {
             Monster_turn();
             if (hero->get_HP() <= 0) break;
@@ -160,20 +173,29 @@ void Battle::Battle_round() {
         }
 
         // 状态处理
-        process_turn();
+       
 
         // 清屏（可选，终端清理效果）
-        cout << "\n🔄 回合结束，按回车继续...\n";
-        cin.ignore();
-        cin.get(); // 等待用户按回车
+        cout << "\n-----🔄 回合结束，按回车继续...------";
+        getchar(); // 等待用户按回车
         system("cls"); // 清屏
     }
 
     // 战斗结束判定
-    cout << "\n🏁 战斗结束！" << endl;
+    cout << "\n🏁 战斗结束！  ";
+    this->hero->set_max_HP(1000000);
     if (hero->get_HP() <= 0) {
-        cout << "💀 英雄战败了！" << endl;
+        cout << "💀 英雄战败了！" << endl<<endl;
+        cout << "💔 按任意键返回主菜单...";
+        getchar(); // 等待用户按任意键
+        system("cls"); // 清屏
+        return;
     } else if (monster->get_HP() <= 0) {
-        cout << "🎉 英雄胜利！" << endl;
+        cout << "🎉 英雄胜利！" << endl<<endl;
+        cout <<"🎊 按任意键继续...";
+        getchar(); // 等待用户按任意键
+        system("cls"); // 清屏
+        return;
     }
+    
 }

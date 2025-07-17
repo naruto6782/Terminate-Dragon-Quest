@@ -15,7 +15,7 @@ class Battle {
         void Hero_turn();//done
         void Monster_turn();//done
         void show_battle();//done
-        void choose_item();
+        int choose_item();
 };
 
 

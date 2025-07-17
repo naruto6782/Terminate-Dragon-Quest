@@ -11,6 +11,7 @@ using namespace std;
 
 int main() {
     Game game;
-    game.init(&game);
+    Hero hero("haha",100,10,10,10,1,30);
+    game.menu2(&hero);
     return 0;
 }
