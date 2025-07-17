@@ -17,15 +17,17 @@ protected:
     unsigned int HP=100;
     unsigned int Attack=10;
     unsigned int Defense=10;
+    unsigned int Money=10;
     unsigned int Speed=10;
     unsigned int Level=1;   
 public:
-        Base(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed, unsigned int Level) {
+        Base(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed, unsigned int Money, unsigned int Level) {
         this->name = name;
         this->HP = HP;
         this->Attack = Attack;
         this->Defense = Defense;
         this->Speed = Speed;
+        this->Money = Money;
         this->Level = Level;
         this->status = new StatusEffect();
         this->status->resetAll();
@@ -39,6 +41,7 @@ public:
         int get_Attack() const { return Attack; }
         int get_Defense() const { return Defense; }
         int get_Speed() const { return Speed; }
+        int get_Money() const { return Money; }
         int get_Level() const { return Level; }
         bool is_Alive() const { return HP > 0; }
         StatusEffect* getStatusEffect() const {return status;}
@@ -48,6 +51,7 @@ public:
         void change_Defense(int num1,double num2) { Defense += num1; Defense =(int) Defense *num2; }
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
+        void change_Money(int num) { Money += num; }
         void setStatusEffect(StatusEffect* status) {this->status = status;}
 };
 class Monster;
@@ -138,7 +142,7 @@ public:
 
    
     //构造函数
-    Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed,unsigned int Level, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed, Level) {
+    Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed, unsigned int Money, unsigned int Level, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed, Money, Level) {
         this->Luck = Luck;
         this->weapon = nullptr;
         this->armor = nullptr;

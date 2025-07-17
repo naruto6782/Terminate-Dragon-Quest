@@ -175,5 +175,7 @@ void Battle::Battle_round() {
         cout << "💀 英雄战败了！" << endl;
     } else if (monster->get_HP() <= 0) {
         cout << "🎉 英雄胜利！" << endl;
+        int money = monster->get_Money();
+        hero -> change_Money(money);
     }
 }
