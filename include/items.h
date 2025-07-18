@@ -76,6 +76,11 @@ class Panacea: public BaseItem {
     Panacea(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 8;}
     void use(Hero* hero, Monster* monster) const override;
 };
+class PhoenixFeather: public BaseItem {
+    public:
+    PhoenixFeather(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 9;}
+    void use(Hero* hero, Monster* monster) const override;
+};
 class NullItem: public BaseItem {
     public:
     NullItem(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 0;}

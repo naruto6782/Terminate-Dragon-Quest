@@ -53,7 +53,7 @@ void Hero::show_info(Hero* hero) {
     std::cout << "武器: " << (weapon->get_index() ? weapon->get_name() : "无") << std::endl;
     std::cout << "防具: " << (armor->get_index() ? armor->get_name() : "无") << std::endl;
     std::cout << "饰品: " << (accessory->get_index() ? accessory->get_name() : "无") << std::endl;
-    std::cout << "按任意键返回主菜单..." << std::endl;
+    std::cout << "按Enter返回主菜单..." << std::endl;
     getchar();
     
     system("cls");

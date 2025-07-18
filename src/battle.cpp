@@ -152,7 +152,7 @@ int Battle::choose_item() {
     return 1;
 }
 
-void Battle::Battle_round(int HP) {
+int Battle::Battle_round(int HP) {
     cout << "\n🏁 战斗开始！" << endl;
     this->hero->set_max_HP(HP);
     this->monster->set_max_HP(this->monster->get_HP());
@@ -183,20 +183,17 @@ void Battle::Battle_round(int HP) {
     }
 
     // 战斗结束判定
-    cout << "\n🏁 战斗结束！  ";
+    cout << "\n🏁 战斗结束！  \n";
     this->hero->set_max_HP(1000000);
     if (hero->get_HP() <= 0) {
         cout << "💀 英雄战败了！" << endl<<endl;
-        cout << "💔 按Enter返回主菜单...";
-        getchar(); // 等待用户按任意键
-        system("cls"); // 清屏
-        return;
-    } else if (monster->get_HP() <= 0) {
+        return 0;
+    } else {
         int money = monster->get_Money();
         hero -> change_Money(money);
         this->monster->reborn(1.0);
         cout << "🎉 英雄胜利！获得了" << monster->get_Money() << "金钱" << endl<<endl;
-        return;
+        return 1;
         
     }
     
