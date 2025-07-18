@@ -59,7 +59,6 @@ void easy(Hero* hero) {
         system("cls"); // 清屏
         Medicine medicine("血瓶", 1, 100);
         Poison poison("毒瓶", 1, 100);
-        hero->equip(&silver_spear);
         hero->equip(&defense_shield);
         hero->equip(&brave_amulet);
         Monster monster("zengtou", 100,5,1,10,10,10);

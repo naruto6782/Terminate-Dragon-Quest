@@ -121,6 +121,7 @@ public:
     ~Hero() override {
         delete hero_backpack;
     }
+    Equipment* get_weapon() const { return const_cast<Equipment*>(weapon); }
     int get_Luck() const { return Luck; }
     void Attack_Monster(Hero* hero, Monster* monster);
 };
