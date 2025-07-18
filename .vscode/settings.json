@@ -78,5 +78,6 @@
         "xutility": "cpp",
         "list": "cpp",
         "xhash": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
