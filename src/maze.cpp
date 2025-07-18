@@ -11,9 +11,9 @@ extern Equipment silver_spear,defense_shield,brave_amulet;
 extern int count_easy, count_medium, count_hard;
 Shop shop;
 int easy_maze[round][event] = {
-    {0, 1, 3, 1, 1, 4, 1, 5},
+    {0, 1, 3, 1, 1, 4, 1, 5},//11111
     {0, 1, 2, 3, 1, 1, 1, 5},
-    {0, 1, 1, 1, 4, 3, 2, 5},
+    {0, 1, 1, 1, 4, 3, 2, 5},//
     {0, 1, 2, 1, 1, 3, 1, 5},
     {0, 1, 1, 3, 1, 2, 1, 5},
     {0, 1, 1, 1, 2, 1, 3, 5}
@@ -60,9 +60,9 @@ void easy(Hero* hero) {
         hero->equip(&brave_amulet);
         std::srand(std::time(nullptr));
         int index = std::rand() % 6;
-        Monster monster = monsters[0][index];
+        Monster* monster = &monsters[0][index];
         backpack *bag=hero->get_backpack();
-        Battle battle(hero,&monster);
+        Battle battle(hero,monster);
         int result=battle.Battle_round(HP);  // 调用战斗函数
         if (result == 0){
             cout << "💀 你的战术堪称完美...可惜敌人不按剧本演。" << endl<<endl;
@@ -148,6 +148,11 @@ void easy(Hero* hero) {
         } 
         else if (e == 5) {
         std::cout << "你找到了宝箱\n";
+        std::cout << "按Enter打开宝箱...\n";
+        getchar(); // 等待用户按任意键
+        system("cls"); // 清屏
+        drop_equipment_easy();
+        drop_equipment_easy();
         std::cout << "按Enter打开宝箱...\n";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
