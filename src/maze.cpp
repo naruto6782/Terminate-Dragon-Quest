@@ -5,7 +5,10 @@
 #include "battle.h"
 #include "Hero_and_Monster.h"
 #include "shop.h"
+#include "game.h"
+#include "monsters.h"
 extern Equipment silver_spear,defense_shield,brave_amulet;
+extern int count_easy, count_medium, count_hard;
 int easy_maze[round][event] = {
     {0, 1, 3, 1, 1, 4, 1, 5},
     {0, 1, 2, 3, 1, 1, 1, 5},
@@ -13,15 +16,15 @@ int easy_maze[round][event] = {
     {0, 1, 2, 1, 1, 3, 1, 5},
     {0, 1, 1, 3, 1, 2, 1, 5},
     {0, 1, 1, 1, 2, 1, 3, 5}
-    // {0,4,4,4,4,4,4,4},
-    // {0,4,4,4,4,4,4,4},
-    // {0,4,4,4,4,4,4,4},
-    // {0,4,4,4,4,4,4,4},
-    // {0,4,4,4,4,4,4,4},
-    // {0,4,4,4,4,4,4,4}
+    // {0,5,5,5,5,5,5,5},
+    // {0,5,5,5,5,5,5,5},
+    // {0,5,5,5,5,5,5,5},
+    // {0,5,5,5,5,5,5,5},
+    // {0,5,5,5,5,5,5,5},
+    // {0,5,5,5,5,5,5,5}
 };
 
-int middle_maze[round][event] = {
+int medium_maze[round][event] = {
     {1, 2, 3, 1, 1, 1, 5},
     {1, 1, 2, 1, 3, 1, 5},
     {1, 1, 1, 2, 3, 1, 5},
@@ -48,7 +51,8 @@ void easy(Hero* hero) {
     srand(time(0)); // 初始化随机数种子
     int* current_maze = select_random_maze(easy_maze);
     int difficulty = current_maze[0];
-    std::cout << "当前难度:简单"<< "\n事件路径: ";
+    std::cout << "当前难度:简单"<< "\n按Enter进入冒险...\n";
+    getchar(); 
     unsigned int HP = hero->get_HP();
     hero->set_max_HP(HP);
     for (int i = 1; i < event; i++) {
@@ -62,7 +66,9 @@ void easy(Hero* hero) {
         hero->equip(&silver_spear);
         hero->equip(&defense_shield);
         hero->equip(&brave_amulet);
-        Monster monster("zengtou", 100,5,1,10,10,10);
+        std::srand(std::time(nullptr));
+        int index = std::rand() % 6;
+        Monster monster = monsters[0][index];
         backpack *bag=hero->get_backpack();
         bag->add_item(&medicine);
         Battle battle(hero,&monster);
@@ -152,9 +158,14 @@ void easy(Hero* hero) {
         } 
         else if (e == 5) {
         std::cout << "你找到了宝箱\n";
-        // open_chest();
+        std::cout << "按Enter打开宝箱...\n";
+        getchar(); // 等待用户按任意键
+        system("cls"); // 清屏
+        drop_equipment_easy();
+        drop_equipment_easy();
         }
-        }
+    }
+
         hero->set_max_HP(HP);
         hero->reborn(1.0);
         hero->set_max_HP(1000000);
@@ -165,10 +176,11 @@ void easy(Hero* hero) {
 
     }
 
-void middle() {
+
+void medium() {
     srand(time(0)); // 初始化随机数种子
 
-    int* current_maze = select_random_maze(middle_maze);
+    int* current_maze = select_random_maze(medium_maze);
     int difficulty = current_maze[0];
 
     std::cout << "当前难度:中等"<< "\n事件路径: ";
@@ -195,7 +207,9 @@ void middle() {
     getchar();
 
 }
-void difficult() {
+
+
+void hard() {
     srand(time(0)); // 初始化随机数种子
 
     int* current_maze = select_random_maze(difficult_maze);

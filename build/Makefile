@@ -213,6 +213,30 @@ src/battle.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/battle.cpp.s
 .PHONY : src/battle.cpp.s
 
+src/count.obj: src/count.cpp.obj
+.PHONY : src/count.obj
+
+# target to build an object file
+src/count.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/count.cpp.obj
+.PHONY : src/count.cpp.obj
+
+src/count.i: src/count.cpp.i
+.PHONY : src/count.i
+
+# target to preprocess a source file
+src/count.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/count.cpp.i
+.PHONY : src/count.cpp.i
+
+src/count.s: src/count.cpp.s
+.PHONY : src/count.s
+
+# target to generate assembly for a file
+src/count.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/count.cpp.s
+.PHONY : src/count.cpp.s
+
 src/equip.obj: src/equip.cpp.obj
 .PHONY : src/equip.obj
 
@@ -352,6 +376,9 @@ help:
 	@echo ... src/battle.obj
 	@echo ... src/battle.i
 	@echo ... src/battle.s
+	@echo ... src/count.obj
+	@echo ... src/count.i
+	@echo ... src/count.s
 	@echo ... src/equip.obj
 	@echo ... src/equip.i
 	@echo ... src/equip.s

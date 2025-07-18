@@ -4,6 +4,11 @@
 #include <vector>
 #include "Hero_and_Monster.h"
 using namespace std;
+
+extern int count_easy;
+extern int count_medium;
+extern int count_hard;
+
 class Game {
 public: 
     void init(Game* game);
