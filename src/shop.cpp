@@ -44,21 +44,21 @@ void Shop::show_shop(Hero* hero) {
     if (choice < -1 || choice > Max_shop_item_num - 1|| choice + 1 > this->total_items) {
         std::cout << "无效的选择或物品编号。" << std::endl<< std::endl;
         std::cout << "请重新选择。" << std::endl<< std::endl;
-        std::cout << "按任意键返回商店菜单..." << std::endl<< std::endl;
+        std::cout << "按Enter返回商店菜单..." << std::endl<< std::endl;
         getchar();
         system("cls");
         continue;
     }
     else if (choice >= 0 ) {
         buy_item(hero,choice);
-        std::cout << "按任意键返回商店菜单..." << std::endl;
+        std::cout << "按Enter返回商店菜单..." << std::endl;
         getchar();
         system("cls");
         continue;
     }
     }while(choice != -1);
     std::cout << "感谢您的光临！" << std::endl;
-    std::cout << "按任意键返回主菜单..." << std::endl;
+    std::cout << "按Enter返回主菜单..." << std::endl;
     getchar();
     system("cls");
     return;

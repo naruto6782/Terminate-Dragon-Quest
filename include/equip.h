@@ -39,4 +39,12 @@ public:
     unsigned int get_index() const { return index; }
 };
 
+
+Equipment* get_random_equipment(const std::vector<std::pair<Equipment*, double>>& drop_pool);
+void drop_equipment_easy();
+void drop_equipment_medium();
+void drop_equipment_hard();
+
+
+
 #endif
