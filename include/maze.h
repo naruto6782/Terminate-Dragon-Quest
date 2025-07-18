@@ -4,8 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 #include "Hero_and_Monster.h"
-const int round = 6;
-const int event = 8;
+#define round 6 // 迷宫行数
+#define event 8 // 每行事件数
 
 extern int easy_maze[round][event];
 extern int middle_maze[round][event];

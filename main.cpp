@@ -9,10 +9,11 @@
 #include "backpack.h"
 #include "maze.h"
 using namespace std;
-
+extern Equipment poisoned_blade;
 int main() {
     Game game;
-    Hero hero("haha",100,10,10,10,50,1,30);
+    Hero hero("haha",100,2,10,10,50,1,30);
+    hero.equip(&poisoned_blade);
     game.menu2(&hero);
     return 0;
 }

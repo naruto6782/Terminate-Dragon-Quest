@@ -71,11 +71,24 @@ void Game::menu2(Hero* hero){//after name
     backpack *bag=hero->get_backpack();
     bag->add_item(&medicine);
     while(1){
-        std::cout << "请做出你的选择" << std::endl
-        << "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
+        system("cls");
+        std::cout<< "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
         << "4.物品" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl;
+        while (true) {
+        std::cout << "请做出你的选择：";
         std::cin >> choice;
-        getchar();
+        if (std::cin.fail()) 
+            {
+            std::cin.clear();  // 清除错误标志位
+            std::cin.ignore(10000, '\n');  // 丢弃错误输入（直到换行）
+            std::cout << "❌ 输入无效，请输入一个整数！\n";
+            } 
+        else 
+            {
+            std::cin.ignore(10000, '\n');  // 清空缓冲区（避免输入如 123abc 时剩余字符影响后续）
+            break;  // 输入成功，退出循环
+            }
+        }
         switch(choice){ 
         case 3:
             system("cls");
@@ -105,7 +118,6 @@ void Game::menu2(Hero* hero){//after name
             break;
         default:
             std::cout << "迷途的羔羊啊，请重新选择。" << std::endl;
-            getchar();
             getchar();
         }
     }
