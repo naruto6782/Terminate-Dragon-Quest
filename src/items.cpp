@@ -11,6 +11,7 @@ Antidote antidote("解毒草", 1, 100);
 Antibiotic antibiotic("惊惶木", 1, 100);
 Stunned stunned("夜阑谣", 1, 100);
 Panacea panacea("万灵药", 1, 100);
+PhoenixFeather phoenixFeather("凤凰羽翼", 1, 1000);
 
 void Medicine::use(Hero* hero, Monster* monster) const{
     std::cout << "你使用了生命药水，恢复了10点生命值！" << std::endl<<std::endl;
@@ -52,4 +53,8 @@ void Panacea::use(Hero* hero, Monster* monster) const{
     hero->getStatusEffect()->resetAll();
 }
 
+void PhoenixFeather::use(Hero* hero, Monster* monster) const{
+    hero->reborn(0.3);
+    std::cout << "你使用了凤凰羽毛，重生成功！" << std::endl<< std::endl;
+}
 void NullItem::use(Hero* hero, Monster* monster) const{}

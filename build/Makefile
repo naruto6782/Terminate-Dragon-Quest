@@ -285,31 +285,6 @@ src/items.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/items.cpp.s
 .PHONY : src/items.cpp.s
 
-<<<<<<< HEAD
-src/shop.obj: src/shop.cpp.obj
-.PHONY : src/shop.obj
-
-# target to build an object file
-src/shop.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/shop.cpp.obj
-.PHONY : src/shop.cpp.obj
-
-src/shop.i: src/shop.cpp.i
-.PHONY : src/shop.i
-
-# target to preprocess a source file
-src/shop.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/shop.cpp.i
-.PHONY : src/shop.cpp.i
-
-src/shop.s: src/shop.cpp.s
-.PHONY : src/shop.s
-
-# target to generate assembly for a file
-src/shop.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/shop.cpp.s
-.PHONY : src/shop.cpp.s
-=======
 src/maze.obj: src/maze.cpp.obj
 .PHONY : src/maze.obj
 
@@ -333,7 +308,30 @@ src/maze.s: src/maze.cpp.s
 src/maze.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/maze.cpp.s
 .PHONY : src/maze.cpp.s
->>>>>>> maze
+
+src/shop.obj: src/shop.cpp.obj
+.PHONY : src/shop.obj
+
+# target to build an object file
+src/shop.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/shop.cpp.obj
+.PHONY : src/shop.cpp.obj
+
+src/shop.i: src/shop.cpp.i
+.PHONY : src/shop.i
+
+# target to preprocess a source file
+src/shop.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/shop.cpp.i
+.PHONY : src/shop.cpp.i
+
+src/shop.s: src/shop.cpp.s
+.PHONY : src/shop.s
+
+# target to generate assembly for a file
+src/shop.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Game_lib.dir\build.make CMakeFiles/Game_lib.dir/src/shop.cpp.s
+.PHONY : src/shop.cpp.s
 
 # Help Target
 help:
@@ -363,15 +361,12 @@ help:
 	@echo ... src/items.obj
 	@echo ... src/items.i
 	@echo ... src/items.s
-<<<<<<< HEAD
-	@echo ... src/shop.obj
-	@echo ... src/shop.i
-	@echo ... src/shop.s
-=======
 	@echo ... src/maze.obj
 	@echo ... src/maze.i
 	@echo ... src/maze.s
->>>>>>> maze
+	@echo ... src/shop.obj
+	@echo ... src/shop.i
+	@echo ... src/shop.s
 .PHONY : help
 
 
