@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/Code/Terminal Dragon Quest/src/Hero_and_Monster.cpp" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
   "D:/Code/Terminal Dragon Quest/src/battle.cpp" "CMakeFiles/Game_lib.dir/src/battle.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/battle.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/count.cpp" "CMakeFiles/Game_lib.dir/src/count.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/count.cpp.obj.d"
   "D:/Code/Terminal Dragon Quest/src/equip.cpp" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj.d"
   "D:/Code/Terminal Dragon Quest/src/game.cpp" "CMakeFiles/Game_lib.dir/src/game.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
   "D:/Code/Terminal Dragon Quest/src/items.cpp" "CMakeFiles/Game_lib.dir/src/items.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/items.cpp.obj.d"
