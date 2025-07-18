@@ -9,10 +9,10 @@
 
 extern int easy_maze[round][event];
 extern int middle_maze[round][event];
-extern int difficult_maze[round][event];
+extern int hard_maze[round][event];
 
 int* select_random_maze(int maze[][event]);
 void easy(Hero *hero);
 void middle();
-void difficult();
+void hard();
 #endif

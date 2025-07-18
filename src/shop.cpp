@@ -4,6 +4,7 @@
 void Shop::show_shop(Hero* hero) {
     int choice=-1;
     do{
+    
     std::cout << "欢迎来到商店！以下是可供购买的物品：" << std::endl;
     std::cout << "==================== 商店物品 ====================\n";
     std::cout << std::left
@@ -26,6 +27,7 @@ void Shop::show_shop(Hero* hero) {
     }
 
     std::cout << "==================================================\n";
+    std::cout << "你当前的金币数为：" << hero->get_Money() << " 金币。" << std::endl;
     std::cout << "请输入你想购买的物品编号（0退出）: "<< std::endl;
     while (true) {
         std::cout << "请输入一个编号：";
