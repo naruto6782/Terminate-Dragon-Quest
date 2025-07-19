@@ -56,8 +56,6 @@ void easy(Hero* hero) {
         std::cout << "遭遇怪物！按Enter开始战斗...\n";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
-        hero->equip(&defense_shield);
-        hero->equip(&brave_amulet);
         std::srand(std::time(nullptr));
         int index = std::rand() % 6;
         Monster* monster = &monsters[0][index];
@@ -81,7 +79,7 @@ void easy(Hero* hero) {
     else if (e == 2) {
         std::cout << "商店\n";
         Shop shop;
-        shop.show_shop_items();
+        shop.show_shop_items(hero);
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
@@ -181,8 +179,6 @@ void medium(Hero* hero) {
         std::cout << "遭遇怪物！按Enter开始战斗...\n";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
-        hero->equip(&defense_shield);
-        hero->equip(&brave_amulet);
         std::srand(std::time(nullptr));
         int index = std::rand() % 6;
         Monster* monster = &monsters[0][index];
@@ -205,7 +201,7 @@ void medium(Hero* hero) {
     } 
     else if (e == 2) {
         std::cout << "商店\n";
-        shop.show_shop_items();
+        shop.show_shop_items(hero);
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
@@ -304,8 +300,6 @@ void hard(Hero* hero) {
         std::cout << "遭遇怪物！按Enter开始战斗...\n";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
-        hero->equip(&defense_shield);
-        hero->equip(&brave_amulet);
         std::srand(std::time(nullptr));
         int index = std::rand() % 6;
         Monster* monster = &monsters[0][index];
@@ -328,7 +322,7 @@ void hard(Hero* hero) {
     } 
     else if (e == 2) {
         std::cout << "商店\n";
-        shop.show_shop_items();
+        shop.show_shop_items(hero);
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏

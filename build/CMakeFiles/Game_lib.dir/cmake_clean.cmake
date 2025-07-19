@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
+  "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj"
+  "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/battle.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/battle.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/count.cpp.obj"
@@ -13,8 +15,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Game_lib.dir/src/items.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/maze.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/maze.cpp.obj.d"
-  "CMakeFiles/Game_lib.dir/src/shop.cpp.obj"
-  "CMakeFiles/Game_lib.dir/src/shop.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/story.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/story.cpp.obj.d"
   "libGame_lib.a"

@@ -12,8 +12,10 @@ using namespace std;
 extern Equipment poisoned_blade;
 int main() {
     Game game;
+    init_items_effects();
+    init_equipment_effects();
     Hero hero("haha",100,2,10,10,50,1,30);
-    hero.equip(&poisoned_blade);
+    hero.get_equipment_backpack()->add_equipment(poisoned_blade);
     game.menu2(&hero);
     return 0;
 }

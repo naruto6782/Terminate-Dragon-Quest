@@ -121,10 +121,13 @@ void Battle::process_turn(int choice){
 
 int Battle::choose_item() {
     Backpack* bag = this->hero->get_backpack();
-    bag->show_backpack();
+    int status=bag->show_backpack();
+    if(status == 0) {
+        return 0; // 返回0表示背包为空
+    }
     int choose;
     while (true) {
-        std::cout << "请输入一个编号：";
+        std::cout << "请输入一个编号(输入0返回)： ";
         std::cin >> choose;
 
         if (std::cin.fail()) {
@@ -139,7 +142,7 @@ int Battle::choose_item() {
     int choose_index = bag->choose_to_index(choose);
     index_to_item(choose_index).apply_effect(this->hero, this->monster);
     cout << endl;
-    if (choose == -1) {
+    if (choose == 0) {
         cout << "❌ 你取消了使用道具"<<endl<<endl;
         return 0;
     }
@@ -150,6 +153,7 @@ int Battle::choose_item() {
 
 int Battle::Battle_round(int HP) {
     cout << "\n🏁 战斗开始！" << endl;
+    int monster_HP = this->monster->get_HP();
     while (hero->get_HP() > 0 && monster->get_HP() > 0) {
         bool hero_goes_first = hero->get_Speed() >= monster->get_Speed();
         // 行动阶段
@@ -230,7 +234,7 @@ int Battle::Battle_round(int HP) {
     } else {
         int money = monster->get_Money();
         hero -> change_Money(money);
-        this->monster->reborn(1.0);
+        this->monster->reborn(1.0, monster_HP);
         cout << "🎉 英雄胜利！获得了" << monster->get_Money() << "金钱" << endl<<endl;
         return 1;
         

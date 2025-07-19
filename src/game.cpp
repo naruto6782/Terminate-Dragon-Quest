@@ -152,10 +152,12 @@ void Game::menu2(Hero* hero){//after name
         case 4:
             system("cls");
             bag->show_backpack();
+            cout << "输入任意键返回主菜单";
+            getchar();
             break;
         case 5:
             system("cls");
-            shop.show_shop_items();
+            shop.show_shop_items(hero);
             break;
         case 6:
             exit(0);
