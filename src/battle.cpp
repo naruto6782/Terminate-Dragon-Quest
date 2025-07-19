@@ -1,6 +1,7 @@
 #include "battle.h"
 #include "backpack.h"
 #include "Hero_and_Monster.h"
+#include "items.h"
 #include <iostream>
 #include <iomanip> 
 using namespace std;
@@ -119,51 +120,36 @@ void Battle::process_turn(int choice){
 }
 
 int Battle::choose_item() {
-    backpack* bag = this->hero->get_backpack();
-    //TO COPY
-    cout << "\n🎒 你背包中的道具如下：\n";
-    cout << "=======================================================\n";
-    cout << std::setw(5) << "编号" 
-         << std::setw(20) << "道具名"
-         << std::setw(10) << "数量" << "\n";
-    cout << "-------------------------------------------------------\n";
+    Backpack* bag = this->hero->get_backpack();
+    bag->show_backpack();
+    int choose;
+    while (true) {
+        std::cout << "请输入一个编号：";
+        std::cin >> choose;
 
-    for (int i = 0; i < MAX_ITEMS; ++i) {
-        BaseItem* item = bag->choose_item(i);
-        if (item->get_index() != 0) {
-            cout << std::setw(5) << i+1
-                 << std::setw(20) << item->get_name()
-                 << std::setw(10) << item->get_num() << "\n";
+        if (std::cin.fail()) {
+            std::cin.clear();  // 清除错误标志位
+            std::cin.ignore(10000, '\n');  // 丢弃错误输入（直到换行）
+            std::cout << "❌ 输入无效，请输入一个整数！\n";
+        } else {
+            std::cin.ignore(10000, '\n');  // 清空缓冲区（避免输入如 123abc 时剩余字符影响后续）
+            break;  // 输入成功，退出循环
         }
     }
-    cout << "=======================================================\n";
-    cout << "\n🔢 请输入你要使用的道具编号（0取消）：";
-    int choose;
-    std::cout << "请输入一个编号：";
-    std::cin >> choose;
-    choose--;
+    int choose_index = bag->choose_to_index(choose);
+    index_to_item(choose_index).apply_effect(this->hero, this->monster);
     cout << endl;
     if (choose == -1) {
         cout << "❌ 你取消了使用道具"<<endl<<endl;
         return 0;
     }
-
-    BaseItem* item_choosed = bag->choose_item(choose);
-    if (item_choosed->get_index() == 0) {
-        cout << "⚠️ 输入无效，没有这个编号的道具。" << endl<<endl;
-        return 0;
-    }
-
-    item_choosed->use(this->hero, this->monster);
     bag->delete_item(choose);  // 使用后删除一个数量
-    get_change(item_choosed->get_index());
+    get_change(index_to_item(choose_index).index);
     return 1;
 }
 
 int Battle::Battle_round(int HP) {
     cout << "\n🏁 战斗开始！" << endl;
-    this->hero->set_max_HP(HP);
-    this->monster->set_max_HP(this->monster->get_HP());
     while (hero->get_HP() > 0 && monster->get_HP() > 0) {
         bool hero_goes_first = hero->get_Speed() >= monster->get_Speed();
         // 行动阶段
@@ -238,7 +224,6 @@ int Battle::Battle_round(int HP) {
 
     // 战斗结束判定
     cout << "\n🏁 战斗结束！  \n";
-    this->hero->set_max_HP(1000000);
     if (hero->get_HP() <= 0) {
         cout << "💀 英雄战败了！" << endl<<endl;
         return 0;

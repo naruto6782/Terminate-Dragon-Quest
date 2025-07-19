@@ -5,6 +5,7 @@
 #include <random>
 #include "Hero_and_Monster.h"
 #include "status.h"
+#include "backpack.h"
 using namespace std;
 
 static mt19937_64& get_random_engine() {//用于随机数生成
@@ -53,8 +54,22 @@ void Hero::show_info(Hero* hero) {
     std::cout << "武器: " << (weapon->get_index() ? weapon->get_name() : "无") << std::endl;
     std::cout << "防具: " << (armor->get_index() ? armor->get_name() : "无") << std::endl;
     std::cout << "饰品: " << (accessory->get_index() ? accessory->get_name() : "无") << std::endl;
-    std::cout << "按Enter返回主菜单..." << std::endl;
-    getchar();
+    int next_choice;
+    Equipment_backpack* equip_bag = hero->get_equipment_backpack();
+    while (true) {
+        std::cout << "按 1 查看武器背包" << std::endl;
+        std::cout << "按 2 返回主菜单..." << std::endl;
+        std::cin >> next_choice;
+        getchar(); // 清除输入缓冲区的换行符
+        if (next_choice == 1) {
+            equip_bag->show_equipment(); // ✅ 递归再次调用
+            break;             // ✅ 注意：需要 break，否则返回后还会再次进入循环
+        } else if (next_choice == 2) {
+            return;
+        } else {
+            std::cout << "❌ 无效输入，请重新输入！" << std::endl;
+        }
+    }
     
     system("cls");
 
@@ -100,11 +115,9 @@ void Hero::Attack_Monster(Hero* hero, Monster* monster){
     int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster->getStatusEffect()->defending);
     monster->change_HP(-damage,1.0);
 }
-//TODO 英雄选择技能
-
-//TODO 英雄选择道具
 
 //TODO 英雄选择逃跑
+//WON'T DO 因为英雄不可以逃跑！
 
 //----------------Monster-Section----------------
 void Monster::show_info(Monster* monster){

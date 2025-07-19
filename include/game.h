@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 #include <iostream>
 #include <vector>
 #include "Hero_and_Monster.h"
@@ -52,7 +51,3 @@ public:
 
 void printWithDelay(const std::string& text, int delayMs = 50, const std::string& color = RESET);
 void printLineByLine(const std::vector<std::string>& lines, int delayMs, const SceneColorConfig& config);
-
-
-
-#endif
