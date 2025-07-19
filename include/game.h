@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 #include <iostream>
 #include <vector>
 #include "Hero_and_Monster.h"
@@ -26,7 +25,3 @@ public:
     const std::vector<int>& getRedLines() const { return redLines; }
     const std::vector<int>& getYellowLines() const { return yellowLines; }
 };
-
-//test github
-#endif
-//SceneColorConfig haha({1,2,4},{5,7},{3,6})

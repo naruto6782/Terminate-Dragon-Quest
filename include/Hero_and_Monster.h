@@ -15,8 +15,7 @@ class Base
 protected:
     StatusEffect* status;
     std::string name;
-    unsigned int HP=100;
-    unsigned int max_HP=1000000; // 新增最大生命值
+    unsigned int HP=100;// 新增最大生命值
     unsigned int Attack=10;
     unsigned int Defense=10;
     unsigned int Money=10;
@@ -33,7 +32,6 @@ public:
         this->Level = Level;
         this->status = new StatusEffect();
         this->status->resetAll();
-        this->max_HP = 1000000;
         }
         virtual ~Base() {
             delete status;
@@ -46,7 +44,6 @@ public:
         int get_Speed() const { return Speed; }
         int get_Money() const { return Money; }
         int get_Level() const { return Level; }
-        unsigned int get_max_HP() const { return max_HP; }
         bool is_Alive() const { return HP > 0; }
         StatusEffect* getStatusEffect() const {return status;}
         //改变属性值
@@ -69,9 +66,8 @@ public:
         void change_Defense(int num1,double num2) { Defense += num1; Defense =(int) Defense *num2; }
         void change_Speed(int num) { Speed += num; }
         void change_Level(int num) { Level += num; }
-        void set_max_HP(unsigned int max_HP) { this->max_HP = max_HP; }
         void change_Money(int num) { Money += num; }
-        void reborn(double rate){
+        void reborn(double rate, unsigned int max_HP = 1000000) {
             this->HP=(int) rate*max_HP;
         };
         void setStatusEffect(StatusEffect* status) {this->status = status;}
@@ -84,9 +80,9 @@ private:
     const Equipment* armor;
     const Equipment* accessory;
     unsigned int Luck=0;
-    backpack *hero_backpack;
+    Backpack hero_backpack;
+    Equipment_backpack equipment_backpack;
 public:
-    backpack *get_backpack(){return this->hero_backpack;}
     void show_info(Hero* hero);//展示英雄信息
     void change_Luck(int num) { Luck += num; };
     void equip(const Equipment* item) {
@@ -106,21 +102,15 @@ public:
         }
         item->apply_effect(this);
     }
-
-
-   
     //构造函数
     Hero(const std::string& name, unsigned int HP, unsigned int Attack, unsigned int Defense, unsigned int Speed, unsigned int Money, unsigned int Level, unsigned int Luck) : Base(name, HP, Attack, Defense, Speed, Money, Level) {
         this->Luck = Luck;
         this->weapon = &null_weapon;
         this->armor = &null_armor;
         this->accessory = &null_accessory;
-        this->hero_backpack = new backpack(); // ✅ 动态分配背包
-        this->hero_backpack->init_backpack(); // ✅ 初始化
     }
-    ~Hero() override {
-        delete hero_backpack;
-    }
+    Backpack* get_backpack() { return &this->hero_backpack; }
+    Equipment_backpack* get_equipment_backpack() { return &this->equipment_backpack; }
     Equipment* get_weapon() const { return const_cast<Equipment*>(weapon); }
     int get_Luck() const { return Luck; }
     void Attack_Monster(Hero* hero, Monster* monster);

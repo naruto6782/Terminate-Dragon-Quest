@@ -100,11 +100,9 @@ void Hero::Attack_Monster(Hero* hero, Monster* monster){
     int damage=H2M_ultimate_attack(hero->get_Attack(),monster->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),monster->getStatusEffect()->defending);
     monster->change_HP(-damage,1.0);
 }
-//TODO 英雄选择技能
-
-//TODO 英雄选择道具
 
 //TODO 英雄选择逃跑
+//WON'T DO 因为英雄不可以逃跑！
 
 //----------------Monster-Section----------------
 void Monster::show_info(Monster* monster){

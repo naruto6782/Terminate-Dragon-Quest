@@ -1,89 +1,62 @@
-#ifndef ITEMS_H
-#define ITEMS_H
+#pragma once
 #include <iostream>
+#include <functional>
 #include "status.h"
 class Hero;
 class Monster;
-/*
-index与item的对应关系：
-1. 生命药水
-2. 钢铁合剂
-3. 愤怒合剂
-4. 解毒草
-5. 惊惶木
-6. 淬毒镖
-7. 夜阑谣
-8. 万灵药
-*/
-class BaseItem {
-    protected:
-        std::string name;
-        unsigned int num = 0;
-        unsigned int price = 10;
-        unsigned int index = 0;
+
+class Item {
+    private:
+        std::function<void(Hero*, Monster*)> apply_func; // 使用效果
     public:
-    BaseItem(const std::string& name, unsigned int num, unsigned int price) {
-        this->name = name;
-        this->num = num;
-        this->price = price;
+    Item(const std::string& name, unsigned int num, unsigned int price,int index = 0) : name(name), num(num), price(price), index(index) {
+        if (num < 0) {
+            std::cout << "物品数量不能为负，已设置为0。" << std::endl;
+            this->num = 0;
+        }
     }
-    std::string get_name() const { return name; }
-    unsigned int get_num() const { return num; }
-    unsigned int get_price() const { return price; }
-    unsigned int get_index() const { return index; }
-    void add_num() { this->num += 1; }
-    void sub_num() { this->num -= 1; }
-    void set_num(unsigned int num) { this->num = num; }
-    virtual void use(Hero* hero, Monster* monster) const = 0;
+    std::string name;
+    unsigned int num = 0;
+    unsigned int price = 10;
+    unsigned int index = 0;
+    void set_effect(std::function<void(Hero*, Monster*)> use) {
+        apply_func = use;
+    }
+    void apply_effect(Hero* hero, Monster* monster) const {
+        if (apply_func) apply_func(hero, monster);
+    }
 };
-class Medicine: public BaseItem {
-    public:
-    Medicine(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 1;}
-    void use(Hero* hero , Monster* monster) const override;
-};
-class IronMedicine: public BaseItem {
-    public:
-    IronMedicine(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 2;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class AngryDrink: public BaseItem {
-    public:
-    AngryDrink(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 3;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class Antidote: public BaseItem {    
-    public:
-    Antidote(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 4;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class Antibiotic: public BaseItem {
-    public:
-    Antibiotic(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 5;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class Poison: public BaseItem {
-    public:
-    Poison(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 6;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class Stunned: public BaseItem {
-    public:  
-    Stunned(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 7;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class Panacea: public BaseItem {
-    public:
-    Panacea(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 8;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class PhoenixFeather: public BaseItem {
-    public:
-    PhoenixFeather(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 9;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-class NullItem: public BaseItem {
-    public:
-    NullItem(const std::string& name, unsigned int num, unsigned int price) : BaseItem(name, num, price) {this->index = 0;}
-    void use(Hero* hero, Monster* monster) const override;
-};
-#endif
+Item index_to_item(int index) {
+    switch (index) {
+        case 1:
+            return medicine;
+        case 2:
+            return ironMedicine;
+        case 3:
+            return angryDrink;
+        case 4:
+            return antidote;
+        case 5:
+            return antibiotic;
+        case 6:
+            return poison;
+        case 7:
+            return stunned;
+        case 8:
+            return panacea;
+        case 9:
+            return phoenixFeather;
+        default:
+            return null_item; // 返回空物品
+    }
+}
+Item null_item("Null", 0, 0, 0);
+Item medicine("血瓶", 1, 100, 1);
+Item poison("毒瓶", 1, 100,2);
+Item ironMedicine("钢铁合剂", 1, 100, 3);
+Item angryDrink("愤怒合剂", 1, 100, 4);
+Item antidote("解毒草", 1, 100, 5);
+Item antibiotic("惊惶木", 1, 100, 6);
+Item stunned("夜阑谣", 1, 100, 7);
+Item panacea("万灵药", 1, 100, 8);
+Item phoenixFeather("凤凰羽翼", 1, 1000, 9);
