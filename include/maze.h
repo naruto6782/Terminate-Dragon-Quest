@@ -4,15 +4,17 @@
 #include <cstdlib>
 #include <ctime>
 #include "Hero_and_Monster.h"
-#define round 6 // 迷宫行数
-#define event 8 // 每行事件数
+#define ROUNDS 6 // 迷宫行数
+#define EVENTS 8 // 每行事件数
 
-extern int easy_maze[round][event];
-extern int middle_maze[round][event];
-extern int hard_maze[round][event];
+extern int easy_maze[ROUNDS][EVENTS];
+extern int middle_maze[ROUNDS][EVENTS];
+extern int hard_maze[ROUNDS][EVENTS];
 
-int* select_random_maze(int maze[][event]);
+int* select_random_maze(int maze[][EVENTS]);
 void easy(Hero *hero);
-void middle();
-void hard();
+void medium(Hero *hero);
+void hard(Hero *hero);
+
+
 #endif

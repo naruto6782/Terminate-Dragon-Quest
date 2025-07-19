@@ -203,6 +203,10 @@ CMakeFiles/Game_lib.dir/src/game.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/sstream \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/sstream.tcc \
  D:/Code/TERMIN~1/include/story.h \
+ D:/Code/TERMIN~1/include/Hero_and_Monster.h \
+ D:/Code/TERMIN~1/include/battle.h D:/Code/TERMIN~1/include/equip.h \
+ D:/Code/TERMIN~1/include/shop.h D:/Code/TERMIN~1/include/backpack.h \
+ D:/Code/TERMIN~1/include/maze.h \
  C:/msys64/ucrt64/include/c++/14.2.0/chrono \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/chrono.h \
  C:/msys64/ucrt64/include/c++/14.2.0/ratio \
@@ -216,8 +220,4 @@ CMakeFiles/Game_lib.dir/src/game.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/algorithmfwd.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_heap.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_tempbuf.h \
- C:/msys64/ucrt64/include/c++/14.2.0/pstl/glue_algorithm_defs.h \
- D:/Code/TERMIN~1/include/Hero_and_Monster.h \
- D:/Code/TERMIN~1/include/battle.h D:/Code/TERMIN~1/include/equip.h \
- D:/Code/TERMIN~1/include/shop.h D:/Code/TERMIN~1/include/backpack.h \
- D:/Code/TERMIN~1/include/maze.h
+ C:/msys64/ucrt64/include/c++/14.2.0/pstl/glue_algorithm_defs.h
