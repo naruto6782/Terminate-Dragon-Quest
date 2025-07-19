@@ -4,7 +4,7 @@
 #include "maze.h"
 #include "battle.h"
 #include "Hero_and_Monster.h"
-#include "shop.h"
+#include "backpack.h"
 extern Equipment silver_spear,defense_shield,brave_amulet;
 int easy_maze[round][event] = {
     {0, 1, 3, 1, 1, 4, 1, 5},
@@ -50,28 +50,22 @@ void easy(Hero* hero) {
     int difficulty = current_maze[0];
     std::cout << "当前难度:简单"<< "\n事件路径: ";
     unsigned int HP = hero->get_HP();
-    hero->set_max_HP(HP);
     for (int i = 1; i < event; i++) {
     int e = current_maze[i];
     if (e == 1) {
         std::cout << "遭遇怪物！按Enter开始战斗...\n";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
-        Medicine medicine("血瓶", 1, 100);
-        Poison poison("毒瓶", 1, 100);
         hero->equip(&defense_shield);
         hero->equip(&brave_amulet);
         Monster monster("zengtou", 100,5,1,10,10,10);
-        backpack *bag=hero->get_backpack();
-        bag->add_item(&medicine);
+        Backpack *bag=hero->get_backpack();
         Battle battle(hero,&monster);
         int result=battle.Battle_round(HP);  // 调用战斗函数
         if (result == 0){
             cout << "💀 你的战术堪称完美...可惜敌人不按剧本演。" << endl<<endl;
             cout << "💔 按Enter返回主菜单...";
-            hero->set_max_HP(HP);
-            hero->change_HP(1000000,1.0,hero->get_max_HP());
-            hero->set_max_HP(1000000);
+            hero->reborn(1.0, HP);
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
             return;
@@ -85,16 +79,14 @@ void easy(Hero* hero) {
     else if (e == 2) {
         std::cout << "商店\n";
         Shop shop;
-        shop.show_shop(hero);
+        shop.show_shop_items();
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
         // shop();
     } 
     else if (e == 3) {
-        hero->set_max_HP(HP);
-        hero->change_HP(20,1.0,hero->get_max_HP());
-        hero->set_max_HP(1000000);
+        hero->change_HP(20,1.0,HP);
         std::cout << "到达篝火，回复20生命值！当前生命值：" << hero->get_HP() << "\n";
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
@@ -109,7 +101,7 @@ void easy(Hero* hero) {
         std::cout << "2. 扣除50金币\n";
         std::cin >> choice;
         if (choice == 1) {
-            hero->change_HP(-50,1.0,hero->get_max_HP());
+            hero->change_HP(-50,1.0,HP);
             std::cout << "扣除50生命值成功！,剩余生命值：" << hero->get_HP() << "\n";
             getchar(); // 等待用户按任意键
             if (hero->get_HP() <= 0) {
@@ -127,7 +119,7 @@ void easy(Hero* hero) {
                 std::cout << "金币不足,将扣除50生命值！\n";
                 getchar(); // 等待用户按任意键
                 hero->change_Money(50);
-                hero->change_HP(-50,1.0,hero->get_max_HP());
+                hero->change_HP(-50,1.0,HP);
                 if (hero->get_HP() <= 0) {
                     cout << "💀 你迈出了探索的重要一步，然后...没再迈第二步。" << endl<<endl;
                     cout << "💔 按Enter返回主菜单...";
@@ -154,9 +146,7 @@ void easy(Hero* hero) {
         // open_chest();
         }
         }
-        hero->set_max_HP(HP);
-        hero->reborn(1.0);
-        hero->set_max_HP(1000000);
+        hero->reborn(1.0, HP);
         cout << "你已打败了简单难度的" << "\n";
         cout <<"🎊 按Enter返回主界面...";
         getchar(); // 等待用户按任意键

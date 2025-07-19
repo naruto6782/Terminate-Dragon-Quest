@@ -4,7 +4,6 @@
 #include "Hero_and_Monster.h"
 #include "battle.h"
 #include "equip.h"
-#include "shop.h"
 #include "backpack.h"
 #include "maze.h"
 #include <cstdlib>
@@ -59,8 +58,6 @@ void Game::menu1(Game* game){
 void Game::menu2(Hero* hero){//after name
     int choice;
     Shop shop;
-    Medicine medicine("血瓶", 1, 100);
-    Poison poison("毒瓶", 1, 100);
     // Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
     // Equipment wwwww(EquipmentType::Armor, "流云铠甲", 10, 100, 2);
     // Equipment eeeee(EquipmentType::Accessory, "1111", 10, 100, 2);
@@ -68,8 +65,7 @@ void Game::menu2(Hero* hero){//after name
     // hero->equip_Weapon(&equipment);
     // hero->equip_Armor(&wwwww);
     // Monster monster("zengtou", 100,10,1,10,10,10);
-    backpack *bag=hero->get_backpack();
-    bag->add_item(&medicine);
+    Backpack *bag=hero->get_backpack();
     while(1){
         system("cls");
         std::cout<< "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
@@ -96,7 +92,7 @@ void Game::menu2(Hero* hero){//after name
             break;
         case 4:
             system("cls");
-            bag->show();
+            bag->show_backpack();
             break;
         case 1:
             {
@@ -106,12 +102,11 @@ void Game::menu2(Hero* hero){//after name
             }
         case 2:
             system("cls");
-            bag->add_item(&poison);
-            bag->show();
+            bag->show_backpack();
             break;
         case 5:
             system("cls");
-            shop.show_shop(hero);
+            shop.show_shop_items();
             break;
         case 6:
             exit(0);
@@ -153,27 +148,26 @@ void printLineByLine(const std::vector<std::string>& lines, int delayMs, const S
 void Game::start(){
     system("chcp 65001 > nul");
     
-    printLineByLine(asciiScene, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}, std::vector<int>{}));
- 
-        printWithDelay(intro1, 30, CYAN); //1
+    printLineByLine(asciiScene, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}, std::vector<int>{}));//场景
+    printWithDelay(intro1, 30, CYAN); //文字
     cout << "按Enter继续..." << endl;
     getchar();
     getchar();
     system("cls");
-    printLineByLine(asciiHero, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
-    printWithDelay(intro2, 30, CYAN);//2
+    printLineByLine(asciiHero, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));//英雄
+    printWithDelay(intro2, 30, CYAN);//文字
     std::cout << "请输入你的名字：";
     std::string name;
     cin >> name;
     getchar();
     system("cls");
-    printLineByLine(asciiSword, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}));
+    printLineByLine(asciiSword, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}));//剑
     std::string intro3 = 
     "“如此甚好，" + name + "。汝之命运，当由此展开。”\n"
     "提汝之剑，踏上征途。汝乃天命之子。\n";
 
-    printWithDelay(intro3, 30, CYAN);//3
-    printWithDelay(intro4, 30, CYAN);
+    printWithDelay(intro3, 30, CYAN);//文字
+    printWithDelay(intro4, 30, CYAN);//文字
     cout << "\n" << endl;
     cout << "按下Enter继续..." << endl;
     getchar();
@@ -181,7 +175,7 @@ void Game::start(){
     printLineByLine(asciiLogo, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29}, std::vector<int>{}));//logo
     sleep(1500);
     system("cls");
-    Hero hero(name,100,10,10,10,10,1,30);
+    Hero hero(name,100,10,10,10,10,1,30);//英雄的初始化
     menu2(&hero);
 }
 

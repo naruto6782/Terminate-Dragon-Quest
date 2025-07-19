@@ -1,183 +1,139 @@
-#ifndef BACKPACK_H
-#define BACKPACK_H
+#pragma once
 #define MAX_ITEMS 15
 #include "items.h"
+#include "equip.h"
 #include <iomanip> 
 #include <string>
-extern NullItem null_item;
-extern Medicine medicine;
-extern Poison poison;
-extern IronMedicine ironMedicine;
-extern AngryDrink angryDrink;
-extern Antidote antidote;
-extern Antibiotic antibiotic;
-extern Stunned stunned;
-extern Panacea panacea;
 
-class backpack {
-private:
-    BaseItem* items[MAX_ITEMS];
-
-    int prompt_remove_item() {
-
-
-        int option;
-        while(1){
-        system("cls");
-        std::cout << "背包已满，你想：\n";
-        std::cout << "1. 删除已有物品\n";
-        std::cout << "2. 丢弃将要添加的物品\n";
-        std::cout << "请输入数字选择：";
-        std::cin >> option;
-        if (option == 1) 
-        {   
-            std::cout << "当前背包物品如下：\n";
-            for (int i = 0; i < MAX_ITEMS; i++) {
-                if (items[i]->get_index() != 0) {
-                    std::cout << i + 1<< ": " << items[i]->get_name() << " x" << items[i]->get_num() << std::endl;
-                }
-            }
-            std::cout << "请输入要删除的物品编号：";
-            int idx;
-            std::cin >> idx;
-            idx--;
-            std::string name=items[idx]->get_name();
-            if (delete_item(idx)) {
-                std::cout << "已删除：" << name << std::endl;
-            } else {
-                std::cout << "输入错误，取消添加物品。\n";
-            }
-            return 1;
-        } 
-        else if(option==2)
-        {
-            std::cout << "你选择了丢弃要添加的物品。\n";
-            return 0;
-        }
-        std::cout << "错误输入，请重新选择";
-        getchar();
-        }
-    }
+class Backpack {
+protected:
+    std::vector<Item> items;
 
 public:
-    void init_backpack() {
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            items[i] = &null_item;
-        }
-    }
-
-    // 检查是否还有空位
-    int Check_valid() {
-        int sum=0;
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_index() == 0) {
-                continue;
-            }
-            else{
-                sum+=items[i]->get_num();
+    //用栈式存储物品
+    void add_or_stack(Item new_item) {
+        for (auto& item : items) {
+            if (item.name == new_item.name) {
+                item.num += new_item.num;
+                return;
             }
         }
-        if(sum<=MAX_ITEMS-1){
-            return 1;
-        }
-        return 0; // 满了
+        items.emplace_back(new_item.name, new_item.num, new_item.price, new_item.index);
     }
-
-    void fresh_backpack() {
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_num() < 1) {
-                items[i] = &null_item;
-            }
+    //删除数量为0的物品
+    void remove_zero() {
+        items.erase(
+            std::remove_if(items.begin(), items.end(), [](const Item& item) {
+                return item.num <= 0;
+            }),
+            items.end()
+        );
+    }
+    void show_backpack() {
+        std::cout << "你的背包：\n";
+        int index_of_backpack = 1;
+        for (auto& item : items) {
+            std::cout << "  " << index_of_backpack << ". " << item.name << " x" << item.num << "\n";
+            ++index_of_backpack;
         }
     }
-
-    void add_item(BaseItem* item) {
-        int choice;
-        if (!Check_valid()) {
-            //TODO 弹出提示框
-            choice=prompt_remove_item();//1 代表删除原物品，0代表放弃
-        }
-        // 查找相同类型的物品
-        if(choice==0){
+    void delete_item(int choice) {
+        choice--; // 转换为0基索引
+        if (choice < 0 || choice >= items.size()) {
+            std::cout << "❌ 无效的选择！" << std::endl;
             return;
         }
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_index() == item->get_index()) {
-                items[i]->add_num();
-                return;
-            }
-        }
-
-        // 找到空位，插入新物品
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_index() == 0) {
-                items[i] = item;
-                items[i] ->set_num(1); // 设置数量为1
-                return;
-            }
-        }
+        items[choice].num--;
+        remove_zero(); // 删除数量为0的物品
     }
-
-    int delete_item(int index) {
-        if(items[index]->get_index()==0){
-            return 0;
+    int choose_to_index(int choice) {
+        choice--; // 转换为0基索引
+        if (choice < 0 || choice >= items.size()) {
+            std::cout << "❌ 无效的选择！" << std::endl;
+            return -1; // 返回-1表示无效选择
         }
-        items[index]->sub_num();
-        if(items[index]->get_num()==0){
-            for(int j=index+1;j<MAX_ITEMS;j++){
-                items[j-1]=items[j];
-            }
-            items[MAX_ITEMS-1]=&null_item;
-            return 1;
-        }
-        return 1;
-    }
-
-    void show() {
-        std::cout << "\n🎒======= 背包内容 =======🎒\n\n";
-
-        bool empty = true;
-        for (int i = 0; i < MAX_ITEMS; i++) {
-            if (items[i]->get_index() != 0) {
-                empty = false;
-                std::cout << "【" << items[i]->get_name() << "】\n";
-                std::cout << "  数量  : " << items[i]->get_num() << "\n";
-                std::cout << "-------------------------------\n";
-            }
-        }
-
-        if (empty) {
-            std::cout << "（空空如也，还没有任何物品）\n";
-        }
-
-        std::cout << "\n按任意键返回主菜单...";
-        getchar();
-        system("cls");
-        return;
-    }
-
-
-    BaseItem* choose_item(int choose) {
-        if (choose < 0 || choose >= MAX_ITEMS) {
-            return &null_item;
-        }
-        return items[choose];
-    }
-    
-    BaseItem* get_item(int index) {
-        switch(index){
-            case 0: return &null_item;
-            case 1: return &medicine;
-            case 2: return &ironMedicine;
-            case 3: return &angryDrink;
-            case 4: return &antidote;
-            case 5: return &antibiotic;
-            case 6: return &poison;
-            case 7: return &stunned;
-            case 8: return &panacea;
-            default: return &null_item; // 如果没有对应的物品，返回空物品
-        }
+        return items[choice].index;// 返回有效索引
     }
 };
+class Shop : public Backpack {
+public:
+    Shop(){
+        add_or_stack(Item("生命药水", 10, 50, 1));
+        add_or_stack(Item("钢铁合剂", 5, 100, 2));
+        add_or_stack(Item("愤怒合剂", 3, 150, 3));
+        add_or_stack(Item("解毒草", 8, 30, 4));
+        add_or_stack(Item("惊惶木", 6, 80, 5));
+        add_or_stack(Item("淬毒镖", 4, 120, 6));
+        add_or_stack(Item("夜阑谣", 2, 200, 7));
+        add_or_stack(Item("万灵药", 1, 500, 8));
+        add_or_stack(Item("凤凰羽翼", 1, 1000, 9));
+    }
+    void show_shop_items() {
+        std::cout << "🛒 商店商品列表：\n";
+        int index_of_shop = 1;
+        for (auto& item : items) {
+            std::cout << "  " << index_of_shop << ". " << item.name << " x" << item.num << "\n";
+            ++index_of_shop;
+        } // 复用
+    }
 
-#endif
+    // 玩家购买物品
+    Item sell_item(int choice) {
+        choice--;
+        if (choice < 0 || choice >= items.size()) {
+            std::cout << "❌ 无效选择！" << std::endl;
+            return Item("Null", 0, 0, 0); // 返回默认空物品
+        }
+        Item item = items[choice];
+        item.num = 1; // 玩家只能买1个，或你自定义
+        items[choice].num--;
+        remove_zero();
+        return item;
+    }
+
+    void restock(Item item) {
+        add_or_stack(item);
+    }
+};
+class Equipment_backpack{
+private:
+    std::vector<Equipment> equipment_items;
+public:
+    void add_equipment(const Equipment& equipment) {
+        for (auto& item : equipment_items) {
+            if (item.get_name() == equipment.get_name()) {
+                item.add_num(1);
+                return;
+            }
+        }
+        equipment_items.push_back(equipment);
+    }
+    void show_equipment() {
+        std::cout << "你的装备：\n";
+        int index_of_equipment = 1;
+        for (const auto& equipment : equipment_items) {
+            std::cout << "  " << index_of_equipment << ". " << equipment.get_name() 
+                      << " (类型: " << static_cast<int>(equipment.get_type()) 
+                      << ", 数量: " << equipment.get_num() << ")\n";
+            ++index_of_equipment;
+        }
+    }
+    void erase_zero() {
+        equipment_items.erase(
+            std::remove_if(equipment_items.begin(), equipment_items.end(), [](const Equipment& equipment) {
+                return equipment.get_num() <= 0;
+            }),
+            equipment_items.end()
+        );
+    }
+    void delete_equipment(int choice) {
+        choice--; // 转换为0基索引
+        if (choice < 0 || choice >= equipment_items.size()) {
+            std::cout << "❌ 无效的选择！" << std::endl;
+            return;
+        }
+        equipment_items[choice].add_num(-1);
+        erase_zero(); // 删除数量为0的装备
+    }
+
+};
