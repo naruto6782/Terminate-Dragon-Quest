@@ -62,7 +62,7 @@ void Hero::show_info(Hero* hero) {
         std::cin >> next_choice;
         getchar(); // 清除输入缓冲区的换行符
         if (next_choice == 1) {
-            equip_bag->show_equipment(); // ✅ 递归再次调用
+            equip_bag->show_equipment(hero); // ✅ 递归再次调用
             break;             // ✅ 注意：需要 break，否则返回后还会再次进入循环
         } else if (next_choice == 2) {
             return;
