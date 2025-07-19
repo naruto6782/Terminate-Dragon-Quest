@@ -6,6 +6,8 @@
 #include "Hero_and_Monster.h"
 #include "status.h"
 #include "backpack.h"
+#include "challenge.h"
+
 using namespace std;
 
 static mt19937_64& get_random_engine() {//用于随机数生成
@@ -107,7 +109,7 @@ int H2M_ultimate_attack(int H_Attack, int M_Defense, int H_Speed, int M_Speed,in
     double damage = 10*H_Attack - 2* M_Defense;
     if (damage < 0) damage = 0;//伤害不能为负
     if (M_isdefense) damage = damage * 0.5;//防御伤害减半
-    cout << "你进行了攻击！ 对怪兽最终伤害: " << static_cast<int>(damage) << endl << endl;
+    cout << "你进行了攻击！ 对怪兽最终伤害: " << static_cast<int>(damage) << endl;
     return static_cast<int>(damage);
 }
 void Hero::Attack_Monster(Hero* hero, Monster* monster){
@@ -167,7 +169,7 @@ int M2H_ultimate_attack(int M_Attack, int H_Defense, int H_Speed, int M_Speed,in
     double damage = 10*M_Attack - 2* H_Defense;
     if (damage < 0) damage = 0;
     if (H_isdefense) damage = damage * 0.5;
-    cout << "怪兽进行了攻击！ 对你最终伤害: " << static_cast<int>(damage) << endl << endl;
+    cout << "怪兽进行了攻击！ 对你最终伤害: " << static_cast<int>(damage) << endl;
     return static_cast<int>(damage);
 }
 
@@ -175,4 +177,22 @@ void Monster::Attack_Hero(Hero* hero, Monster* monster){
     //先计算伤害，如果未躲避成功，再减少英雄HP
     int damage=M2H_ultimate_attack(monster->get_Attack(),hero->get_Defense(),hero->get_Speed(),monster->get_Speed(),hero->get_Luck(),hero->getStatusEffect()->defending);
     hero->change_HP(-damage,1.0);
+}
+
+
+void Boss::use_skill_or_attack(Hero* hero) {
+    static auto& engine = get_random_engine();
+    std::uniform_real_distribution<double> dist(0.0, 1.0);
+
+    for (const Skill& skill : skills) {
+        double roll = dist(engine);
+        if (roll < skill.probability) {
+            std::cout << "👹 Boss 使用技能：" << skill.name << "！\n";
+            skill.effect(hero, this);
+            return;
+        }
+    }
+
+    std::cout << "👹 Boss 发起普通攻击！\n";
+    this->Attack_Hero(hero, this);
 }

@@ -8,15 +8,16 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/LEARN/Terminal_Dragon_Quest/src/Hero_and_Monster.cpp" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/backpack.cpp" "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/battle.cpp" "CMakeFiles/Game_lib.dir/src/battle.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/battle.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/count.cpp" "CMakeFiles/Game_lib.dir/src/count.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/count.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/equip.cpp" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/game.cpp" "CMakeFiles/Game_lib.dir/src/game.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/items.cpp" "CMakeFiles/Game_lib.dir/src/items.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/items.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/maze.cpp" "CMakeFiles/Game_lib.dir/src/maze.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/maze.cpp.obj.d"
-  "D:/LEARN/Terminal_Dragon_Quest/src/story.cpp" "CMakeFiles/Game_lib.dir/src/story.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/story.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/Hero_and_Monster.cpp" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/Hero_and_Monster.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/backpack.cpp" "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/battle.cpp" "CMakeFiles/Game_lib.dir/src/battle.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/battle.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/challenge.cpp" "CMakeFiles/Game_lib.dir/src/challenge.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/challenge.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/count.cpp" "CMakeFiles/Game_lib.dir/src/count.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/count.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/equip.cpp" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/equip.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/game.cpp" "CMakeFiles/Game_lib.dir/src/game.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/game.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/items.cpp" "CMakeFiles/Game_lib.dir/src/items.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/items.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/maze.cpp" "CMakeFiles/Game_lib.dir/src/maze.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/maze.cpp.obj.d"
+  "D:/Code/Terminal Dragon Quest/src/story.cpp" "CMakeFiles/Game_lib.dir/src/story.cpp.obj" "gcc" "CMakeFiles/Game_lib.dir/src/story.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

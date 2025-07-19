@@ -6,6 +6,7 @@
 #include "equip.h"
 #include "backpack.h"
 #include "maze.h"
+#include "challenge.h"
 #include <cstdlib>
 #include <chrono>
 #include <thread>
@@ -62,6 +63,7 @@ void Game::menu2(Hero* hero){//after name
         std::cout << "请做出你的选择：";
         std::cin >> choice;
         getchar();
+        unsigned int HP = hero->get_HP();
         switch(choice){ 
         case 1:
             {
@@ -144,7 +146,36 @@ void Game::menu2(Hero* hero){//after name
         }
         case 2:
             system("cls");
-            break;
+            if(count_easy>=1&&count_medium == 0&&count_hard == 0){
+                std::cout << "梦魇蝶后 · 赛莲" << std::endl;
+                getchar();
+                system("cls");
+                Selen(hero);
+                hero->reborn(1.0,HP);
+                break;
+            }
+            else if(count_medium >= 1&&count_hard == 0){
+                std::cout << "焚天古龙 · 阿祖尔瓦恩" << std::endl;
+                getchar();
+                system("cls");
+                Azurvain(hero);
+                hero->reborn(1.0,HP);
+                break;
+            }
+            else if(count_hard >= 1){
+                std::cout << "深渊邪龙 · 奈克托斯" << std::endl;
+                getchar();
+                system("cls");
+                Nekthos(hero);
+                hero->reborn(1.0,HP);
+                break;
+            }
+            else{
+                std::cout << "通关简单难度冒险以解锁挑战。" << std::endl;
+                getchar();
+                system("cls");
+                break;
+            }
         case 3:
             system("cls");
             hero->show_info(hero);

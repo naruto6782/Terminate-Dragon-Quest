@@ -1,9 +1,12 @@
 #ifndef HERO_AND_MONSTER_H
 #define HERO_AND_MONSTER_H
 #include <string>
+#include <functional>
+#include <vector>
 #include "status.h"
 #include "equip.h"
 #include "backpack.h"
+
 
 class StatusEffect;
 class Accessory;
@@ -68,7 +71,7 @@ public:
         void change_Level(int num) { Level += num; }
         void change_Money(int num) { Money += num; }
         void reborn(double rate, unsigned int max_HP = 1000000) {
-            this->HP=(int) rate*max_HP;
+            this->HP = (unsigned int)(rate * max_HP);
         };
         void setStatusEffect(StatusEffect* status) {this->status = status;}
 };
@@ -86,7 +89,7 @@ private:
     Equipment_backpack equipment_backpack;
 public:
     void show_info(Hero* hero);//展示英雄信息
-    void change_Luck(int num) { Luck += num; };
+    void change_Luck(int num) { Luck += num;};
     void equip(Equipment* item) {
     // 先移除当前装备效果
     switch (item->get_type()) {
@@ -139,6 +142,34 @@ public:
     using Base::Base;
     void show_info(Monster* monster);//展示怪物信息
     void Attack_Hero(Hero* hero, Monster* monster);
+};
+
+struct Skill {
+    std::string name;
+    std::function<void(Hero*, Monster*)> effect;
+    double probability; // 技能触发概率 0 ~ 1
+
+    Skill(const std::string& name,
+          const std::function<void(Hero*, Monster*)>& effect,
+          double probability)
+        : name(name), effect(effect), probability(probability) {}
+};
+
+
+
+class Boss : public Monster {
+private:
+    std::vector<Skill> skills;
+
+public:
+    Boss(const std::string& name, int HP, int Atk, int Def, int Spd, int Luck, int money)
+        : Monster(name, HP, Atk, Def, Spd, Luck, money) {}
+
+    void add_skill(const Skill& skill) {
+        skills.push_back(skill);
+    }
+
+    void use_skill_or_attack(Hero* hero);
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include "backpack.h"
 #include "Hero_and_Monster.h"
 #include "items.h"
+#include "challenge.h"
 #include <iostream>
 #include <iomanip> 
 using namespace std;
@@ -54,6 +55,7 @@ void Battle::Hero_turn() {
     int item_choice =-1;
     int choice=-1;
     do{
+    item_choice =-1;
     show_battle();
     cout << "\n🎮 请做出你的选择：\n";
     cout << "1. ⚔️ 普通攻击\n";
@@ -83,7 +85,7 @@ void Battle::Hero_turn() {
             break;
     }
     if(item_choice==0){
-        cout << "-----按Enter继续-----";
+        cout << "-----按Enter回到选择界面-----";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
     }
@@ -123,7 +125,7 @@ int Battle::choose_item() {
     Backpack* bag = this->hero->get_backpack();
     int status=bag->show_backpack();
     if(status == 0) {
-        return 0; // 返回0表示背包为空
+        return 1; // 返回0表示背包为空
     }
     int choose;
     while (true) {
@@ -139,14 +141,17 @@ int Battle::choose_item() {
             break;  // 输入成功，退出循环
         }
     }
-    int choose_index = bag->choose_to_index(choose);
-    index_to_item(choose_index).apply_effect(this->hero, this->monster);
-    cout << endl;
     if (choose == 0) {
         cout << "❌ 你取消了使用道具"<<endl<<endl;
         return 0;
     }
-    bag->delete_item(choose);  // 使用后删除一个数量
+    int choose_index = bag->choose_to_index(choose);
+    index_to_item(choose_index).apply_effect(this->hero, this->monster);
+    cout << endl;
+    if (choose_index == 9) {
+        cout << "❌ 凤凰羽毛不能主动使用！ " << endl;
+        return 0;
+    }
     get_change(index_to_item(choose_index).index);
     return 1;
 }
@@ -155,9 +160,6 @@ int Battle::Battle_round(int HP) {
     cout << "\n🏁 战斗开始！" << endl;
     int monster_HP = this->monster->get_HP();
     while (hero->get_HP() > 0 && monster->get_HP() > 0) {
-        bool hero_goes_first = hero->get_Speed() >= monster->get_Speed();
-        // 行动阶段
-        if (hero_goes_first) {
             process_turn(1);
             int hero_poisoned = this->hero->getStatusEffect()->poisoned; 
             int hero_stunned = this->hero->getStatusEffect()->stunned;
@@ -185,40 +187,13 @@ int Battle::Battle_round(int HP) {
             if(monster_stunned){
                 cout << "怪物被眩晕了，无法行动！" << endl << endl;
             } else {
+                if (auto* boss_ptr = dynamic_cast<Boss*>(this->monster)) {
+                boss_ptr->use_skill_or_attack(this->hero);
+                } 
+                else {
                 Monster_turn();
+                }
             }
-
-        } else // 怪物先行动
-        {
-            process_turn(1);
-            int monster_poisoned = this->monster->getStatusEffect()->poisoned;
-            int monster_stunned = this->monster->getStatusEffect()->stunned;
-            if (monster->get_HP() <= 0) break;
-            if(monster_poisoned>0){
-                this->monster->change_HP(-10*monster_poisoned,1.0);
-                cout << "怪物中了毒，受到伤害！" << endl << endl;
-            }
-            if (monster->get_HP() <= 0) break;
-            if(monster_stunned){
-                cout << "怪物被眩晕了，无法行动！" << endl << endl;
-            } else {
-                Monster_turn();
-            }
-            process_turn(0);
-            int hero_poisoned = this->hero->getStatusEffect()->poisoned;
-            int hero_stunned = this->hero->getStatusEffect()->stunned;
-            if (hero->get_HP() <= 0) break;
-            if(hero_poisoned>0){
-                this->hero->change_HP(-10*hero_poisoned,1.0);
-                cout << "你中了毒，受到伤害！" << endl << endl;
-            }
-            if (hero->get_HP() <= 0) break;
-            if(hero_stunned){
-                cout << "你被眩晕了，无法行动！" << endl << endl;
-            } else {
-                Hero_turn();
-            }
-        }
         // 状态处理
         // 清屏（可选，终端清理效果）
         cout << "\n-----🔄 回合结束，按Enter继续...------";

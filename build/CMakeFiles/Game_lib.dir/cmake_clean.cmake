@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Game_lib.dir/src/backpack.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/battle.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/battle.cpp.obj.d"
+  "CMakeFiles/Game_lib.dir/src/challenge.cpp.obj"
+  "CMakeFiles/Game_lib.dir/src/challenge.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/count.cpp.obj"
   "CMakeFiles/Game_lib.dir/src/count.cpp.obj.d"
   "CMakeFiles/Game_lib.dir/src/equip.cpp.obj"

@@ -17,12 +17,22 @@ public:
     //用栈式存储物品
     void add_or_stack(Item new_item) {
         for (auto& item : items) {
-            if (item.name == new_item.name) {
+            if (item.index == new_item.index) {
                 item.num += new_item.num;
                 return;
             }
         }
         items.emplace_back(new_item.name, new_item.num, new_item.price, new_item.index);
+    }
+
+    int check_index(int index){
+        for (auto& item : items) {
+            if (item.index == index) {
+                
+                return 1;
+            }
+        }
+        return 0;
     }
     //删除数量为0的物品
     void remove_zero() {
@@ -62,6 +72,29 @@ public:
             return -1; // 返回-1表示无效选择
         }
         return items[choice].index;// 返回有效索引
+    }
+    int check_item_num(int index) {
+        for (auto& item : items) {
+            if (item.index == index) {
+                if(item.num > 0){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+            }
+        }
+        return 0;
+    };
+    void delete_item_by_index(int index) {
+        for (auto& item : items) {
+            if (item.index == index) {
+                item.num--;
+                remove_zero(); // 删除数量为0的物品
+                return;
+            }
+        }
+        std::cout << "❌ 无效的选择！" << std::endl;
     }
 };
 class Shop : public Backpack {
@@ -163,3 +196,4 @@ public:
     }
     void change_equipment(int choice, Hero* hero);
 };
+

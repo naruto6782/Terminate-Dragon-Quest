@@ -10,8 +10,8 @@ void init_equipment_effects() {
         [](Hero* h){ h->change_Attack(-10,1.0); });
     
     storm_blade.set_effect(//暴风大剑
-        [](Hero* h){ h->change_Attack(30,1.0); h->change_Speed(-20); },
-        [](Hero* h){ h->change_Attack(-30,1.0); h->change_Speed(20); });
+        [](Hero* h){ h->change_Attack(20,1.0); h->change_Speed(-10); },
+        [](Hero* h){ h->change_Attack(-20,1.0); h->change_Speed(10); });
 
     cursed_blade.set_effect(//诅咒之刃
         [](Hero* h){ h->change_Attack(20,1.0); h->change_Luck(-10); },
