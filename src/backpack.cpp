@@ -31,7 +31,6 @@ void Equipment_backpack::change_equipment(int choice, Hero* hero) {
 }
 void Shop::show_shop_items(Hero* hero) {
         while (true) {
-            std::cout <<"当前金币: " << hero->get_Money() << "\n";
             std::cout << "\n🛒 商店商品列表：\n";
             int index_of_shop = 1;
             for (auto& item : items) {
@@ -41,6 +40,7 @@ void Shop::show_shop_items(Hero* hero) {
                 ++index_of_shop;
             }
             std::cout << "  0. 退出商店\n";
+            std::cout <<"当前金币: " << hero->get_Money() << "\n";
             std::cout << "请选择要购买的物品（输入数字）：";
 
             int choice;
@@ -59,9 +59,11 @@ void Shop::show_shop_items(Hero* hero) {
                 std::cout << "📌 是否继续购物？\n";
                 std::cout << "  1. 继续购买\n";
                 std::cout << "  2. 退出商店\n";
+                std::cout << "请选择：";
                 std::cin >> next_choice;
                 getchar();
                 if (next_choice == 1) {
+                    system("cls"); // 清屏
                     break; // 继续循环展示商品
                 } else if (next_choice == 2) {
                     std::cout << "👋 欢迎下次光临！\n";
@@ -91,3 +93,6 @@ void Shop::sell_item(int choice, Hero* hero) {
         remove_zero();
         return;
     }
+
+
+
