@@ -60,7 +60,7 @@ void Shop::show_shop(Hero* hero) {
     }
     }while(choice != -1);
     std::cout << "感谢您的光临！" << std::endl;
-    std::cout << "按Enter返回主菜单..." << std::endl;
+    std::cout << "按Enter继续..." << std::endl;
     getchar();
     system("cls");
     return;
