@@ -58,7 +58,7 @@ void Selen(Hero* hero){
             return;
             }
         else if (result == 1) {
-            cout <<"🎊 按Enter返回主菜单...";
+            cout <<"🎊 按Enter继续...";
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
             }
@@ -79,7 +79,7 @@ void Azurvain(Hero* hero){
             return;
             }
         else if (result == 1) {
-            cout <<"🎊 按Enter返回主菜单...";
+            cout <<"🎊 按Enter继续...";
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
             }
@@ -100,7 +100,7 @@ void Nekthos(Hero* hero){
             return;
             }
         else if (result == 1) {
-            cout <<"🎊 按Enter返回主菜单...";
+            cout <<"🎊 按Enter继续...";
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
             }

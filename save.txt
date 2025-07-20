@@ -1,28 +1,27 @@
-Name:wakaka
+Name:曾头
 HP:100
-Attack:10
+Attack:100
 Defense:10
 Speed:10
-Money:55
+Money:228
 Luck:30
-now_weapon_index:1
-now_armor_index:9
-now_accessory_index:14
-count_easy:2
-count_medium:2
-count_hard:0
+now_weapon_index:4
+now_armor_index:0
+now_accessory_index:11
+count_easy:1
+count_medium:1
+count_hard:1
 count_challenge:2
 Equipment_backpack:
-Armor 影织衣 2 100 9 1
-Weapon 秘银剑 2 100 1 1
-Accessory 勇者护符 3 100 11 0
-Accessory 宇宙之辉 1 100 14 1
+Weapon 秘银剑 2 100 1 0
+Weapon 淬毒刃 1 100 4 1
+Accessory 勇者护符 1 100 11 1
 Backpack:
-生命药水 2 50 1
+生命药水 1 50 1
 钢铁合剂 1 100 2
 Shop:
-生命药水 8 50 1
-钢铁合剂 4 100 2
+生命药水 9 50 1
+钢铁合剂 5 100 2
 愤怒合剂 3 150 3
 解毒草 8 30 4
 惊惶木 6 80 5
