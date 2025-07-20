@@ -176,79 +176,17 @@ void Game::menu2(Hero* hero, Shop* shop){
             system("cls");
             if(count_easy>=1&&count_medium == 0&&count_hard == 0){
                 system("cls");
-                std::cout << "梦魇蝶后 · 赛莲" << std::endl;
-                printLineByLine(selen,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
-                printWithDelay(intro5, 30, CYAN);
-                std::cout << "按Enter继续..." << std::endl;
-                getchar();
-                system("cls");
                 Selen(hero);
-                printWithDelay(intro6, 30, CYAN);
-                std::cout << "按Enter继续..." << std::endl;
-                getchar();
-                system("cls");
-                hero->reborn(1.0,HP);
                 break;
             }
             else if(count_medium >= 1&&count_hard == 0){
                 system("cls");
-                std::cout << "焚天古龙 · 阿祖尔瓦恩" << std::endl;
-                printLineByLine(firedragon,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26}, std::vector<int>{}));
-                printWithDelay(intro7, 30, CYAN);
-                std::cout << "按Enter继续..." << std::endl;
-                getchar();
-                system("cls");
                 Azurvain(hero);
-                printWithDelay(intro8, 30, CYAN);
-                std::cout << "按Enter继续..." << std::endl;
-                getchar();
-                system("cls");
-                hero->reborn(1.0,HP);
                 break;
             }
             else if(count_hard >= 1){
                 system("cls");
-                std::cout << "深渊邪龙 · 奈克托斯" << std::endl;
-                printLineByLine(necktos,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}, std::vector<int>{}));
-                printWithDelay(intro9, 30, CYAN);
-                std::cout << "按Enter继续..." << std::endl;
-                getchar();
-                system("cls");
                 Nekthos(hero);
-                printWithDelay(intro10, 30, CYAN);
-                bool validChoice = false;
-                while (!validChoice) {
-                    std::cout << "是否要给予奈克托斯最后一击？\n1.是\n2.否\n请输入你的选择：" << std::endl;
-                    int end;
-                    std::cin >> end;
-                    getchar(); // 读取换行符
-                    switch (end) {
-                        case 1:
-                            system("cls");
-                            printWithDelay(intro11, 30, CYAN);
-                            std::cout << "按Enter继续..." << std::endl;
-                            getchar();
-                            system("cls");
-                            hero->reborn(1.0, HP);
-                            validChoice = true;
-                            break;
-                    
-                        case 2:
-                            system("cls");
-                            printWithDelay(intro12, 30, CYAN);
-                            std::cout << "按Enter继续..." << std::endl;
-                            getchar();
-                            system("cls");
-                            hero->reborn(1.0, HP);
-                            validChoice = true;
-                            break;
-                    
-                        default:
-                            std::cout << "此乃命运无法到达之处，请重新选择。" << std::endl;
-                            getchar(); // 暂停一下
-                            break;
-                    }
-                }
                 break;
             }
             else{

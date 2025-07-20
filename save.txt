@@ -1,6 +1,6 @@
 Name:123
 HP:100
-Attack:10
+Attack:100
 Defense:10
 Speed:10
 Money:70
