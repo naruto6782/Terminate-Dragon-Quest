@@ -24,6 +24,36 @@ void Game::init(Game* game){
     game->menu1(game);
 }
 
+
+void printWithDelay(const std::string& text, int delayMs, const std::string& color) {    //字体打印
+    std::cout << color;
+    for (char c : text) {
+        std::cout << c << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    }
+    std::cout << RESET;  // 输出后重置颜色
+}
+
+void sleep(int ms) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
+
+void printLineByLine(const std::vector<std::string>& lines, int delayMs, const SceneColorConfig& config) {     //图片打印
+    for (size_t i = 0; i < lines.size(); ++i) {
+        if (std::find(config.getRedLines().begin(), config.getRedLines().end(), i) 
+            != config.getRedLines().end()) {
+            std::cout << RED << lines[i] << RESET << std::endl;
+        } else if (std::find(config.getYellowLines().begin(), config.getYellowLines().end(), i) 
+                   != config.getYellowLines().end()) {
+            std::cout << GOLD << lines[i] << RESET << std::endl;
+        } else {
+            std::cout << lines[i] << std::endl;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+    }
+}
+
+
 void Game::menu1(Game* game){
     std::cout << "请做出你的选择:" << std::endl << "1.新的开始" << std::endl << "2.加载游戏" << std::endl << "3.退出游戏" << std::endl;
     int choice;
@@ -118,7 +148,7 @@ void Game::menu2(Hero* hero, Shop* shop){
                 }
             break;
             } 
-            if(count_challenge == 2){
+            if(count_challenge >= 2){
                 std::cout << "请选择难度：\n1.简单\n2.中等\n3.困难\n请输入你的选择：" << std::endl;
                 int choose;
                 cin >> choose;
@@ -145,27 +175,80 @@ void Game::menu2(Hero* hero, Shop* shop){
         case 2:
             system("cls");
             if(count_easy>=1&&count_medium == 0&&count_hard == 0){
+                system("cls");
                 std::cout << "梦魇蝶后 · 赛莲" << std::endl;
+                printLineByLine(selen,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
+                printWithDelay(intro5, 30, CYAN);
+                std::cout << "按Enter继续..." << std::endl;
                 getchar();
                 system("cls");
                 Selen(hero);
+                printWithDelay(intro6, 30, CYAN);
+                std::cout << "按Enter继续..." << std::endl;
+                getchar();
+                system("cls");
                 hero->reborn(1.0,HP);
                 break;
             }
             else if(count_medium >= 1&&count_hard == 0){
+                system("cls");
                 std::cout << "焚天古龙 · 阿祖尔瓦恩" << std::endl;
+                printLineByLine(firedragon,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26}, std::vector<int>{}));
+                printWithDelay(intro7, 30, CYAN);
+                std::cout << "按Enter继续..." << std::endl;
                 getchar();
                 system("cls");
                 Azurvain(hero);
+                printWithDelay(intro8, 30, CYAN);
+                std::cout << "按Enter继续..." << std::endl;
+                getchar();
+                system("cls");
                 hero->reborn(1.0,HP);
                 break;
             }
             else if(count_hard >= 1){
+                system("cls");
                 std::cout << "深渊邪龙 · 奈克托斯" << std::endl;
+                printLineByLine(necktos,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}, std::vector<int>{}));
+                printWithDelay(intro9, 30, CYAN);
+                std::cout << "按Enter继续..." << std::endl;
                 getchar();
                 system("cls");
                 Nekthos(hero);
-                hero->reborn(1.0,HP);
+                printWithDelay(intro10, 30, CYAN);
+                bool validChoice = false;
+                while (!validChoice) {
+                    std::cout << "是否要给予奈克托斯最后一击？\n1.是\n2.否\n请输入你的选择：" << std::endl;
+                    int end;
+                    std::cin >> end;
+                    getchar(); // 读取换行符
+                    switch (end) {
+                        case 1:
+                            system("cls");
+                            printWithDelay(intro11, 30, CYAN);
+                            std::cout << "按Enter继续..." << std::endl;
+                            getchar();
+                            system("cls");
+                            hero->reborn(1.0, HP);
+                            validChoice = true;
+                            break;
+                    
+                        case 2:
+                            system("cls");
+                            printWithDelay(intro12, 30, CYAN);
+                            std::cout << "按Enter继续..." << std::endl;
+                            getchar();
+                            system("cls");
+                            hero->reborn(1.0, HP);
+                            validChoice = true;
+                            break;
+                    
+                        default:
+                            std::cout << "此乃命运无法到达之处，请重新选择。" << std::endl;
+                            getchar(); // 暂停一下
+                            break;
+                    }
+                }
                 break;
             }
             else{
@@ -201,33 +284,7 @@ void Game::menu2(Hero* hero, Shop* shop){
     }
 }
 
-void printWithDelay(const std::string& text, int delayMs, const std::string& color) {    //字体打印
-    std::cout << color;
-    for (char c : text) {
-        std::cout << c << std::flush;
-        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
-    }
-    std::cout << RESET;  // 输出后重置颜色
-}
 
-void sleep(int ms) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(ms));
-}
-
-void printLineByLine(const std::vector<std::string>& lines, int delayMs, const SceneColorConfig& config) {     //图片打印
-    for (size_t i = 0; i < lines.size(); ++i) {
-        if (std::find(config.getRedLines().begin(), config.getRedLines().end(), i) 
-            != config.getRedLines().end()) {
-            std::cout << RED << lines[i] << RESET << std::endl;
-        } else if (std::find(config.getYellowLines().begin(), config.getYellowLines().end(), i) 
-                   != config.getYellowLines().end()) {
-            std::cout << GOLD << lines[i] << RESET << std::endl;
-        } else {
-            std::cout << lines[i] << std::endl;
-        }
-        std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
-    }
-}
 void Game::start(Hero* hero, Shop* shop) {
     system("chcp 65001 > nul");
     
