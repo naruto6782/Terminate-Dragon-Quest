@@ -24,13 +24,14 @@ extern int count_medium;
 extern int count_hard;
 extern int count_challenge;
 class Hero;
+class Shop;
 
 class Game {
 public: 
     void init(Game* game);
     void menu1(Game* game);
-    void menu2(Hero* hero);
-    void start(Hero* hero);
+    void menu2(Hero* hero, Shop* shop);
+    void start(Hero* hero, Shop* shop);
 };
 
 class SceneColorConfig {

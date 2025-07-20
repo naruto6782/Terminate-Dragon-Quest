@@ -29,14 +29,16 @@ void Game::menu1(Game* game){
     int choice;
     std::cin >> choice;
     Hero hero("",100,10,10,10,10,1,30);
+    Shop shop;
     switch(choice){
         case 1:
+            shop.Shop_init();
             system("cls");
-            game->start(&hero);
+            game->start(&hero, &shop);
             break;
         case 2:
-            loadGame(&hero,"./save.txt");
-            menu2(&hero);
+            loadGame(&hero, &shop, "./save.txt");
+            menu2(&hero, &shop);
             break;
         case 3:
             exit(0);
@@ -49,16 +51,8 @@ void Game::menu1(Game* game){
         };
 }
 
-void Game::menu2(Hero* hero){//after name
+void Game::menu2(Hero* hero, Shop* shop){
     int choice;
-    Shop shop;
-    // Equipment equipment(EquipmentType::Weapon, "暴风大剑", 10, 100, 3);
-    // Equipment wwwww(EquipmentType::Armor, "流云铠甲", 10, 100, 2);
-    // Equipment eeeee(EquipmentType::Accessory, "1111", 10, 100, 2);
-    // hero->equip_Accessory(&eeeee);
-    // hero->equip_Weapon(&equipment);
-    // hero->equip_Armor(&wwwww);
-    // Monster monster("zengtou", 100,10,1,10,10,10);
     Backpack *bag=hero->get_backpack();
     while(1){
         system("cls");
@@ -192,13 +186,13 @@ void Game::menu2(Hero* hero){//after name
             break;
         case 5:
             system("cls");
-            shop.show_shop_items(hero);
+            shop->show_shop_items(hero);
             break;
         case 6:
             exit(0);
             break;
         case 7:
-            saveGame(hero, "save.txt");
+            saveGame(hero, shop, "./save.txt");
             break;
         default:
             std::cout << "迷途的羔羊啊，请重新选择。" << std::endl;
@@ -234,7 +228,7 @@ void printLineByLine(const std::vector<std::string>& lines, int delayMs, const S
         std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
     }
 }
-void Game::start(Hero* hero) {
+void Game::start(Hero* hero, Shop* shop) {
     system("chcp 65001 > nul");
     
     printLineByLine(asciiScene, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}, std::vector<int>{}));//场景
@@ -265,7 +259,7 @@ void Game::start(Hero* hero) {
     sleep(1500);
     system("cls");
     hero->set_name(name);//英雄的初始化
-    menu2(hero);
+    menu2(hero, shop);
 }
 
 

@@ -116,7 +116,9 @@ public:
 };
 class Shop : public Backpack {
 public:
-    Shop(){
+    Shop(){clear();}
+    void Shop_init(){
+        clear();
         add_or_stack(Item("生命药水", 10, 50, 1));
         add_or_stack(Item("钢铁合剂", 5, 100, 2));
         add_or_stack(Item("愤怒合剂", 3, 150, 3));
@@ -128,8 +130,17 @@ public:
         add_or_stack(Item("凤凰羽翼", 1, 1000, 9));
     }
     void show_shop_items(Hero* hero);
-
-
+    void clear() {
+        items.clear();
+    }
+    int get_item_num(int index) {
+        for (const auto& item : items) {
+            if (item.index == index) {
+                return item.num;
+            }
+        }
+        return 0; // 如果没有找到，返回0
+    }
     // 玩家购买物品
     void sell_item(int choice, Hero* hero);
 
@@ -225,6 +236,15 @@ public:
         equipment_items[choice].add_num(-1);
         erase_zero(); // 删除数量为0的装备
     }
+    void set_is_equipped_by_index(int index) {
+        for (auto& equipment : equipment_items) {
+            if (equipment.get_index() == index) {
+                if (!equipment.get_is_equipped()) {
+                    equipment.change_is_equipped(); // 装备
+                return;
+            }
+        }
+        }
+    }
     void change_equipment(int choice, Hero* hero);
 };
-
