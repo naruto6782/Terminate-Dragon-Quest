@@ -1,0 +1,18 @@
+Name:
+HP:100
+Attack:50
+Defense:10
+Speed:10
+Money:23233
+Luck:30
+now_weapon_index:0
+now_armor_index:0
+now_accessory_index:0
+count_easy:0
+count_medium:0
+count_hard:0
+count_challenge:0
+Equipment_backpack:
+Weapon 淬毒刃 1 100 4 0
+Backpack:
+生命药水 2 50 1

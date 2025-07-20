@@ -7,6 +7,7 @@
 #include "backpack.h"
 #include "maze.h"
 #include "challenge.h"
+#include "save_and_load.h"
 #include <cstdlib>
 #include <chrono>
 #include <thread>
@@ -27,15 +28,18 @@ void Game::menu1(Game* game){
     std::cout << "请做出你的选择:" << std::endl << "1.新的开始" << std::endl << "2.加载游戏" << std::endl << "3.退出游戏" << std::endl;
     int choice;
     std::cin >> choice;
+    Hero hero("",100,10,10,10,10,1,30);
     switch(choice){
         case 1:
             system("cls");
-            game->start();
+            game->start(&hero);
             break;
         case 2:
-            game->load();
+            loadGame(&hero,"./save.txt");
+            menu2(&hero);
             break;
         case 3:
+            exit(0);
             break;
         default:
             std::cout << "迷途的羔羊啊，请重新选择。" << std::endl;
@@ -59,7 +63,7 @@ void Game::menu2(Hero* hero){//after name
     while(1){
         system("cls");
         std::cout<< "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
-        << "4.物品" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl;
+        << "4.物品" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl << "7.冒险之书" << std::endl;
         std::cout << "请做出你的选择：";
         std::cin >> choice;
         getchar();
@@ -193,6 +197,9 @@ void Game::menu2(Hero* hero){//after name
         case 6:
             exit(0);
             break;
+        case 7:
+            saveGame(hero, "save.txt");
+            break;
         default:
             std::cout << "迷途的羔羊啊，请重新选择。" << std::endl;
             getchar();
@@ -227,7 +234,7 @@ void printLineByLine(const std::vector<std::string>& lines, int delayMs, const S
         std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
     }
 }
-void Game::start(){
+void Game::start(Hero* hero) {
     system("chcp 65001 > nul");
     
     printLineByLine(asciiScene, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}, std::vector<int>{}));//场景
@@ -257,8 +264,8 @@ void Game::start(){
     printLineByLine(asciiLogo, 40, SceneColorConfig(std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29}, std::vector<int>{}));//logo
     sleep(1500);
     system("cls");
-    Hero hero(name,100,10,10,10,10,1,30);//英雄的初始化
-    menu2(&hero);
+    hero->set_name(name);//英雄的初始化
+    menu2(hero);
 }
 
 

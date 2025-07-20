@@ -5,7 +5,7 @@
 #include "items.h"
 #include "battle.h"
 #include "challenge.h"
-
+#include "count.h"
 
 Boss* create_selen_boss() {
     Boss* boss =  new Boss ("梦魇蝶后 · 赛莲", 200, 10, 15, 20, 60, 50);
