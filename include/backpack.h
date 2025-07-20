@@ -15,6 +15,10 @@ protected:
 
 public:
     //用栈式存储物品
+    const std::vector<Item>& get_items() {
+        return items;
+    }
+
     void add_or_stack(Item new_item) {
         for (auto& item : items) {
             if (item.index == new_item.index) {
@@ -25,6 +29,19 @@ public:
         items.emplace_back(new_item.name, new_item.num, new_item.price, new_item.index);
     }
 
+    void add_or_stack(const std::string& name, unsigned int num, unsigned int price, int index = 0) {
+        for (auto& item : items) {
+            if (item.index == index) {
+                item.num += num;
+                return;
+            }
+        }
+        items.emplace_back(name, num, price, index);
+    }
+
+    void clear() {
+        items.clear();
+    }
     int check_index(int index){
         for (auto& item : items) {
             if (item.index == index) {
@@ -124,6 +141,9 @@ class Equipment_backpack{
 private:
     std::vector<Equipment> equipment_items;
 public:
+    const std::vector<Equipment>& get_equipment_items() const {
+        return equipment_items;
+    }
     void add_equipment(const Equipment& equipment) {
             for (auto& item : equipment_items) {
                 if (item.get_name() == equipment.get_name()) {
@@ -133,7 +153,16 @@ public:
             }
             equipment_items.push_back(equipment);
         }
-        void show_equipment(Hero* hero) {
+    void add_equipment(std::string name, unsigned int num, unsigned int price, EquipmentType type, unsigned int index) {
+        for (auto& item : equipment_items) {
+            if (item.get_name() == name) {
+                item.add_num(num);
+                return;
+            }
+        }
+        equipment_items.emplace_back(type, name, num, price, index);
+    }
+    void show_equipment(Hero* hero) {
         std::cout << "你的装备：\n";
         int index_of_equipment = 1;
         for (const auto& equipment : equipment_items) {
@@ -176,7 +205,9 @@ public:
         change_equipment(choice, hero);
     }
 
-
+    void clear() {
+        equipment_items.clear();
+    }
     void erase_zero() {
         equipment_items.erase(
             std::remove_if(equipment_items.begin(), equipment_items.end(), [](const Equipment& equipment) {

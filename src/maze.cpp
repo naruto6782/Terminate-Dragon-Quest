@@ -8,8 +8,8 @@
 #include "story.h"
 #include "monsters.h"
 #include "backpack.h"
+#include "count.h"
 
-extern int count_easy, count_medium, count_hard;
 Shop shop;
 int easy_maze[ROUNDS][EVENTS] = {
     {0, 1, 3, 1, 1, 4, 1, 5},

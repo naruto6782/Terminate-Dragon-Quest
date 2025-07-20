@@ -42,6 +42,7 @@ public:
     std::string get_name() const { return name; }
     unsigned int get_index() const { return index; }
     unsigned int get_num() const { return num; }
+    unsigned int get_price() const { return price; }
     void add_num(unsigned int num) {
         this->num += num;
         if (this->num < 0) {

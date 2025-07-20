@@ -23,15 +23,14 @@ extern int count_easy;
 extern int count_medium;
 extern int count_hard;
 extern int count_challenge;
+class Hero;
 
 class Game {
 public: 
     void init(Game* game);
     void menu1(Game* game);
     void menu2(Hero* hero);
-    void start();
-    void load(){cout<<"Game Load"<<endl;};
-    void save();
+    void start(Hero* hero);
 };
 
 class SceneColorConfig {

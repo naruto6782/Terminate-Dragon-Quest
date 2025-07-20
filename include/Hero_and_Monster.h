@@ -1,5 +1,4 @@
-#ifndef HERO_AND_MONSTER_H
-#define HERO_AND_MONSTER_H
+#pragma once
 #include <string>
 #include <functional>
 #include <vector>
@@ -74,6 +73,13 @@ public:
             this->HP = (unsigned int)(rate * max_HP);
         };
         void setStatusEffect(StatusEffect* status) {this->status = status;}
+
+        void set_name(const std::string& name) { this->name = name; }
+        void set_HP(unsigned int HP) { this->HP = HP; }
+        void set_Attack(unsigned int Attack) { this->Attack = Attack; }
+        void set_Defense(unsigned int Defense) { this->Defense = Defense; }
+        void set_Speed(unsigned int Speed) { this->Speed = Speed; }
+        void set_Money(unsigned int Money) { this->Money = Money; }
 };
 
 class Monster;//前向声明
@@ -133,7 +139,10 @@ public:
     Backpack* get_backpack() { return &this->hero_backpack; }
     Equipment_backpack* get_equipment_backpack() { return &this->equipment_backpack; }
     Equipment* get_weapon() const { return const_cast<Equipment*>(weapon); }
+    Equipment* get_armor() const { return const_cast<Equipment*>(armor); }
+    Equipment* get_accessory() const { return const_cast<Equipment*>(accessory); }
     int get_Luck() const { return Luck; }
+    void set_Luck(unsigned int Luck) { this->Luck = Luck; }
     void Attack_Monster(Hero* hero, Monster* monster);
 };
 class Monster: public Base
@@ -171,5 +180,3 @@ public:
 
     void use_skill_or_attack(Hero* hero);
 };
-
-#endif
