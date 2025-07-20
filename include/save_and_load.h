@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-
 #include "Hero_and_Monster.h"
 #include "count.h"
 extern Equipment null_weapon, null_armor, null_accessory;
@@ -74,9 +73,16 @@ void saveGame(Hero* hero, Shop* shop, const std::string& filename) {
         std::cerr << "写入文件时发生错误。" << std::endl;
         return;
     }
-
+    Equipment wp = index_to_equipment(wp_index);
+    Equipment ar = index_to_equipment(ar_index);
+    Equipment ac = index_to_equipment(ac_index);
+    hero->get_equipment_backpack()->set_is_equipped_by_index(wp_index);
+    hero->get_equipment_backpack()->set_is_equipped_by_index(ar_index);
+    hero->get_equipment_backpack()->set_is_equipped_by_index(ac_index);
+    if (wp_index) hero->equip(wp.clone());
+    if (ar_index) hero->equip(ar.clone());
+    if (ac_index) hero->equip(ac.clone());
     outFile.close();
-
     std::cout << "游戏已成功保存到文件: " << filename << std::endl;
     std::cout << "感谢您的游戏，按任意键继续！\n";
     getchar();
@@ -194,9 +200,9 @@ void loadGame(Hero* hero, Shop* shop, const std::string& filename) {
     hero->get_equipment_backpack()->set_is_equipped_by_index(wp_index);
     hero->get_equipment_backpack()->set_is_equipped_by_index(ar_index);
     hero->get_equipment_backpack()->set_is_equipped_by_index(ac_index);
-    if (wp_index) hero->equip(&wp);
-    if (ar_index) hero->equip(&ar);
-    if (ac_index) hero->equip(&ac);
+    if (wp_index) hero->equip(wp.clone());
+    if (ar_index) hero->equip(ar.clone());
+    if (ac_index) hero->equip(ac.clone());
 
     inFile.close();
     std::cout << "游戏成功加载自文件: " << filename << std::endl;

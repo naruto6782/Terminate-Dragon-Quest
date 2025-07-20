@@ -1,24 +1,23 @@
-Name:曾头
+Name:123
 HP:100
-Attack:100
+Attack:10
 Defense:10
 Speed:10
-Money:228
+Money:70
 Luck:30
-now_weapon_index:4
+now_weapon_index:1
 now_armor_index:0
-now_accessory_index:11
-count_easy:1
-count_medium:1
-count_hard:1
-count_challenge:2
+now_accessory_index:12
+count_easy:3
+count_medium:0
+count_hard:0
+count_challenge:0
 Equipment_backpack:
-Weapon 秘银剑 2 100 1 0
-Weapon 淬毒刃 1 100 4 1
-Accessory 勇者护符 1 100 11 1
+Accessory 生命宝石 1 100 12 1
+Weapon 暴风大剑 3 100 2 0
+Weapon 秘银剑 2 100 1 1
 Backpack:
 生命药水 1 50 1
-钢铁合剂 1 100 2
 Shop:
 生命药水 9 50 1
 钢铁合剂 5 100 2
