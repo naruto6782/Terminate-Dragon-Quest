@@ -116,11 +116,11 @@ void easy(Hero* hero) {
         std::cout << "你遇到了一个陷阱\n";
         int choice;
         std::cout << "请选择：";
-        std::cout << "1. 扣除5生命值\n";
+        std::cout << "1. 扣除50生命值\n";
         std::cout << "2. 扣除50金币\n";
         std::cin >> choice;
         if (choice == 1) {
-            hero->change_HP(-500,1.0,HP);
+            hero->change_HP(-50,1.0,HP);
             std::cout << "扣除50生命值成功！,剩余生命值：" << hero->get_HP() << "\n";
             getchar(); // 等待用户按任意键
             if (hero->get_HP() <= 0) {
@@ -277,7 +277,7 @@ void medium(Hero* hero) {
         std::cout << "2. 扣除50金币\n";
         std::cin >> choice;
         if (choice == 1) {
-            hero->change_HP(-500,1.0,HP);
+            hero->change_HP(-50,1.0,HP);
             std::cout << "扣除50生命值成功！,剩余生命值：" << hero->get_HP() << "\n";
             getchar(); // 等待用户按任意键
             if (hero->get_HP() <= 0) {
