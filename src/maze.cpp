@@ -95,6 +95,7 @@ void easy(Hero* hero) {
     else if (e == 2) {
         std::cout << "商店\n";
         Shop shop;
+        shop.Shop_init();
         shop.show_shop_items(hero);
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
@@ -251,6 +252,7 @@ void medium(Hero* hero) {
     else if (e == 2) {
         std::cout << "你遇到了一个商店！\n";
         Shop shop;
+        shop.Shop_init();
         shop.show_shop_items(hero);
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键
@@ -407,6 +409,7 @@ void hard(Hero* hero) {
     else if (e == 2) {
         std::cout << "你遇到了一个商店！\n";
         Shop shop;
+        shop.Shop_init();
         shop.show_shop_items(hero);
         cout <<"🎊 按Enter前往下一关卡...";
         getchar(); // 等待用户按任意键

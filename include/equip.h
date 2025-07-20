@@ -89,6 +89,7 @@ extern Equipment gold_necklace;
 extern Equipment jinchanchan;
 
 extern Equipment index_to_equipment(int index);
+
 void init_equipment_effects();
 std::string type_to_string(EquipmentType type);
 Equipment* get_random_equipment(const std::vector<std::pair<Equipment*, double>>& drop_pool);
