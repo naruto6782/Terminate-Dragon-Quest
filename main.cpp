@@ -11,6 +11,7 @@
 using namespace std;
 extern Equipment poisoned_blade;
 int main() {
+    system("chcp 65001 > nul");
     Game game;
     init_items_effects();
     init_equipment_effects();

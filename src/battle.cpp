@@ -51,7 +51,7 @@ void Battle::show_battle() {
     cout << "=======================================================\n\n";
 }
 
-void Battle::Hero_turn() {
+void Battle::Hero_turn(int monster_HP) {
     int item_choice =-1;
     int choice=-1;
     do{
@@ -71,6 +71,14 @@ void Battle::Hero_turn() {
             if(this->hero->get_weapon()->get_index() == 4){
                 this->monster->getStatusEffect()->setPoisoned();
             }
+            if(this->hero->get_weapon()->get_index() == 5){
+                std::cout<<"月影双刃效果发动，进行了第二次攻击！"<<std::endl;
+                this->hero->Attack_Monster(this->hero, this->monster);
+            }
+            if(this->hero->get_weapon()->get_index() == 6){
+                std::cout<<"花无十日红效果发动，造成对方15%最大生命值的伤害！"<<std::endl;
+                this->monster->change_HP(monster_HP*0.1,1.0);
+            }
             break;
         case 2:
             this->hero->getStatusEffect()->setDefending();
@@ -88,6 +96,17 @@ void Battle::Hero_turn() {
         cout << "-----按Enter回到选择界面-----";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
+    }
+    else{
+        if(this->hero->get_accessory()->get_index() == 13){
+            hero->change_HP(30,1.0);
+            std::cout<<"宇宙之辉效果发动，恢复30点生命值！"<<std::endl;
+        }
+        if(this->hero->get_accessory()->get_index() == 15){
+            hero->change_Money(15);
+            std::cout<<"金币护符效果发动，获得15金钱！"<<std::endl;
+        }
+        break;
     }
     }while(item_choice==0);
 }
@@ -172,7 +191,7 @@ int Battle::Battle_round(int HP) {
             if(hero_stunned){
                 cout << "你被眩晕了，无法行动！" << endl << endl;
             } else {
-                Hero_turn();
+                Hero_turn(monster_HP);
             }
 
             process_turn(0);
