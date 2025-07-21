@@ -9,6 +9,7 @@
 #include "story.h"
 #include "game.h"
 #include "equip.h"
+#include "music.h"
 
 Boss* create_selen_boss() {
     Boss* boss =  new Boss ("梦魇蝶后 · 赛莲", 200, 10, 8, 10, 500, 20);
@@ -158,6 +159,8 @@ void Nekthos(Hero* hero){
                 switch (end) {
                     case 1:
                         system("cls");
+                        stopMusic(1000);
+                        playMusic("music/false_end.wav", 1000);
                         printLineByLine(false_end,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
                         printWithDelay(intro11, 30, CYAN);
                         std::cout << "按Enter继续..." << std::endl;
@@ -168,11 +171,14 @@ void Nekthos(Hero* hero){
                         getchar();
                         system("cls");
                         hero->reborn(1.0, HP);
+                        stopMusic(1000);
                         validChoice = true;
                         break;
                 
                     case 2:
                         system("cls");
+                        stopMusic(1000);
+                        playMusic("music/true_end.wav", 1000);
                         printLineByLine(true_end1,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
                         printWithDelay(intro12, 30, CYAN);
                         system("cls");
@@ -186,6 +192,7 @@ void Nekthos(Hero* hero){
                         getchar();
                         system("cls");
                         hero->reborn(1.0, HP);
+                        stopMusic(1000);
                         validChoice = true;
                         break;
                 

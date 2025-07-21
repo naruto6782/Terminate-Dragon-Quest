@@ -189,17 +189,26 @@ void Game::menu2(Hero* hero, Shop* shop){
             system("cls");
             if(count_easy>=1&&count_medium == 0&&count_hard == 0){
                 system("cls");
+                stopMusic(1000);
+                playMusic("music/fight.wav", 1000);
                 Selen(hero);
+                stopMusic(1000);
                 break;
             }
             else if(count_medium >= 1&&count_hard == 0){
                 system("cls");
+                stopMusic(1000);
+                playMusic("music/fire.wav", 1000);
                 Azurvain(hero);
+                stopMusic(1000);
                 break;
             }
             else if(count_hard >= 1){
                 system("cls");
+                stopMusic(1000);
+                playMusic("music/final.wav", 1000);
                 Nekthos(hero);
+                stopMusic(1000);
                 break;
             }
             else{

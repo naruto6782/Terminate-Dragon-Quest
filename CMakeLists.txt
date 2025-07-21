@@ -21,6 +21,9 @@ add_library(Game_lib
     src/challenge.cpp src/music.cpp
 )
 
+# 设置 main.exe 的输出路径为项目根目录
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 # 主程序
 add_executable(main main.cpp)
 
