@@ -27,56 +27,60 @@ void printBar(int value, int max_value = 100, int barWidth = 30) {
 }
 //----------------Hero-Section----------------
 void Hero::show_info(Hero* hero) {
-    cout << "\tHero " << hero->get_name()<<'\t'<<"Level:"<<hero->get_Level()<<endl;
-    
-    cout << "HP:\t\t\t";
-    printBar(hero->get_HP());
-    
-    cout << "Attack:\t\t\t";
-    printBar(hero->get_Attack());
-    
-    cout << "Defense:\t\t";
-    printBar(hero->get_Defense());
-    
-    cout << "Speed:\t\t\t";
-    printBar(hero->get_Speed());
-    
-    cout << "Luck:\t\t\t";
-    printBar(hero->get_Luck());
-
-    cout << "Money:\t\t\t" << hero->get_Money();
-    
-    cout << endl;
-
-    hero->getStatusEffect()->print();
-
-    cout << endl;
-
-    std::cout << "当前装备：" << std::endl;
-    std::cout << "武器: " << (weapon->get_index() ? weapon->get_name() : "无") << std::endl;
-    std::cout << "防具: " << (armor->get_index() ? armor->get_name() : "无") << std::endl;
-    std::cout << "饰品: " << (accessory->get_index() ? accessory->get_name() : "无") << std::endl;
-    int next_choice;
     Equipment_backpack* equip_bag = hero->get_equipment_backpack();
+    int next_choice;
+
     while (true) {
+        system("cls");
+
+        cout << "\tHero " << hero->get_name() << '\t' << "Level:" << hero->get_Level() << endl;
+
+        cout << "HP:\t\t\t";
+        printBar(hero->get_HP());
+
+        cout << "Attack:\t\t\t";
+        printBar(hero->get_Attack());
+
+        cout << "Defense:\t\t";
+        printBar(hero->get_Defense());
+
+        cout << "Speed:\t\t\t";
+        printBar(hero->get_Speed());
+
+        cout << "Luck:\t\t\t";
+        printBar(hero->get_Luck());
+
+        cout << "Money:\t\t\t" << hero->get_Money() << endl;
+
+        hero->getStatusEffect()->print();
+
+        cout << endl;
+
+        std::cout << "当前装备：" << std::endl;
+        std::cout << "武器: " << (weapon->get_index() ? weapon->get_name() : "无") << std::endl;
+        std::cout << "防具: " << (armor->get_index() ? armor->get_name() : "无") << std::endl;
+        std::cout << "饰品: " << (accessory->get_index() ? accessory->get_name() : "无") << std::endl;
+
         std::cout << "按 1 查看武器背包" << std::endl;
         std::cout << "按 2 返回主菜单..." << std::endl;
         std::cin >> next_choice;
-        getchar(); // 清除输入缓冲区的换行符
+        getchar();
+
         if (next_choice == 1) {
-            equip_bag->show_equipment(hero); // ✅ 递归再次调用
-            break;             // ✅ 注意：需要 break，否则返回后还会再次进入循环
+            system("cls");
+            equip_bag->show_equipment(hero);
+            std::cout << "按任意键返回英雄信息..." << std::endl;
+            std::cin.get();  // 等待用户确认
         } else if (next_choice == 2) {
-            return;
+            break;
         } else {
             std::cout << "❌ 无效输入，请重新输入！" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     }
-    
-    system("cls");
-
-
 }
+
     // hero->getEquipment()->equip(hero);
 
     // cout<< endl;

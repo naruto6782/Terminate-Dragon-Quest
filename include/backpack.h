@@ -201,7 +201,6 @@ public:
 
             choice = std::stoi(input);
             if (choice == 0) {
-                std::cout << "✅ 已取消更换装备。\n";
                 return;
             }
 
