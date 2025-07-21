@@ -18,6 +18,7 @@
 
 void Game::init(Game* game){
     std::cout << "游戏已启动!" << std::endl;
+    std::cout << "欢迎游玩Terminal Dragon Quest!\n本游戏采取手动存档方式，请在主菜单的“冒险之书”中进行存档。" << std::endl;
     std::cout << "按Enter继续..." << std::endl;
     getchar();
     system("cls");
@@ -87,7 +88,7 @@ void Game::menu2(Hero* hero, Shop* shop){
     while(1){
         system("cls");
         std::cout<< "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
-        << "4.物品" << std::endl << "5.商店" << std::endl << "6.退出" << std::endl << "7.冒险之书" << std::endl;
+        << "4.物品" << std::endl << "5.商店" << std::endl << "6.冒险之书" << std::endl << "7.退出游戏" << std::endl;
         std::cout << "请做出你的选择：";
         std::cin >> choice;
         getchar();
@@ -210,10 +211,10 @@ void Game::menu2(Hero* hero, Shop* shop){
             shop->show_shop_items(hero);
             break;
         case 6:
-            exit(0);
+            saveGame(hero, shop, "./save.txt");
             break;
         case 7:
-            saveGame(hero, shop, "./save.txt");
+            exit(0);
             break;
         default:
             std::cout << "迷途的羔羊啊，请重新选择。" << std::endl;

@@ -183,10 +183,6 @@ void easy(Hero* hero) {
         // trap();
         } 
         else if (e == 5) {
-        if(count_easy == 0)
-        {std::cout << "首次\n";}
-        else if(count_easy == 1)
-        {std::cout << "第二次\n";}
         printLineByLine(chest, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}));
         std::cout << "你找到了一个宝箱！\n";
         std::cout << "按Enter打开宝箱...\n";
@@ -199,6 +195,7 @@ void easy(Hero* hero) {
         hero->reborn(1.0,HP);
         count_easy++;
         cout << "你已通关简单难度的冒险！" << "\n";
+        cout <<"挑战：梦魇蝶后 · 赛莲 已解锁\n";
         cout <<"🎊 按Enter返回主界面...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
@@ -340,10 +337,6 @@ void medium(Hero* hero) {
         // trap();
         } 
         else if (e == 5) {
-        if(count_easy == 0)
-        {std::cout << "首次\n";}
-        else if(count_easy == 1)
-        {std::cout << "第二次\n";}
         printLineByLine(chest, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}));
         std::cout << "你找到了一个宝箱！\n";
         std::cout << "按Enter打开宝箱...\n";
@@ -356,6 +349,7 @@ void medium(Hero* hero) {
         hero->reborn(1.0,HP);
         count_medium++;
         cout << "你已通关中等难度的冒险！" << "\n";
+        cout <<"挑战：焚天古龙 · 阿祖尔瓦恩 已解锁\n";
         cout <<"🎊 按Enter返回主界面...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏
@@ -497,10 +491,6 @@ void hard(Hero* hero) {
         // trap();
         } 
         else if (e == 5) {
-        if(count_easy == 0)
-        {std::cout << "首次\n";}
-        else if(count_easy == 1)
-        {std::cout << "第二次\n";}
         printLineByLine(chest, 40, SceneColorConfig(std::vector<int>{}, std::vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}));
         std::cout << "你找到了一个宝箱！\n";
         std::cout << "按Enter打开宝箱...\n";
@@ -513,6 +503,7 @@ void hard(Hero* hero) {
         hero->reborn(1.0,HP);
         count_hard++;
         cout << "你已通关困难难度的冒险！" << "\n";
+        cout <<"挑战：深渊邪龙 · 奈克托斯 已解锁\n";
         cout <<"🎊 按Enter返回主界面...";
         getchar(); // 等待用户按任意键
         system("cls"); // 清屏

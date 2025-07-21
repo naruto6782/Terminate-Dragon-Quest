@@ -171,8 +171,8 @@ private:
     std::vector<Skill> skills;
 
 public:
-    Boss(const std::string& name, int HP, int Atk, int Def, int Spd, int Luck, int money)
-        : Monster(name, HP, Atk, Def, Spd, Luck, money) {}
+    Boss(const std::string& name, int HP, int Atk, int Def, int Spd, int money, int level)
+        : Monster(name, HP, Atk, Def, Spd, money, level) {}
 
     void add_skill(const Skill& skill) {
         skills.push_back(skill);
