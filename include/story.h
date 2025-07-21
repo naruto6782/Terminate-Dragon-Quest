@@ -14,8 +14,12 @@ extern std::vector<std::string> chest;
 extern std::vector<std::string> selen;
 extern std::vector<std::string> firedragon;
 extern std::vector<std::string> necktos;
-
-
+extern std::vector<std::string> selen_after;
+extern std::vector<std::string> firedragon_after;
+extern std::vector<std::string> necktos_after;
+extern std::vector<std::string> false_end;
+extern std::vector<std::string> true_end1;
+extern std::vector<std::string> true_end2;
 
 //字
 extern std::string intro1;
@@ -29,5 +33,6 @@ extern std::string intro9;
 extern std::string intro10;
 extern std::string intro11;
 extern std::string intro12;
+extern std::string intro13;
     
 #endif

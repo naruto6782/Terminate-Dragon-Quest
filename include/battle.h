@@ -20,7 +20,7 @@ class Battle {
         }
         int Battle_round(int HP);
         void process_turn(int choice);//done
-        void Hero_turn();//done
+        void Hero_turn(int monster_HP);//done
         void Monster_turn();//done
         void show_battle();//done
         int choose_item();

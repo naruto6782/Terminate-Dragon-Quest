@@ -82,7 +82,6 @@ extern Equipment soul_shield;
 
 extern Equipment brave_amulet;
 extern Equipment life_stone;
-extern Equipment xiangnang;
 extern Equipment universe_glow;
 extern Equipment s_cape;
 extern Equipment gold_necklace;
@@ -96,6 +95,9 @@ Equipment* get_random_equipment(const std::vector<std::pair<Equipment*, double>>
 Equipment drop_equipment_easy();
 Equipment drop_equipment_medium();
 Equipment drop_equipment_hard();
+Equipment drop_equipment_selen();
+Equipment drop_equipment_fire();
+Equipment drop_equipment_final();
 
 
 
