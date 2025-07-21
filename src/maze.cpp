@@ -9,6 +9,7 @@
 #include "monsters.h"
 #include "backpack.h"
 #include "count.h"
+#include "maze.h"
 
 Shop shop;
 int easy_maze[ROUNDS][EVENTS] = {
@@ -56,6 +57,7 @@ void easy(Hero* hero) {
     std::cout << "当前难度:简单"<< "\n按Enter进入冒险...\n";
     getchar(); 
     unsigned int HP = hero->get_HP();
+    int max_HP = hero->get_HP();
     for (int i = 1; i < EVENTS; i++) {
     int e = current_maze[i];
     if (e == 1) {
@@ -209,6 +211,7 @@ void medium(Hero* hero) {
     std::cout << "当前难度:中等"<< "\n按Enter进入冒险...\n";
     getchar(); 
     unsigned int HP = hero->get_HP();
+    int max_HP = hero->get_HP();
     for (int i = 1; i < EVENTS; i++) {
     int e = current_maze[i];
     if (e == 1) {
@@ -362,6 +365,7 @@ void hard(Hero* hero) {
     std::cout << "当前难度:困难"<< "\n按Enter进入冒险...\n";
     getchar(); 
     unsigned int HP = hero->get_HP();
+    int max_HP = hero->get_HP();
     for (int i = 1; i < EVENTS; i++) {
     int e = current_maze[i];
     if (e == 1) {

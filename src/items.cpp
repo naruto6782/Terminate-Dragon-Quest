@@ -2,13 +2,16 @@
 #include "items.h"
 #include "Hero_and_Monster.h"
 
+
+int max_HP = 10000;
+
 void init_items_effects() {
     
     null_item.set_effect(
         [](Hero* h, Monster* m){ std::cout << "无效物品，无法使用。" << std::endl; }
     );
     medicine.set_effect(//血瓶
-        [](Hero* h, Monster* m){ h->change_HP(40,1.0); std::cout << "你使用了血瓶，回复40生命值！" << std::endl; h->get_backpack()->delete_item_by_index(1); }
+        [](Hero* h, Monster* m){ h->change_HP(40,1.0,max_HP); std::cout << "你使用了血瓶，回复40生命值！" << std::endl; h->get_backpack()->delete_item_by_index(1); }
     );
     poison.set_effect(//毒瓶
         [](Hero* h, Monster* m){ m->getStatusEffect()->setPoisoned(); std::cout << "你使用了毒瓶，怪物中毒！" << std::endl; h->get_backpack()->delete_item_by_index(2); }

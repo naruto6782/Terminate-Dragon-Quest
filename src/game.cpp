@@ -241,11 +241,11 @@ void Game::menu2(Hero* hero, Shop* shop){
             stopMusic(1000);
             break;
         case 6:
-            stopMusic(1000);
-            closeMusic();
             saveGame(hero, shop, "./save.txt");
             break;
         case 7:
+            stopMusic(1000);
+            closeMusic();
             exit(0);
             break;
         default:

@@ -5,6 +5,9 @@
 class Hero;
 class Monster;
 
+
+extern int max_HP;
+
 class Item {
     private:
         std::function<void(Hero*, Monster*)> apply_func; // 使用效果
