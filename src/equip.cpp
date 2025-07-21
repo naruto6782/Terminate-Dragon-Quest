@@ -6,56 +6,64 @@
 void init_equipment_effects() {
     
     silver_spear.set_effect(//秘银剑
-        [](Hero* h){ h->change_Attack(10,1.0);},
-        [](Hero* h){ h->change_Attack(-10,1.0); });
+        [](Hero* h){ h->change_Attack(5,1.0);},
+        [](Hero* h){ h->change_Attack(-5,1.0); });
     
     storm_blade.set_effect(//暴风大剑
         [](Hero* h){ h->change_Attack(20,1.0); h->change_Speed(-10); },
         [](Hero* h){ h->change_Attack(-20,1.0); h->change_Speed(10); });
 
     cursed_blade.set_effect(//诅咒之刃
-        [](Hero* h){ h->change_Attack(20,1.0); h->change_Luck(-10); },
-        [](Hero* h){ h->change_Attack(-20,1.0); h->change_Luck(10); });
+        [](Hero* h){ h->change_Attack(15,1.0); h->change_Luck(-10); },
+        [](Hero* h){ h->change_Attack(-15,1.0); h->change_Luck(10); });
 
     poisoned_blade.set_effect(//淬毒刃
-        [](Hero* h){ h->change_Attack(10,1.0); },
-        [](Hero* h){ h->change_Attack(-10,1.0); });
-
-    moon_blade.set_effect(//月影双刃
         [](Hero* h){ h->change_Attack(5,1.0); },
         [](Hero* h){ h->change_Attack(-5,1.0); });
 
+    moon_blade.set_effect(//月影双刃
+        [](Hero* h){ h->change_Attack(-5,1.0); },
+        [](Hero* h){ h->change_Attack(5,1.0); });
+
     flower_blade.set_effect(//花无十日红
         [](Hero* h){ h->change_Attack(10,2.0); },
-        [](Hero* h){ h->change_Attack(-10,2.0); });
+        [](Hero* h){ h->change_Attack(-10,0.5); });
 
     defense_shield.set_effect(//军团圣盾
-        [](Hero* h){ h->change_Defense(10,1.0);  },
-        [](Hero* h){ h->change_Defense(-10,1.0); });
-    
-    brave_shield.set_effect(//狂战士之甲
         [](Hero* h){ h->change_Defense(5,1.0);  },
         [](Hero* h){ h->change_Defense(-5,1.0); });
+    
+    brave_shield.set_effect(//狂战士之甲
+        [](Hero* h){ h->change_Defense(5,1.5); h->change_HP(40,1.0);  },
+        [](Hero* h){ h->change_Defense(-5,1.5); h->change_HP(-40,1.0); });
 
     shadow_shield.set_effect(//影织衣
         [](Hero* h){ h->change_Defense(5,1.0); h->change_Speed(10); h->change_Luck(10);  },
         [](Hero* h){ h->change_Defense(-5,1.0); h->change_Speed(-10); h->change_Luck(-10); });
 
     soul_shield.set_effect(//镇魂重甲
-        [](Hero* h){ h->change_HP(100,1.0);  },
-        [](Hero* h){ h->change_HP(-100,1.0); });
+        [](Hero* h){ h->change_Defense(30,1.0); h->change_HP(30,1.0);  },
+        [](Hero* h){ h->change_Defense(-30,1.0); h->change_HP(-30,1.0); });
 
     brave_amulet.set_effect(//勇者护符
         [](Hero* h){ h->change_Attack(5,1.0); h->change_Defense(5,1.0); },
         [](Hero* h){ h->change_Attack(-5,1.0); h->change_Defense(-5,1.0); });
 
-    xiangnang.set_effect(//忘忧香囊
-        [](Hero* h){ h->getStatusEffect()->resetAll(); },
-        [](Hero* h){ h->getStatusEffect()->resetAll(); });
+    life_stone.set_effect(//生命宝石
+        [](Hero* h){ h->change_HP(60,1.0); },
+        [](Hero* h){ h->change_HP(-60,1.0); });
 
     s_cape.set_effect(//灵光披风    
         [](Hero* h){ h->change_Speed(10); h->change_Luck(10); },
         [](Hero* h){ h->change_Speed(-10); h->change_Luck(-10); });
+
+    gold_necklace.set_effect(//金币护符
+        [](Hero* h){},
+        [](Hero* h){});
+    
+    universe_glow.set_effect(//宇宙之辉
+        [](Hero* h){},
+        [](Hero* h){});    
 
     jinchanchan.set_effect(//金铲铲
         [](Hero* h){ h->change_Attack(30,1.0); h->change_Defense(30,1.0); h->change_Speed(30); h->change_Luck(30); },
@@ -66,51 +74,51 @@ void init_equipment_effects() {
 // 装备指针池（你可以按类型区分：武器、护甲、饰品）
 std::vector<std::pair<Equipment*, double>> easy_drops = {
     {&silver_spear, 6.0},
+    {&cursed_blade, 3.0},
+    {&storm_blade, 1.5},
     {&defense_shield, 6.0},
-    {&brave_amulet, 6.0},
-    {&storm_blade, 3.0},
-    {&cursed_blade, 4.0},
     {&brave_shield, 3.0},
+    {&brave_amulet, 6.0},
     {&life_stone,3.0},
-    {&poisoned_blade, 1.5},
     {&shadow_shield,1.5},
     {&universe_glow, 1.5},
+    {&gold_necklace, 1.5},
     {&jinchanchan, 0.5}
 };
 
 std::vector<std::pair<Equipment*, double>> medium_drops = {
-    {&storm_blade, 6.0},
     {&cursed_blade, 6.0},
+    {&storm_blade, 3.0},
     {&brave_shield, 6.0},
-    {&xiangnang, 6.0},
-    {&moon_blade, 1.5},
-    {&brave_shield, 3.0},
+    {&shadow_shield,3.0},
+    {&life_stone,6.0},
     {&s_cape,3.0},
-    {&xiangnang,3.0},
-    {&gold_necklace, 2.0},
-    {&poisoned_blade, 1.5},
-    {&shadow_shield,1.5},
-    {&soul_shield, 1.0},
-    {&universe_glow, 1.5},
-    {&flower_blade, 1.0},
+    {&universe_glow, 3.0},
+    {&gold_necklace, 3.0},
     {&jinchanchan, 0.5}
 };
 
 std::vector<std::pair<Equipment*, double>> hard_drops = {
-    {&cursed_blade, 6.0},
-    {&brave_shield, 6.0},
-    {&moon_blade, 4.5},
-    {&brave_shield, 6.0},
-    {&s_cape,6.0},
-    {&xiangnang,3.0},
-    {&gold_necklace, 6.0},
-    {&poisoned_blade, 6.0},
-    {&shadow_shield,4.5},
+    {&storm_blade, 6.0},
+    {&shadow_shield, 6.0},
     {&soul_shield, 3.0},
-    {&flower_blade, 3.0},
+    {&s_cape,6.0},
+    {&universe_glow, 6.0},
+    {&gold_necklace, 6.0},
     {&jinchanchan, 0.5}
 };
 
+std::vector<std::pair<Equipment*, double>> selen_drops = {
+    {&poisoned_blade, 1.5}
+};
+
+std::vector<std::pair<Equipment*, double>> fire_drops = {
+    {&moon_blade, 6.0}
+};
+
+std::vector<std::pair<Equipment*, double>> final_drops = {
+    {&flower_blade, 6.0}
+};
 
 // 返回一个随机掉落的装备指针
 Equipment* get_random_equipment(const std::vector<std::pair<Equipment*, double>>& drop_pool) {
@@ -159,6 +167,38 @@ Equipment drop_equipment_hard() {
     }
     return Equipment(*drop);
 }
+
+Equipment drop_equipment_selen() {
+    Equipment* drop = nullptr;
+            drop = get_random_equipment(selen_drops);
+    if (drop) {
+        std::cout << "你获得了装备：" << drop->get_name() << std::endl;
+        // hero->equip(drop);
+    }
+    return Equipment(*drop);
+}
+
+Equipment drop_equipment_fire() {
+    Equipment* drop = nullptr;
+            drop = get_random_equipment(fire_drops);
+    if (drop) {
+        std::cout << "你获得了装备：" << drop->get_name() << std::endl;
+        // hero->equip(drop);
+    }
+    return Equipment(*drop);
+}
+
+Equipment drop_equipment_final() {
+    Equipment* drop = nullptr;
+            drop = get_random_equipment(final_drops);
+    if (drop) {
+        std::cout << "你获得了装备：" << drop->get_name() << std::endl;
+        // hero->equip(drop);
+    }
+    return Equipment(*drop);
+}
+
+
 Equipment index_to_equipment(int index) {
     switch (index) {
         case 1: return silver_spear;
@@ -173,11 +213,10 @@ Equipment index_to_equipment(int index) {
         case 10: return soul_shield;
         case 11: return brave_amulet;
         case 12: return life_stone;
-        case 13: return xiangnang;
-        case 14: return universe_glow;
-        case 15: return s_cape;
-        case 16: return gold_necklace;
-        case 17: return jinchanchan;
+        case 13: return universe_glow;
+        case 14: return s_cape;
+        case 15: return gold_necklace;
+        case 16: return jinchanchan;
         default: return null_weapon; // 返回空武器
     }
 }
@@ -192,20 +231,19 @@ std::string type_to_string(EquipmentType type) {
 Equipment null_weapon(EquipmentType::Weapon, "空", 0, 0, 0);
 Equipment null_armor(EquipmentType::Armor, "空", 0, 0, 0);
 Equipment null_accessory(EquipmentType::Accessory, "空", 0, 0, 0);
-Equipment silver_spear(EquipmentType::Weapon, "秘银剑", 1, 100, 1);//加10攻击力
-Equipment storm_blade(EquipmentType::Weapon, "暴风大剑", 1, 100, 2);//加30攻击力，速度降低20
-Equipment cursed_blade(EquipmentType::Weapon, "诅咒之刃", 1, 100, 3);//加20攻击力，幸运降低10
-Equipment poisoned_blade(EquipmentType::Weapon, "淬毒刃", 1, 100, 4);//加5攻击力，战斗时给对方附加中毒效果
-Equipment moon_blade(EquipmentType::Weapon, "月影双刃", 1, 100, 5);//减5攻击力，一回合可以攻击两次
-Equipment flower_blade(EquipmentType::Weapon, "花无十日红", 1, 100, 6);//加20攻击力，2倍率，每回合提升0.2倍率
-Equipment defense_shield(EquipmentType::Armor, "军团圣盾", 1, 100, 7);//加10防御
-Equipment brave_shield(EquipmentType::Armor, "狂战士之甲", 1, 100, 8);//加5防御，每回合加2防御
-Equipment shadow_shield(EquipmentType::Armor, "影织衣", 1, 100, 9);//加5防御，加10速度，加10运气
-Equipment soul_shield(EquipmentType::Armor, "镇魂重甲", 1, 100, 10);//加30防御
-Equipment brave_amulet(EquipmentType::Accessory, "勇者护符", 1, 100, 11);//加10攻击10防御
-Equipment life_stone(EquipmentType::Accessory, "生命宝石", 1, 100, 12);//加50最大生命值
-Equipment xiangnang(EquipmentType::Accessory, "忘忧香囊", 1, 100, 13);//免疫负面效果
-Equipment universe_glow(EquipmentType::Accessory, "宇宙之辉", 1, 100, 14);//每回合回复30生命
-Equipment s_cape(EquipmentType::Accessory, "灵光披风", 1, 100, 15);//加10速度加10幸运
-Equipment gold_necklace(EquipmentType::Accessory, "金币护符", 1, 100, 16);//每回合结束加5金币
-Equipment jinchanchan(EquipmentType::Accessory, "金铲铲", 1, 100, 17);//buff全部增加
+Equipment silver_spear(EquipmentType::Weapon, "秘银剑（攻击+5）", 1, 100, 1);//加5攻击力
+Equipment storm_blade(EquipmentType::Weapon, "暴风大剑（攻击+20，速度-10）", 1, 100, 2);//加20攻击力，速度降低10
+Equipment cursed_blade(EquipmentType::Weapon, "诅咒之刃（攻击+15，幸运-10）", 1, 100, 3);//加15攻击力，幸运降低10
+Equipment poisoned_blade(EquipmentType::Weapon, "淬毒刃（攻击+5，战斗时给对方施加中毒效果）", 1, 100, 4);//加5攻击力，战斗时给对方附加中毒效果
+Equipment moon_blade(EquipmentType::Weapon, "月影双刃（攻击-5，一回合可攻击两次）", 1, 100, 5);//减5攻击力，一回合可以攻击两次
+Equipment flower_blade(EquipmentType::Weapon, "花无十日红（攻击+10，倍率×2，可造成对方最大生命值15%的伤害）", 1, 100, 6);//加10攻击力，2倍率，造成怪兽最大生命值15%的伤害
+Equipment defense_shield(EquipmentType::Armor, "军团圣盾（防御+5）", 1, 100, 7);//加5防御
+Equipment brave_shield(EquipmentType::Armor, "狂战士之甲（防御+5，生命+40）", 1, 100, 8);//加5防御，40生命
+Equipment shadow_shield(EquipmentType::Armor, "影织衣（防御+5，速度+10，幸运+10）", 1, 100, 9);//加5防御，加10速度，加10运气
+Equipment soul_shield(EquipmentType::Armor, "镇魂重甲（防御+30，生命+30）", 1, 100, 10);//加30防御，30生命
+Equipment brave_amulet(EquipmentType::Accessory, "勇者护符（攻击+5，防御+5）", 1, 100, 11);//加5攻击5防御
+Equipment life_stone(EquipmentType::Accessory, "生命宝石（生命+60）", 1, 100, 12);//加60最大生命值
+Equipment universe_glow(EquipmentType::Accessory, "宇宙之辉（每回合结束回复30生命）", 1, 100, 13);//每回合回复20生命
+Equipment s_cape(EquipmentType::Accessory, "灵光披风（速度+10，幸运+10）", 1, 100, 14);//加10速度加10幸运
+Equipment gold_necklace(EquipmentType::Accessory, "金币护符（每回合结束增加10金币）", 1, 100, 15);//每回合结束加10金币
+Equipment jinchanchan(EquipmentType::Accessory, "金铲铲（隐藏彩蛋装备！全属性增加！快来装备吧！）", 1, 100, 16);//buff全部增加

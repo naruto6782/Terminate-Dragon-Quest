@@ -8,40 +8,46 @@
 #include "count.h"
 #include "story.h"
 #include "game.h"
+#include "equip.h"
 
 Boss* create_selen_boss() {
-    Boss* boss =  new Boss ("梦魇蝶后 · 赛莲", 200, 10, 15, 20, 60, 50);
-    boss->add_skill(Skill("💀 黑暗咆哮", [](Hero* hero, Monster* self) {
-        std::cout << "💀 黑暗力量将你笼罩！你陷入眩晕！\n";
+    Boss* boss =  new Boss ("梦魇蝶后 · 赛莲", 200, 10, 8, 10, 500, 20);
+    boss->add_skill(Skill("💀 轻语之惧", [](Hero* hero, Monster* self) {
+        std::cout << "💀 梦魇蝶后的低语侵入你心灵，使你陷入眩晕！\\n";
         hero->getStatusEffect()->setStunned();
     }, 0.2));
     return boss;
     }
 Boss* create_azurvain_boss() {
-    Boss* boss = new Boss("焚天古龙 · 阿祖尔瓦恩", 10, 10, 30, 10, 20, 150);
+    Boss* boss = new Boss("焚天古龙 · 阿祖尔瓦恩", 300, 15, 15, 12, 600, 50);
     boss->add_skill(Skill("龙息喷吐", [](Hero* hero, Monster* self) {
         int dmg = 40;
-        std::cout << "🔥 龙息灼烧你造成 " << dmg << " 点伤害！" << std::endl;
+        std::cout << "🔥 阿祖尔瓦恩喷出灼热龙息，对你造成 " << dmg << " 点伤害！" << std::endl;
         hero->change_HP(-dmg, 1.0);
     }, 0.4));
     boss->add_skill(Skill("怒吼震击", [](Hero* hero, Monster* self) {
-        std::cout << "💥 你被震晕了！" << std::endl;
+        std::cout << "💥 天崩地裂！你的身体被震得麻痹，无法行动！" << std::endl;
         hero->getStatusEffect()->setStunned();
     }, 0.2));
     return boss;
 }
 Boss* create_nekthos_boss() {
-    Boss* boss = new Boss("深渊邪龙 · 奈克托斯", 500, 10, 40, 25, 100, 300);
+    Boss* boss = new Boss("深渊邪龙 · 奈克托斯", 400, 20, 20, 25, 800, 200);
     boss->add_skill(Skill("虚空坍缩", [](Hero* hero, Monster* self) {
         int dmg = 60;
-        std::cout << "🌌 空间扭曲造成 " << dmg << " 点真实伤害！" << std::endl;
+        std::cout << "🌌 奈克托斯召唤坍塌的虚空，对你造成 " << dmg << " 点真实伤害！" << std::endl;
         hero->change_HP(-dmg, 1.0);
     }, 0.5));
     boss->add_skill(Skill("命运剥夺", [](Hero* hero, Monster* self) {
-        std::cout << "🕱 命运被重写... 你陷入了双重异常状态！" << std::endl;
+        std::cout << "🕱 奈克托斯重写你的命运，你陷入了双重异常状态！" << std::endl;
         hero->getStatusEffect()->setPoisoned();
         hero->getStatusEffect()->setStunned();
     }, 0.3));
+    boss->add_skill(Skill("🕳️  深渊之力", [](Hero* hero, Monster* self) {
+        int heal = 100;
+        std::cout << "🕳️  奈克托斯吸收周围的混沌之力，恢复了 " << heal << " 点生命值！\n";
+        self->change_HP(heal,1.0);
+    }, 0.25));
     return boss;
 }
 
@@ -67,9 +73,11 @@ void Selen(Hero* hero){
             }
         else if (result == 1) {
             count_challenge++;
+            hero->get_equipment_backpack()->add_equipment(drop_equipment_selen());
             cout <<"🎊 按Enter继续...";
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
+            printLineByLine(selen_after,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
             printWithDelay(intro6, 30, CYAN);
             std::cout << "按Enter继续..." << std::endl;
             getchar();
@@ -100,9 +108,11 @@ void Azurvain(Hero* hero){
             }
         else if (result == 1) {
             count_challenge++;
+            hero->get_equipment_backpack()->add_equipment(drop_equipment_fire());
             cout <<"🎊 按Enter继续...";
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
+            printLineByLine(firedragon_after,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26}, std::vector<int>{}));
             printWithDelay(intro8, 30, CYAN);
             std::cout << "按Enter继续..." << std::endl;
             getchar();
@@ -116,7 +126,7 @@ void Nekthos(Hero* hero){
     Backpack *bag=hero->get_backpack();
     unsigned int HP = hero->get_HP();
     std::cout << "深渊邪龙 · 奈克托斯" << std::endl;
-    printLineByLine(necktos,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}, std::vector<int>{}));
+    printLineByLine(necktos,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26}, std::vector<int>{}));
     printWithDelay(intro9, 30, CYAN);
     std::cout << "按Enter继续..." << std::endl;
     getchar();
@@ -133,8 +143,11 @@ void Nekthos(Hero* hero){
             }
         else if (result == 1) {
             cout <<"🎊 按Enter继续...";
+            count_challenge++;
+            hero->get_equipment_backpack()->add_equipment(drop_equipment_final());
             getchar(); // 等待用户按任意键
             system("cls"); // 清屏
+            printLineByLine(necktos_after,40, SceneColorConfig(std::vector<int>{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,21,32,33}, std::vector<int>{}));
             printWithDelay(intro10, 30, CYAN);
             bool validChoice = false;
             while (!validChoice) {
@@ -145,8 +158,13 @@ void Nekthos(Hero* hero){
                 switch (end) {
                     case 1:
                         system("cls");
+                        printLineByLine(false_end,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
                         printWithDelay(intro11, 30, CYAN);
                         std::cout << "按Enter继续..." << std::endl;
+                        getchar();
+                        system("cls");
+                        std::cout << "感谢您游玩Terminal Dragon Quest！\n本游戏共有两个结局，剧情灵感来源于《旺达幻视》。因为是小游戏，篇幅有限，所以剧情可能看起来不尽人意，还望海涵。\n" << std::endl;
+                        std::cout << "按Enter返回主菜单..." << std::endl;
                         getchar();
                         system("cls");
                         hero->reborn(1.0, HP);
@@ -155,8 +173,16 @@ void Nekthos(Hero* hero){
                 
                     case 2:
                         system("cls");
+                        printLineByLine(true_end1,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
                         printWithDelay(intro12, 30, CYAN);
+                        system("cls");
+                        printLineByLine(true_end2,40, SceneColorConfig(std::vector<int>{}, std::vector<int>{}));
+                        printWithDelay(intro13, 30, CYAN);
                         std::cout << "按Enter继续..." << std::endl;
+                        getchar();
+                        system("cls");
+                        std::cout << "感谢您游玩Terminal Dragon Quest！\n本游戏共有两个结局，剧情灵感来源于《旺达幻视》。因为是小游戏，篇幅有限，所以剧情可能看起来不尽人意，还望海涵。\n" << std::endl;
+                        std::cout << "按Enter返回主菜单..." << std::endl;
                         getchar();
                         system("cls");
                         hero->reborn(1.0, HP);
