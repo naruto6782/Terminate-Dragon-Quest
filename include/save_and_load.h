@@ -7,6 +7,29 @@
 #include "count.h"
 extern Equipment null_weapon, null_armor, null_accessory;
 
+void xorFileBytes(const std::string& filename, unsigned char key = 0xA6) {
+    std::ifstream ifs(filename, std::ios::binary);
+    if (!ifs) {
+        std::cerr << "无法打开文件进行读取\n";
+        return;
+    }
+    std::vector<char> buffer((std::istreambuf_iterator<char>(ifs)),
+                              std::istreambuf_iterator<char>());
+    ifs.close();
+
+    for (auto& byte : buffer) {
+        byte ^= key;
+    }
+
+    std::ofstream ofs(filename, std::ios::binary);
+    if (!ofs) {
+        std::cerr << "无法打开文件进行写入\n";
+        return;
+    }
+    ofs.write(buffer.data(), buffer.size());
+    ofs.close();
+}
+
 void saveGame(Hero* hero, Shop* shop, const std::string& filename) {
     std::ofstream outFile(filename);
 
@@ -83,6 +106,7 @@ void saveGame(Hero* hero, Shop* shop, const std::string& filename) {
     if (ar_index) hero->equip(ar.clone());
     if (ac_index) hero->equip(ac.clone());
     outFile.close();
+    xorFileBytes(filename); // 加密保存的文件
     std::cout << "游戏已成功保存到文件: " << filename << std::endl;
     std::cout << "感谢您的游戏，按任意键继续！\n";
     getchar();
@@ -105,6 +129,7 @@ std::string trim(const std::string& s) {
 
 
 void loadGame(Hero* hero, Shop* shop, const std::string& filename) {
+    xorFileBytes(filename); // 解密保存的文件
     std::ifstream inFile(filename);
     if (!inFile.is_open()) {
         std::cerr << "无法打开保存文件: " << filename << std::endl;
@@ -207,6 +232,7 @@ void loadGame(Hero* hero, Shop* shop, const std::string& filename) {
     inFile.close();
     std::cout << "游戏成功加载自文件: " << filename << std::endl;
     std::cout << "欢迎回来，按任意键进入游戏 " << hero->get_name() << "！\n";
+    xorFileBytes(filename);
     getchar();
     getchar();
 }
