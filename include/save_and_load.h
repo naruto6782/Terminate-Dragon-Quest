@@ -234,7 +234,6 @@ void loadGame(Hero* hero, Shop* shop, const std::string& filename) {
     std::cout << "欢迎回来，按任意键进入游戏 " << hero->get_name() << "！\n";
     xorFileBytes(filename);
     getchar();
-    getchar();
 }
 
 

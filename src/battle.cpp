@@ -3,6 +3,7 @@
 #include "Hero_and_Monster.h"
 #include "items.h"
 #include "challenge.h"
+#include "check.h"
 #include <iostream>
 #include <iomanip> 
 using namespace std;
@@ -10,6 +11,8 @@ using namespace std;
 #include <random>
 #include <stdlib.h>
 
+bool isdefending = false; // 是否处于防御状态
+bool isattacking = false; // 是否处于攻击状态
 static mt19937_64& get_random_engine() {//用于随机数生成
     static random_device rd;  // 硬件随机源
     static mt19937_64 engine(rd()); // 使用64位梅森旋转算法
@@ -62,8 +65,7 @@ void Battle::Hero_turn(int monster_HP) {
     cout << "2. 🛡️ 防御\n";
     cout << "3. 💊 使用道具\n";
     cout << "👉 你的选择：";
-    cin >> choice;
-    getchar(); // 清除输入缓冲区的换行符
+    choice=getValidChoice(1, 3);
     cout << endl;
     switch (choice) {
         case 1:
@@ -133,10 +135,21 @@ void Battle::Monster_turn(){
 void Battle::process_turn(int choice){
     this->hero->getStatusEffect()->process();
     this->monster->getStatusEffect()->process();
-    if(choice){
+    if(isdefending&&!choice){
         this->hero->change_Defense(-this->change_defense,1.0);
+        reset_change_defense();
+        isdefending=false; // 重置防御状态
+    }
+    if(isattacking&&!choice){
         this->hero->change_Attack(-this->change_attack,1.0);
-        reset_change();
+        reset_change_attack();
+        isattacking=false; // 重置攻击状态
+    }
+    if(this->change_defense!=0){
+        isdefending=true;
+    }
+    if(this->change_attack!=0){
+        isattacking=true;
     }
 }
 
@@ -144,22 +157,10 @@ int Battle::choose_item() {
     Backpack* bag = this->hero->get_backpack();
     int status=bag->show_backpack();
     if(status == 0) {
-        return 1; // 返回0表示背包为空
+        return 0; // 返回0表示背包为空
     }
     int choose;
-    while (true) {
-        std::cout << "请输入一个编号(输入0返回)： ";
-        std::cin >> choose;
-
-        if (std::cin.fail()) {
-            std::cin.clear();  // 清除错误标志位
-            std::cin.ignore(10000, '\n');  // 丢弃错误输入（直到换行）
-            std::cout << "❌ 输入无效，请输入一个整数！\n";
-        } else {
-            std::cin.ignore(10000, '\n');  // 清空缓冲区（避免输入如 123abc 时剩余字符影响后续）
-            break;  // 输入成功，退出循环
-        }
-    }
+    choose=getValidChoice(0,100);
     if (choose == 0) {
         cout << "❌ 你取消了使用道具"<<endl<<endl;
         return 0;

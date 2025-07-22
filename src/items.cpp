@@ -44,33 +44,43 @@ Item index_to_item(int index) {
     switch (index) {
         case 1:
             return medicine;
+            break;
         case 2:
-            return ironMedicine;
-        case 3:
-            return angryDrink;
-        case 4:
-            return antidote;
-        case 5:
-            return antibiotic;
-        case 6:
             return poison;
+            break;
+        case 3:
+            return ironMedicine;
+            break;
+        case 4:
+            return angryDrink;
+            break;
+        case 5:
+            return antidote;
+            break;
+        case 6:
+            return antibiotic;
+            break;
         case 7:
             return stunned;
+            break;
         case 8:
             return panacea;
+            break;
         case 9:
             return phoenixFeather;
+            break;
         default:
-            return null_item; // 返回空物品
+            std::cout << "无效的物品索引！" << std::endl;
+            return null_item; // 返回一个空物品
     }
 }
 Item null_item("Null", 0, 0, 0);
-Item medicine("血瓶", 1, 100, 1);
-Item poison("毒瓶", 1, 100,2);
+Item medicine("血瓶", 1, 50, 1);
+Item poison("毒瓶", 1, 120,2);
 Item ironMedicine("钢铁合剂", 1, 100, 3);
-Item angryDrink("愤怒合剂", 1, 100, 4);
-Item antidote("解毒草", 1, 100, 5);
+Item angryDrink("愤怒合剂", 1, 150, 4);
+Item antidote("解毒草", 1, 30, 5);
 Item antibiotic("惊惶木", 1, 100, 6);
-Item stunned("夜阑谣", 1, 100, 7);
-Item panacea("万灵药", 1, 100, 8);
+Item stunned("夜阑谣", 1, 200, 7);
+Item panacea("万灵药", 1, 500, 8);
 Item phoenixFeather("凤凰羽翼", 1, 1000, 9);

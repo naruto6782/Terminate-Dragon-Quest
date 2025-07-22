@@ -5,7 +5,7 @@
 #include <iomanip> 
 #include <string>
 #include <algorithm>
-
+#include "check.h"
 
 class Hero;
 
@@ -68,7 +68,7 @@ public:
         std::cout << "你的背包：\n";
         int index_of_backpack = 1;
         for (auto& item : items) {
-            std::cout << "  " << index_of_backpack << ". " << item.name << " x" << item.num << "\n";
+            std::cout << "  " << index_of_backpack << ". " << item.name << " x" << item.num <<"\n";
             ++index_of_backpack;
         }
         return 1; // 返回1表示背包不为空
@@ -111,7 +111,7 @@ public:
                 return;
             }
         }
-        std::cout << "❌ 无效的选择！" << std::endl;
+        std::cout << "❌ 未找到索引为 " << index << " 的物品！" << std::endl;
     }
 };
 class Shop : public Backpack {
@@ -120,11 +120,11 @@ public:
     void Shop_init(){
         clear();
         add_or_stack(Item("生命药水", 10, 50, 1));
-        add_or_stack(Item("钢铁合剂", 5, 100, 2));
-        add_or_stack(Item("愤怒合剂", 3, 150, 3));
-        add_or_stack(Item("解毒草", 8, 30, 4));
-        add_or_stack(Item("惊惶木", 6, 80, 5));
-        add_or_stack(Item("淬毒镖", 4, 120, 6));
+        add_or_stack(Item("毒瓶", 4, 120, 2));
+        add_or_stack(Item("钢铁合剂", 5, 100, 3));
+        add_or_stack(Item("愤怒合剂", 3, 150, 4));
+        add_or_stack(Item("解毒草", 8, 30, 5));
+        add_or_stack(Item("惊惶木", 6, 80, 6));
         add_or_stack(Item("夜阑谣", 2, 200, 7));
         add_or_stack(Item("万灵药", 1, 500, 8));
         add_or_stack(Item("凤凰羽翼", 1, 1000, 9));
@@ -189,28 +189,8 @@ public:
 
         std::string input;
         int choice = -1;
-        while (true) {
-            std::cout << "\n是否要更换装备？输入编号（0取消）：";
-            std::cin >> input;
-
-            // 检查是否为纯数字
-            if (!std::all_of(input.begin(), input.end(), ::isdigit)) {
-                std::cout << "❌ 输入无效，请输入数字！\n";
-                continue;
-            }
-
-            choice = std::stoi(input);
-            if (choice == 0) {
-                return;
-            }
-
-            if (choice < 1 || choice > equipment_items.size()) {
-                std::cout << "❌ 输入超出范围！\n";
-                continue;
-            }
-
-            break; // 输入合法，跳出循环
-        }
+        std::cout << "\n是否要更换装备？输入编号（0取消）：";
+        choice=getValidChoice(0, index_of_equipment - 1);
 
         change_equipment(choice, hero);
     }

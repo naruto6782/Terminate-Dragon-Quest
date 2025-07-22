@@ -10,6 +10,7 @@
 #include "backpack.h"
 #include "count.h"
 #include "maze.h"
+#include "check.h"
 
 Shop shop;
 int easy_maze[ROUNDS][EVENTS] = {
@@ -120,7 +121,7 @@ void easy(Hero* hero) {
         std::cout << "请选择：";
         std::cout << "1. 扣除50生命值\n";
         std::cout << "2. 扣除50金币\n";
-        std::cin >> choice;
+        choice = getValidChoice(1, 2);
         if (choice == 1) {
             hero->change_HP(-50,1.0,HP);
             std::cout << "扣除50生命值成功！,剩余生命值：" << hero->get_HP() << "\n";
@@ -274,7 +275,7 @@ void medium(Hero* hero) {
         std::cout << "请选择：";
         std::cout << "1. 扣除50生命值\n";
         std::cout << "2. 扣除50金币\n";
-        std::cin >> choice;
+        choice = getValidChoice(1, 2);
         if (choice == 1) {
             hero->change_HP(-50,1.0,HP);
             std::cout << "扣除50生命值成功！,剩余生命值：" << hero->get_HP() << "\n";
@@ -428,7 +429,7 @@ void hard(Hero* hero) {
         std::cout << "请选择：";
         std::cout << "1. 扣除50生命值\n";
         std::cout << "2. 扣除50金币\n";
-        std::cin >> choice;
+        choice= getValidChoice(1, 2);
         if (choice == 1) {
             hero->change_HP(-50,1.0,HP);
             std::cout << "扣除50生命值成功！,剩余生命值：" << hero->get_HP() << "\n";

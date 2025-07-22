@@ -10,7 +10,7 @@
 #include "game.h"
 #include "equip.h"
 #include "music.h"
-
+#include "check.h"
 Boss* create_selen_boss() {
     Boss* boss =  new Boss ("梦魇蝶后 · 赛莲", 200, 10, 8, 10, 500, 20);
     boss->add_skill(Skill("💀 轻语之惧", [](Hero* hero, Monster* self) {
@@ -154,8 +154,7 @@ void Nekthos(Hero* hero){
             while (!validChoice) {
                 std::cout << "是否要给予奈克托斯最后一击？\n1.是\n2.否\n请输入你的选择：" << std::endl;
                 int end;
-                std::cin >> end;
-                getchar(); // 读取换行符
+                end=getValidChoice(1, 2);
                 switch (end) {
                     case 1:
                         system("cls");

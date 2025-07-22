@@ -7,7 +7,7 @@
 #include "status.h"
 #include "backpack.h"
 #include "challenge.h"
-
+#include "check.h"
 using namespace std;
 
 static mt19937_64& get_random_engine() {//用于随机数生成
@@ -63,9 +63,7 @@ void Hero::show_info(Hero* hero) {
 
         std::cout << "按 1 查看武器背包" << std::endl;
         std::cout << "按 2 返回主菜单..." << std::endl;
-        std::cin >> next_choice;
-        getchar();
-
+        next_choice=getValidChoice(1, 2);
         if (next_choice == 1) {
             system("cls");
             equip_bag->show_equipment(hero);

@@ -28,10 +28,10 @@ class Battle {
             switch (index) {
                 case 1:
                     break;
-                case 2:
+                case 3:
                     this->change_defense = 10;
                     break;
-                case 3:
+                case 4:
                     this->change_attack = 10;
                     break;
                 default:
@@ -39,11 +39,12 @@ class Battle {
             }
             return;
         }
-        void reset_change() {
+        void reset_change_attack() {
             this->change_attack = 0;
+            
+        }
+        void reset_change_defense() {
             this->change_defense = 0;
-            this->change_speed = 0;
-            this->change_luck = 0;
         }
 };
 

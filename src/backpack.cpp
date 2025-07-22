@@ -1,5 +1,6 @@
 #include "backpack.h"
 #include "Hero_and_Monster.h"
+#include "check.h"
 void Equipment_backpack::change_equipment(int choice, Hero* hero) {
     choice--; // 转换为0基索引
     if (choice < 0 || choice >= equipment_items.size()) {
@@ -44,8 +45,7 @@ void Shop::show_shop_items(Hero* hero) {
             std::cout << "请选择要购买的物品（输入数字）：";
 
             int choice;
-            std::cin >> choice;
-            getchar(); // 清除输入缓冲区
+            choice=getValidChoice(0, 9);
 
             if (choice == 0) {
                 std::cout << "👋 欢迎下次光临！\n";

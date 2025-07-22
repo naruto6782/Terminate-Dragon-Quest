@@ -18,7 +18,7 @@ add_library(Game_lib
     src/game.cpp src/Hero_and_Monster.cpp src/equip.cpp
     src/battle.cpp src/items.cpp src/maze.cpp
     src/count.cpp src/story.cpp src/backpack.cpp
-    src/challenge.cpp src/music.cpp
+    src/challenge.cpp src/music.cpp src/check.cpp
 )
 
 # 设置 main.exe 的输出路径为项目根目录
