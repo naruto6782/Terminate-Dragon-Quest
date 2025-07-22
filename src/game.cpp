@@ -59,7 +59,7 @@ void printLineByLine(const std::vector<std::string>& lines, int delayMs, const S
 
 
 void Game::menu1(Game* game){
-    playMusic("music/start.wav", 1000);
+    playMusic("music/start.mp3", 1000);
     std::cout << "请做出你的选择:" << std::endl << "1.新的开始" << std::endl << "2.加载游戏" << std::endl << "3.退出游戏" << std::endl;
     int choice;
     std::cin >> choice;
@@ -91,7 +91,7 @@ void Game::menu2(Hero* hero, Shop* shop){
     int choice;
     Backpack *bag=hero->get_backpack();
     while(1){
-        playMusic("music/bgm.wav", 1000);
+        playMusic("music/bgm.mp3", 1000);
         system("cls");
         std::cout<< "1.冒险" << std::endl << "2.挑战" << std::endl << "3.属性" << std::endl
         << "4.物品" << std::endl << "5.商店" << std::endl << "6.冒险之书" << std::endl << "7.退出游戏" << std::endl;
@@ -103,7 +103,7 @@ void Game::menu2(Hero* hero, Shop* shop){
         case 1:
             {
             stopMusic(1000);
-            playMusic("music/fight.wav", 1000);
+            playMusic("music/fight.mp3", 1000);
             system("cls");
             if(count_challenge == 0){
                 std::cout << "请选择难度：\n1.简单\n2.中等\n3.困难\n请输入你的选择：" << std::endl;
@@ -190,7 +190,7 @@ void Game::menu2(Hero* hero, Shop* shop){
             if(count_easy>=1&&count_medium == 0&&count_hard == 0){
                 system("cls");
                 stopMusic(1000);
-                playMusic("music/fight.wav", 1000);
+                playMusic("music/fight.mp3", 1000);
                 Selen(hero);
                 stopMusic(1000);
                 break;
@@ -198,7 +198,7 @@ void Game::menu2(Hero* hero, Shop* shop){
             else if(count_medium >= 1&&count_hard == 0){
                 system("cls");
                 stopMusic(1000);
-                playMusic("music/fire.wav", 1000);
+                playMusic("music/fire.mp3", 1000);
                 Azurvain(hero);
                 stopMusic(1000);
                 break;
@@ -206,7 +206,7 @@ void Game::menu2(Hero* hero, Shop* shop){
             else if(count_hard >= 1){
                 system("cls");
                 stopMusic(1000);
-                playMusic("music/final.wav", 1000);
+                playMusic("music/final.mp3", 1000);
                 Nekthos(hero);
                 stopMusic(1000);
                 break;
@@ -219,14 +219,14 @@ void Game::menu2(Hero* hero, Shop* shop){
             }
         case 3:
             stopMusic(1000);
-            playMusic("music/daily.wav", 1000);
+            playMusic("music/daily.mp3", 1000);
             system("cls");
             hero->show_info(hero);
             stopMusic(1000);
             break;
         case 4:
             stopMusic(1000);
-            playMusic("music/daily.wav", 1000);
+            playMusic("music/daily.mp3", 1000);
             system("cls");
             bag->show_backpack();
             cout << "输入任意键返回主菜单";
@@ -235,7 +235,7 @@ void Game::menu2(Hero* hero, Shop* shop){
             break;
         case 5:
             stopMusic(1000);
-            playMusic("music/daily.wav", 1000);
+            playMusic("music/daily.mp3", 1000);
             system("cls");
             shop->show_shop_items(hero);
             stopMusic(1000);
